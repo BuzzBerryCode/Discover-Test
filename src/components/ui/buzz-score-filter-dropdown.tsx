@@ -35,12 +35,68 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
     if (isOpen && dropdownRef.current && triggerRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const dropdown = dropdownRef.current;
+      const viewport = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
+      
+      // Calculate optimal position
+      let top = triggerRect.bottom + 8;
+      let left = triggerRect.left;
+      
+      // Adjust for viewport boundaries
+      const dropdownWidth = window.innerWidth < 640 ? 280 : window.innerWidth < 1024 ? 320 : 360;
+      const dropdownHeight = 350; // Estimated max height
+      
+      // Horizontal positioning
+      if (left + dropdownWidth > viewport.width) {
+        left = triggerRect.right - dropdownWidth;
+      }
+      if (left < 8) {
+        left = 8;
+      }
+      
+      // Vertical positioning - show above if not enough space below
+      if (top + dropdownHeight > viewport.height && triggerRect.top > dropdownHeight) {
+        top = triggerRect.top - dropdownHeight - 8;
+      }
       
       dropdown.style.position = 'fixed';
-      dropdown.style.top = `${triggerRect.bottom + 8}px`;
-      dropdown.style.left = `${triggerRect.left}px`;
-      dropdown.style.minWidth = `${triggerRect.width}px`;
+      dropdown.style.top = `${top}px`;
+      dropdown.style.left = `${left}px`;
       dropdown.style.zIndex = '9999';
+      
+      // Handle scroll to keep dropdown positioned
+      const handleScroll = () => {
+        if (triggerRef.current && dropdownRef.current) {
+          const newTriggerRect = triggerRef.current.getBoundingClientRect();
+          let newTop = newTriggerRect.bottom + 8;
+          let newLeft = newTriggerRect.left;
+          
+          // Reapply boundary checks
+          if (newLeft + dropdownWidth > viewport.width) {
+            newLeft = newTriggerRect.right - dropdownWidth;
+          }
+          if (newLeft < 8) {
+            newLeft = 8;
+          }
+          
+          if (newTop + dropdownHeight > viewport.height && newTriggerRect.top > dropdownHeight) {
+            newTop = newTriggerRect.top - dropdownHeight - 8;
+          }
+          
+          dropdownRef.current.style.top = `${newTop}px`;
+          dropdownRef.current.style.left = `${newLeft}px`;
+        }
+      };
+      
+      window.addEventListener('scroll', handleScroll, true);
+      window.addEventListener('resize', handleScroll);
+      
+      return () => {
+        window.removeEventListener('scroll', handleScroll, true);
+        window.removeEventListener('resize', handleScroll);
+      };
     }
   }, [isOpen, triggerRef]);
 
