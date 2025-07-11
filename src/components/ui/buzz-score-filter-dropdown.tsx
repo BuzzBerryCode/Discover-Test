@@ -95,6 +95,20 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
               alt="Close"
             />
           </Button>
+            Filter by Buzz Score
+          </h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onClose}
+            className="h-6 w-6 p-0 hover:bg-gray-100"
+          >
+            <Icon
+              name="CloseIcon.svg"
+              className="w-4 h-4"
+              alt="Close"
+            />
+          </Button>
         </div>
 
         {/* Score options */}
