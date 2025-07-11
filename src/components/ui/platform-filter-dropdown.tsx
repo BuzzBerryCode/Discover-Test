@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { Button } from "./button";
-import { Icon } from "./icon";
 
 interface PlatformFilterDropdownProps {
   isOpen: boolean;
@@ -101,18 +100,6 @@ export const PlatformFilterDropdown: React.FC<PlatformFilterDropdownProps> = ({
         <h3 className="font-semibold text-[14px] lg:text-[16px] xl:text-[18px] text-neutral-new900">
           Filter by Platform
         </h3>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={onClose}
-          className="h-6 w-6 p-0 hover:bg-gray-100"
-        >
-          <Icon
-            name="CloseIcon.svg"
-            className="w-4 h-4"
-            alt="Close"
-          />
-        </Button>
       </div>
 
       {/* Platform options */}
@@ -134,11 +121,6 @@ export const PlatformFilterDropdown: React.FC<PlatformFilterDropdownProps> = ({
             onClick={() => handlePlatformClick(platform)}
           >
             <div className="flex items-center gap-3">
-              <Icon
-                name={platform.icon}
-                className="w-6 h-6"
-                alt={platform.label}
-              />
               <div className="flex flex-col">
                 <span className={`text-[13px] lg:text-[14px] xl:text-[15px] ${
                   platform.available && selectedPlatforms.has(platform.value)
@@ -155,24 +137,6 @@ export const PlatformFilterDropdown: React.FC<PlatformFilterDropdownProps> = ({
                   </span>
                 )}
               </div>
-            </div>
-            <div className="flex items-center">
-              {platform.available && selectedPlatforms.has(platform.value) && (
-                <Icon
-                  name="CheckIcon.svg"
-                  className="w-4 h-4 text-blue-600"
-                  alt="Selected"
-                />
-              )}
-              <div
-                className={`w-4 h-4 border-2 rounded-[3px] ml-2 ${
-                  platform.available && selectedPlatforms.has(platform.value)
-                    ? 'bg-blue-600 border-blue-600'
-                    : platform.available
-                    ? 'border-gray-300'
-                    : 'border-gray-200 bg-gray-100'
-                }`}
-              />
             </div>
           </div>
         ))}
