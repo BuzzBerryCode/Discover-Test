@@ -203,6 +203,5 @@ export const PlatformFilterDropdown: React.FC<PlatformFilterDropdownProps> = ({
         </div>
         </div>
       </div>
-    </div>
   );
 };
