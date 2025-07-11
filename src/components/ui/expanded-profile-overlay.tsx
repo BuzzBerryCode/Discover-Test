@@ -29,14 +29,10 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
-      // Prevent body scroll on mobile when overlay is open
-      document.body.style.overflow = 'hidden';
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      // Restore body scroll when overlay is closed
-      document.body.style.overflow = 'unset';
     };
   }, [isOpen, onClose]);
 
