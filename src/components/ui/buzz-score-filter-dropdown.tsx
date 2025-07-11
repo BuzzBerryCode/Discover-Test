@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { Button } from "./button";
-import { Checkbox } from "./checkbox";
 import { Icon } from "./icon";
 
 interface BuzzScoreFilterDropdownProps {
@@ -32,6 +31,20 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
 }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Position dropdown relative to trigger
+  useEffect(() => {
+    if (isOpen && dropdownRef.current && triggerRef.current) {
+      const triggerRect = triggerRef.current.getBoundingClientRect();
+      const dropdown = dropdownRef.current;
+      
+      dropdown.style.position = 'fixed';
+      dropdown.style.top = `${triggerRect.bottom + 8}px`;
+      dropdown.style.left = `${triggerRect.left}px`;
+      dropdown.style.minWidth = `${triggerRect.width}px`;
+      dropdown.style.zIndex = '9999';
+    }
+  }, [isOpen, triggerRef]);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -61,10 +74,91 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
   return (
     <div
       ref={dropdownRef}
-      className="absolute top-full left-0 mt-2 w-[200px] lg:w-[220px] xl:w-[240px] bg-white border border-[#dbe2eb] rounded-[12px] shadow-lg z-[9999] overflow-hidden"
+      className="bg-white border border-[#dbe2eb] rounded-[12px] shadow-lg overflow-hidden w-[280px] lg:w-[320px] xl:w-[360px]"
     >
-      <div className="p-3 lg:p-4 xl:p-5">
-        <div className="text-[12px] lg:text-[13px] xl:text-[14px] font-medium text-gray-600 mb-3 lg:mb-4 xl:mb-5">
+      <div className="p-4">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-semibold text-[14px] lg:text-[16px] xl:text-[18px] text-neutral-new900">
+            Filter by Buzz Score
+          </h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onClose}
+            className="h-6 w-6 p-0 hover:bg-gray-100"
+          >
+            <Icon
+              name="CloseIcon.svg"
+              className="w-4 h-4"
+              alt="Close"
+            />
+          </Button>
+        </div>
+
+        {/* Score options */}
+        <div className="space-y-3 mb-4">
+          {scoreOptions.map((option) => (
+            <div
+              key={option.value}
+              className="flex items-center justify-between p-3 rounded-[8px] transition-colors hover:bg-gray-50 cursor-pointer"
+              onClick={() => onScoreToggle(option.value)}
+            >
+              <div className="flex items-center gap-3">
+                <span className="font-medium text-[13px] lg:text-[14px] xl:text-[15px] text-neutral-new900">
+                  {option.label}
+                </span>
+              </div>
+              <div className="flex items-center">
+                {selectedScores.has(option.value) && (
+                  <Icon
+                    name="CheckIcon.svg"
+                    className="w-4 h-4 text-blue-600"
+                    alt="Selected"
+                  />
+                )}
+                <div
+                  className={`w-4 h-4 border-2 rounded-[3px] ml-2 ${
+                    selectedScores.has(option.value)
+                      ? 'bg-blue-600 border-blue-600'
+                      : 'border-gray-300'
+                  }`}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+          <span className="text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500">
+            {selectedScores.size} selected
+          </span>
+          <div className="flex items-center gap-2">
+            {selectedScores.size > 0 && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onReset}
+                className="text-[12px] lg:text-[13px] xl:text-[14px] text-gray-600 hover:text-gray-700"
+              >
+                Reset
+              </Button>
+            )}
+            <Button
+              size="sm"
+              onClick={onConfirm}
+              className="bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] text-white text-[12px] lg:text-[13px] xl:text-[14px] px-4 py-2"
+            >
+              Apply
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
           Filter by Buzz Score
         </div>
         
