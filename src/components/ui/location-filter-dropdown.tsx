@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { Button } from './button';
-import { Checkbox } from './checkbox';
 
 interface LocationFilterDropdownProps {
   isOpen: boolean;
@@ -122,18 +121,13 @@ export const LocationFilterDropdown: React.FC<LocationFilterDropdownProps> = ({
                 }`}
                 onClick={() => onLocationToggle(country)}
               >
-                <Checkbox
-                  checked={selectedLocations.has(country)}
-                  onCheckedChange={() => onLocationToggle(country)}
-                  className="w-4 h-4"
-                />
-                <label className={`text-[14px] cursor-pointer flex-1 ${
+                <span className={`text-[14px] cursor-pointer flex-1 ${
                   selectedLocations.has(country)
                     ? 'text-blue-700 font-medium'
                     : 'text-[#111827]'
                 }`}>
                   {country}
-                </label>
+                </span>
               </div>
             ))}
           </div>

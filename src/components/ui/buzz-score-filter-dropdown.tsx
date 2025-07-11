@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { Button } from "./button";
-import { Checkbox } from "./checkbox";
 import { Icon } from "./icon";
 
 interface BuzzScoreFilterDropdownProps {
@@ -109,31 +108,13 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
               }`}
               onClick={() => onScoreToggle(option.value)}
             >
-              <div className="flex items-center gap-3">
-                <span className={`text-[13px] lg:text-[14px] xl:text-[15px] ${
-                  selectedScores.has(option.value)
-                    ? 'text-blue-700 font-semibold'
-                    : 'text-neutral-new900 font-medium'
-                }`}>
-                  {option.label}
-                </span>
-              </div>
-              <div className="flex items-center">
-                {selectedScores.has(option.value) && (
-                  <Icon
-                    name="CheckIcon.svg"
-                    className="w-4 h-4 text-blue-600"
-                    alt="Selected"
-                  />
-                )}
-                <div
-                  className={`w-4 h-4 border-2 rounded-[3px] ml-2 ${
-                    selectedScores.has(option.value)
-                      ? 'bg-blue-600 border-blue-600'
-                      : 'border-gray-300'
-                  }`}
-                />
-              </div>
+              <span className={`text-[13px] lg:text-[14px] xl:text-[15px] ${
+                selectedScores.has(option.value)
+                  ? 'text-blue-700 font-semibold'
+                  : 'text-neutral-new900 font-medium'
+              }`}>
+                {option.label}
+              </span>
             </div>
           ))}
         </div>
