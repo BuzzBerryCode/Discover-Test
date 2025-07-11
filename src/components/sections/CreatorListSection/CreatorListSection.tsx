@@ -278,7 +278,7 @@ export const CreatorListSection = (): JSX.Element => {
                   selectedCards.has(creator.id) 
                     ? 'bg-gray-50 border-blue-300' 
                     : selectedCreator?.id === creator.id
-                    ? 'bg-[#f1f6fe] border-transparent'
+                    ? 'bg-gray-50 border-blue-500 border-2'
                     : 'bg-gray-50 border-transparent'
                 }`}
               >
