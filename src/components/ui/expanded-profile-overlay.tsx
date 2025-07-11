@@ -17,7 +17,6 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
   onClose,
 }) => {
   const [showAllHashtags, setShowAllHashtags] = useState(false);
-  const [showBuzzScoreInfo, setShowBuzzScoreInfo] = useState(false);
   const [emailButtonText, setEmailButtonText] = useState('Copy Email ID');
 
   // Handle escape key
@@ -75,7 +74,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
           ${/* Mobile: Centered */ ''}
           w-full h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-none border-0
           ${/* Small and up: Full screen */ ''}
-          sm:w-full sm:h-full sm:top-0 sm:left-0 sm:right-0 sm:transform-none sm:rounded-none sm:border-0
+          sm:w-full sm:h-full sm:top-0 sm:right-0 sm:transform-none sm:rounded-none sm:border-0
           ${/* Medium: 60% width, XL: 50% width, right side */ ''}
           md:w-[60%] md:h-full md:top-0 md:right-0 md:rounded-tl-[16px] md:rounded-bl-[16px] md:border-l md:border-t-0 md:border-r-0 md:border-b-0
           lg:w-[60%] lg:rounded-tl-[15px] lg:rounded-bl-[15px]
@@ -411,23 +410,6 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                   {creator.buzz_score}%
                 </span>
               </div>
-              <Button
-                onClick={() => setShowBuzzScoreInfo(!showBuzzScoreInfo)}
-                className="relative bg-transparent hover:bg-transparent transition-colors"
-              >
-                <Icon
-                  name="InformationIcon.svg"
-                  className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] text-gray-600"
-                  alt="Info"
-                />
-                {showBuzzScoreInfo && (
-                  <div className="absolute top-full right-0 mt-2 w-[250px] lg:w-[280px] bg-white border border-gray-200 rounded-[10px] shadow-lg p-[12px] lg:p-[16px] z-10">
-                    <p className="text-[12px] lg:text-[14px] text-gray-700 leading-[16px] lg:leading-[20px]">
-                      The buzz score is a performance score given to every creator based on their growth, engagement, and consistency.
-                    </p>
-                  </div>
-                )}
-              </Button>
             </div>
             
             {/* Buzz Score Bar */}
