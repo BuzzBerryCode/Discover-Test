@@ -39,8 +39,8 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
 
   // Update input values when value prop changes
   useEffect(() => {
-    setMinInput(config.formatValue(value[0]));
-    setMaxInput(config.formatValue(value[1]));
+    setMinInput(value[0].toString());
+    setMaxInput(value[1].toString());
   }, [value, config]);
 
   // Handle input changes
@@ -48,7 +48,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
     const inputValue = e.target.value;
     setMinInput(inputValue);
     
-    const numericValue = config.parseValue(inputValue);
+    const numericValue = parseInt(inputValue) || 0;
     if (!isNaN(numericValue) && numericValue >= config.min && numericValue <= value[1]) {
       onValueChange([numericValue, value[1]]);
     }
@@ -58,7 +58,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
     const inputValue = e.target.value;
     setMaxInput(inputValue);
     
-    const numericValue = config.parseValue(inputValue);
+    const numericValue = parseInt(inputValue) || 0;
     if (!isNaN(numericValue) && numericValue <= config.max && numericValue >= value[0]) {
       onValueChange([value[0], numericValue]);
     }
@@ -66,11 +66,11 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
 
   // Handle input blur to format values
   const handleMinInputBlur = () => {
-    setMinInput(config.formatValue(value[0]));
+    setMinInput(value[0].toString());
   };
 
   const handleMaxInputBlur = () => {
-    setMaxInput(config.formatValue(value[1]));
+    setMaxInput(value[1].toString());
   };
 
   // Position dropdown
@@ -137,7 +137,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
             onChange={handleMinInputChange}
             onBlur={handleMinInputBlur}
             className="w-full h-[40px] px-3 py-2 border border-[#d1d5db] rounded-[8px] text-[14px] text-[#111827] bg-[#f9fafb] focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:border-transparent"
-            placeholder={config.formatValue(config.min)}
+            placeholder={config.min.toString()}
           />
         </div>
 
@@ -152,7 +152,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
             onChange={handleMaxInputChange}
             onBlur={handleMaxInputBlur}
             className="w-full h-[40px] px-3 py-2 border border-[#d1d5db] rounded-[8px] text-[14px] text-[#111827] bg-[#f9fafb] focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:border-transparent"
-            placeholder={config.formatValue(config.max)}
+            placeholder={config.max.toString()}
           />
         </div>
 
