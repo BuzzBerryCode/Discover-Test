@@ -97,7 +97,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
             <div className="flex flex-col gap-[4px] lg:gap-[6px] xl:gap-[8px] flex-1 min-w-0">
                 <span className="text-[#71737c] text-[14px] lg:text-[16px] font-medium">
                 {creator.username}
-              </h2>
+              </span>
               <div className="flex items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
                 <span className="text-[#71737c] text-[14px] lg:text-[16px] xl:text-[18px] font-medium">
                   {creator.username_tag || `@${creator.username.toLowerCase().replace(/\s+/g, '')}`}
