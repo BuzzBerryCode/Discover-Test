@@ -177,8 +177,9 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
           absolute bg-[#F9FAFB] border-[#CAC8C8] overflow-y-auto pointer-events-auto
           ${/* Mobile: Full screen */ ''}
           sm:w-full sm:h-full sm:top-0 sm:right-0 sm:rounded-none sm:border-0
-          ${/* Medium and up: 60% width, right side */ ''}
+          ${/* Medium: 60% width, XL: 50% width, right side */ ''}
           md:w-[60%] md:h-full md:top-0 md:right-0 md:rounded-tl-[10px] md:rounded-bl-[10px] md:border-l md:border-t-0 md:border-r-0 md:border-b-0
+          xl:w-[50%]
         `}
         style={{ borderWidth: '1px' }}
       >
@@ -212,7 +213,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                     onClick={handleEmailClick}
                     onMouseEnter={handleEmailMouseEnter}
                     onMouseLeave={handleEmailMouseLeave}
-                    className="relative p-[6px] lg:p-[8px] xl:p-[10px] bg-white border border-[#dbe2eb] rounded-[6px] hover:bg-gray-50 transition-colors"
+                    className="relative p-[6px] lg:p-[8px] xl:p-[10px] bg-transparent border-0 rounded-[6px] hover:bg-gray-100 transition-colors"
                   >
                     <Icon
                       name="EmailIcon.svg"
@@ -229,7 +230,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                     onClick={handleDMClick}
                     onMouseEnter={handleDMMouseEnter}
                     onMouseLeave={handleDMMouseLeave}
-                    className="relative p-[6px] lg:p-[8px] xl:p-[10px] bg-white border border-[#dbe2eb] rounded-[6px] hover:bg-gray-50 transition-colors"
+                    className="relative p-[6px] lg:p-[8px] xl:p-[10px] bg-transparent border-0 rounded-[6px] hover:bg-gray-100 transition-colors"
                   >
                     <Icon
                       name="DMIcon.svg"
@@ -259,12 +260,12 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
           {/* Match Score and Close Button */}
           <div className="flex items-center gap-[8px] lg:gap-[10px] xl:gap-[12px] flex-shrink-0">
-            <div className="bg-[#B8E6D3] text-[#1F7A54] px-[12px] lg:px-[15px] xl:px-[18px] py-[6px] lg:py-[8px] xl:py-[10px] rounded-[8px] font-bold text-[14px] lg:text-[16px] xl:text-[18px]">
+            <div className="bg-green-100 text-green-600 px-[12px] lg:px-[15px] xl:px-[18px] py-[6px] lg:py-[8px] xl:py-[10px] rounded-[8px] font-bold text-[14px] lg:text-[16px] xl:text-[18px]">
               Match {creator.match_score || 0}%
             </div>
             <Button
               onClick={onClose}
-              className="p-[6px] lg:p-[8px] xl:p-[10px] bg-white border border-[#dbe2eb] rounded-[6px] hover:bg-gray-50 transition-colors"
+              className="p-[6px] lg:p-[8px] xl:p-[10px] bg-transparent border-0 rounded-[6px] hover:bg-gray-100 transition-colors"
             >
               <Icon
                 name="CloseIcon.svg"
@@ -336,7 +337,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
               {hasMoreHashtags && (
                 <Button
                   onClick={() => setShowAllHashtags(!showAllHashtags)}
-                  className="p-[4px] lg:p-[6px] xl:p-[8px] bg-gray-100 border border-gray-300 rounded-[6px] hover:bg-gray-200 transition-colors flex-shrink-0"
+                  className="p-[4px] lg:p-[6px] xl:p-[8px] bg-transparent border-0 rounded-[6px] hover:bg-gray-100 transition-colors flex-shrink-0"
                 >
                   <Icon
                     name="HashtagsDropdownIcon.svg"
@@ -356,10 +357,10 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
           <div className="grid grid-cols-5 gap-[8px] lg:gap-[10px] xl:gap-[12px]">
             {/* Followers */}
             <div className="bg-white rounded-[10px] p-[12px] lg:p-[15px] xl:p-[18px] flex flex-col items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
-              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] bg-[#E0F7FA] rounded-full flex items-center justify-center">
+              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] flex items-center justify-center">
                 <Icon
                   name="FollowerIcon.svg"
-                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px] text-[#00ACC1]"
+                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
                   alt="Followers"
                 />
               </div>
@@ -387,10 +388,10 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
             {/* Avg. Views */}
             <div className="bg-white rounded-[10px] p-[12px] lg:p-[15px] xl:p-[18px] flex flex-col items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
-              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] bg-[#FFF3E0] rounded-full flex items-center justify-center">
+              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] flex items-center justify-center">
                 <Icon
                   name="AvgViewsIcon.svg"
-                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px] text-[#FF9800]"
+                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
                   alt="Avg. Views"
                 />
               </div>
@@ -418,10 +419,10 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
             {/* Engagement */}
             <div className="bg-white rounded-[10px] p-[12px] lg:p-[15px] xl:p-[18px] flex flex-col items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
-              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] bg-[#F3E5F5] rounded-full flex items-center justify-center">
+              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] flex items-center justify-center">
                 <Icon
                   name="AvgEngagementIcon.svg"
-                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px] text-[#9C27B0]"
+                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
                   alt="Engagement"
                 />
               </div>
@@ -449,10 +450,10 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
             {/* Avg. Likes */}
             <div className="bg-white rounded-[10px] p-[12px] lg:p-[15px] xl:p-[18px] flex flex-col items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
-              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] bg-[#FFEBEE] rounded-full flex items-center justify-center">
+              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] flex items-center justify-center">
                 <Icon
                   name="AvgLikesIcon.svg"
-                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px] text-[#E91E63]"
+                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
                   alt="Avg. Likes"
                 />
               </div>
@@ -480,10 +481,10 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
             {/* Avg. Comments */}
             <div className="bg-white rounded-[10px] p-[12px] lg:p-[15px] xl:p-[18px] flex flex-col items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
-              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] bg-[#E8F5E8] rounded-full flex items-center justify-center">
+              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] flex items-center justify-center">
                 <Icon
                   name="AvgCommentsIcon.svg"
-                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px] text-[#4CAF50]"
+                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
                   alt="Avg. Comments"
                 />
               </div>
@@ -587,7 +588,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
             Latest Posts
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-[8px] lg:gap-[10px] xl:gap-[12px]">
-            {creator.thumbnails.slice(0, 4).map((thumbnail, index) => (
+            {[...creator.thumbnails.slice(0, 3), '/images/PostThumbnail-3.svg'].map((thumbnail, index) => (
               <div key={index} className="aspect-[9/16] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] overflow-hidden">
                 <img
                   src={thumbnail}
