@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
 import { Creator, CreatorMetrics, Niche, DatabaseFilters, CreatorListMode } from '../types/database';
 
+// TODO: Remove mock data once Supabase is connected
 // Mock data for development - will be replaced with Supabase calls
 const mockCreators: Creator[] = [
   {
@@ -139,17 +141,62 @@ export const useCreatorData = () => {
     setError(null);
 
     try {
-      // TODO: Replace with actual Supabase query
-      // For AI mode: query ai_recommended_creators table
-      // For All mode: query all creators table
-      // const tableName = mode === 'ai' ? 'ai_recommended_creators' : 'creators';
-      // const { data, error } = await supabase
-      //   .from(tableName)
-      //   .select('*')
-      //   .in('niches', filters.niches || [])
-      //   .gte('followers', filters.followers_min || 0)
-      //   .lte('followers', filters.followers_max || 999999999)
-      //   // ... other filters
+      // TODO: Implement Supabase filtering
+      /*
+      const tableName = mode === 'ai' ? 'ai_recommended_creators_view' : 'creators';
+      let query = supabase.from(tableName).select(`
+        *,
+        social_media:social_media(*)
+      `);
+      
+      // Apply filters
+      if (filters.niches?.length) {
+        query = query.overlaps('niches', filters.niches);
+      }
+      
+      if (filters.followers_min !== undefined || filters.followers_max !== undefined) {
+        query = query.gte('followers', filters.followers_min || 0)
+                     .lte('followers', filters.followers_max || 999999999);
+      }
+      
+      if (filters.engagement_min !== undefined || filters.engagement_max !== undefined) {
+        query = query.gte('engagement', filters.engagement_min || 0)
+                     .lte('engagement', filters.engagement_max || 100);
+      }
+      
+      if (filters.avg_views_min !== undefined || filters.avg_views_max !== undefined) {
+        query = query.gte('avg_views', filters.avg_views_min || 0)
+                     .lte('avg_views', filters.avg_views_max || 999999999);
+      }
+      
+      // Add platform filtering through social_media join
+      if (filters.platforms?.length) {
+        // This would require a more complex query with joins
+      }
+      
+      // Add buzz score filtering
+      if (filters.buzz_scores?.length) {
+        const scoreConditions = filters.buzz_scores.map(range => {
+          switch (range) {
+            case '90%+': return 'buzz_score >= 90';
+            case '80-90%': return 'buzz_score >= 80 AND buzz_score < 90';
+            case '70-80%': return 'buzz_score >= 70 AND buzz_score < 80';
+            case '60-70%': return 'buzz_score >= 60 AND buzz_score < 70';
+            case 'Less than 60%': return 'buzz_score < 60';
+            default: return '';
+          }
+        }).filter(Boolean);
+        
+        if (scoreConditions.length) {
+          query = query.or(scoreConditions.join(','));
+        }
+      }
+      
+      const { data, error } = await query;
+      
+      if (error) throw error;
+      setFilteredCreators(data || []);
+      */
 
       // Mock filtering logic for development
       const sourceCreators = mode === 'ai' ? aiRecommendedCreators : allCreators;
@@ -232,10 +279,32 @@ export const useCreatorData = () => {
     setError(null);
 
     try {
-      // TODO: Replace with actual Supabase query
-      // Load both AI recommended and all creators
-      // const { data: aiData, error: aiError } = await supabase.from('ai_recommended_creators').select('*');
-      // const { data: allData, error: allError } = await supabase.from('creators').select('*');
+      // TODO: Implement Supabase queries
+      // Example implementation:
+      /*
+      if (currentMode === 'ai') {
+        const { data: aiData, error: aiError } = await supabase
+          .from('ai_recommended_creators_view')
+          .select(`
+            *,
+            social_media:social_media(*)
+          `)
+          .eq('user_id', userId); // Get from auth context
+        
+        if (aiError) throw aiError;
+        setAiRecommendedCreators(aiData || []);
+      } else {
+        const { data: allData, error: allError } = await supabase
+          .from('creators')
+          .select(`
+            *,
+            social_media:social_media(*)
+          `);
+        
+        if (allError) throw allError;
+        setAllCreators(allData || []);
+      }
+      */
       
       // Mock API call
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -255,8 +324,16 @@ export const useCreatorData = () => {
   // Load niches
   const loadNiches = async () => {
     try {
-      // TODO: Replace with actual Supabase query
-      // const { data, error } = await supabase.from('niches').select('*');
+      // TODO: Implement Supabase query
+      /*
+      const { data, error } = await supabase
+        .from('niches')
+        .select('*')
+        .order('name');
+      
+      if (error) throw error;
+      setNiches(data || []);
+      */
       
       setNiches(mockNiches);
     } catch (err) {
