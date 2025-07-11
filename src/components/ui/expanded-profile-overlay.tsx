@@ -176,10 +176,11 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
         className={`
           absolute bg-[#F9FAFB] border-[#CAC8C8] overflow-y-auto pointer-events-auto
           ${/* Mobile: Full screen */ ''}
-          sm:w-full sm:h-full sm:top-0 sm:right-0 sm:rounded-none sm:border-0
+          w-full h-full top-0 right-0 rounded-none border-0
           ${/* Medium: 60% width, XL: 50% width, right side */ ''}
-          md:w-[60%] md:h-full md:top-0 md:right-0 md:rounded-tl-[10px] md:rounded-bl-[10px] md:border-l md:border-t-0 md:border-r-0 md:border-b-0
-          xl:w-[50%]
+          md:w-[16%] md:h-full md:top-0 md:right-0 md:rounded-tl-[10px] md:rounded-bl-[10px] md:border-l md:border-t-0 md:border-r-0 md:border-b-0
+          lg:w-[15%]
+          xl:w-[16%]
         `}
         style={{ borderWidth: '1px' }}
       >
@@ -187,7 +188,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
         <div className="flex items-start justify-between p-[15px] mb-[15px]">
           <div className="flex items-center gap-[12px] lg:gap-[15px] xl:gap-[18px] flex-1">
             {/* Profile Picture */}
-            <div className="w-[50px] h-[50px] lg:w-[60px] lg:h-[60px] xl:w-[70px] xl:h-[70px] bg-[#384455] rounded-full overflow-hidden flex-shrink-0">
+            <div className="w-[60px] h-[60px] lg:w-[70px] lg:h-[70px] xl:w-[80px] xl:h-[80px] bg-[#384455] rounded-full overflow-hidden flex-shrink-0">
               {creator.profile_pic ? (
                 <img 
                   src={creator.profile_pic} 
@@ -224,9 +225,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
               <div className="flex items-center gap-[8px] lg:gap-[10px] xl:gap-[12px] mt-[4px]">
                 <Button
                   onClick={handleEmailClick}
-                  onMouseEnter={handleEmailMouseEnter}
-                  onMouseLeave={handleEmailMouseLeave}
-                  className="relative flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] px-[8px] lg:px-[10px] xl:px-[12px] py-[4px] lg:py-[5px] xl:py-[6px] bg-transparent border border-gray-300 rounded-[6px] hover:bg-gray-50 transition-colors"
+                  className="flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] px-[8px] lg:px-[10px] xl:px-[12px] py-[3px] lg:py-[4px] xl:py-[5px] bg-transparent border border-gray-300 rounded-[6px] hover:bg-gray-50 transition-colors shadow-none"
                 >
                   <Icon
                     name="EmailIcon.svg"
@@ -236,17 +235,10 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                   <span className="text-[12px] lg:text-[13px] xl:text-[14px] font-medium text-gray-700">
                     Email Creator
                   </span>
-                  {showEmailTooltip && (
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-black text-white text-sm rounded whitespace-nowrap">
-                      Copy Email ID
-                    </div>
-                  )}
                 </Button>
                 <Button
                   onClick={handleDMClick}
-                  onMouseEnter={handleDMMouseEnter}
-                  onMouseLeave={handleDMMouseLeave}
-                  className="relative flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] px-[8px] lg:px-[10px] xl:px-[12px] py-[4px] lg:py-[5px] xl:py-[6px] bg-transparent border border-gray-300 rounded-[6px] hover:bg-gray-50 transition-colors"
+                  className="flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] px-[8px] lg:px-[10px] xl:px-[12px] py-[3px] lg:py-[4px] xl:py-[5px] bg-transparent border border-gray-300 rounded-[6px] hover:bg-gray-50 transition-colors shadow-none"
                 >
                   <Icon
                     name="DMIcon.svg"
@@ -256,11 +248,6 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                   <span className="text-[12px] lg:text-[13px] xl:text-[14px] font-medium text-gray-700">
                     DM Creator
                   </span>
-                  {showDMTooltip && (
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-black text-white text-sm rounded whitespace-nowrap">
-                      DM Creator
-                    </div>
-                  )}
                 </Button>
               </div>
             </div>
@@ -273,7 +260,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
             </div>
             <Button
               onClick={onClose}
-              className="p-[6px] lg:p-[8px] xl:p-[10px] bg-transparent border-0 hover:bg-gray-100 transition-colors"
+              className="p-[6px] lg:p-[8px] xl:p-[10px] bg-transparent border-0 hover:bg-gray-100 transition-colors shadow-none"
             >
               <Icon
                 name="CloseIcon.svg"
@@ -345,7 +332,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
               {hasMoreHashtags && (
                 <Button
                   onClick={() => setShowAllHashtags(!showAllHashtags)}
-                  className="p-[4px] lg:p-[6px] xl:p-[8px] bg-transparent border-0 hover:bg-gray-100 transition-colors flex-shrink-0"
+                  className="p-[4px] lg:p-[6px] xl:p-[8px] bg-transparent border-0 hover:bg-gray-100 transition-colors flex-shrink-0 shadow-none"
                 >
                   <Icon
                     name="HashtagsDropdownIcon.svg"
@@ -542,7 +529,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
               </div>
               <Button
                 onClick={() => setShowBuzzScoreInfo(!showBuzzScoreInfo)}
-                className="relative p-[4px] lg:p-[6px] xl:p-[8px] bg-transparent border-0 hover:bg-gray-100 transition-colors"
+                className="relative p-[4px] lg:p-[6px] xl:p-[8px] bg-transparent border-0 hover:bg-gray-100 transition-colors shadow-none"
               >
                 <Icon
                   name="InformationIcon.svg"
@@ -550,8 +537,8 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                   alt="Info"
                 />
                 {showBuzzScoreInfo && (
-                  <div className="absolute top-full right-0 mt-2 w-[280px] lg:w-[320px] xl:w-[360px] bg-white border border-gray-200 rounded-[10px] shadow-lg p-[16px] lg:p-[20px] xl:p-[24px] z-10">
-                    <p className="text-[14px] lg:text-[16px] xl:text-[18px] text-gray-700 leading-[20px] lg:leading-[24px] xl:leading-[28px]">
+                  <div className="absolute top-full right-0 mt-2 w-[280px] lg:w-[320px] xl:w-[360px] bg-white border border-gray-200 rounded-[10px] shadow-lg p-[16px] lg:p-[20px] xl:p-[24px] z-10 break-words">
+                    <p className="text-[14px] lg:text-[16px] xl:text-[18px] text-gray-700 leading-[20px] lg:leading-[24px] xl:leading-[28px] whitespace-normal">
                       The buzz score is a performance score given to every creator based on their growth, engagement, and consistency.
                     </p>
                   </div>
@@ -573,11 +560,11 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
               
               {/* Indicating Arrow */}
               <div 
-                className="absolute -top-[16px] transform -translate-x-1/2"
+                className="absolute top-full transform -translate-x-1/2 mt-[2px] text-black"
                 style={{ left: `${creator.buzz_score}%` }}
               >
                 <div 
-                  className="border-l-[5.355px] border-r-[5.355px] border-b-[5.25px] border-l-transparent border-r-transparent border-b-gray-400"
+                  className="border-l-[5.355px] border-r-[5.355px] border-t-[5.25px] border-l-transparent border-r-transparent border-t-black"
                   style={{ width: '10.71px', height: '5.25px' }}
                 />
               </div>
