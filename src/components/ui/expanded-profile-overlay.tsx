@@ -30,10 +30,14 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
+      // Prevent body scroll on mobile when overlay is open
+      document.body.style.overflow = 'hidden';
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
+      // Restore body scroll when overlay is closed
+      document.body.style.overflow = 'unset';
     };
   }, [isOpen, onClose]);
 
@@ -78,7 +82,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
         style={{ borderWidth: '1px' }}
       >
         {/* Header */}
-        <div className="flex items-start justify-between p-[15px] mb-[15px]">
+        <div className="flex items-start justify-between p-[15px] mb-[15px] md:mb-[17px]">
           <div className="flex items-center gap-[12px] lg:gap-[15px] xl:gap-[18px] flex-1">
             {/* Profile Picture */}
             <div className="w-[60px] h-[60px] lg:w-[70px] lg:h-[70px] xl:w-[70px] xl:h-[70px] bg-[#384455] rounded-full overflow-hidden flex-shrink-0">
@@ -166,7 +170,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
         {/* Location */}
         {creator.location && (
-          <div className="px-[15px] mb-[15px]">
+          <div className="px-[15px] mb-[15px] md:mb-[17px]">
             <div className="flex items-center gap-[6px] lg:gap-[8px]">
               <Icon
                 name="LocationIcon.svg"
@@ -181,14 +185,14 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
         )}
 
         {/* Bio */}
-        <div className="px-[15px] mb-[15px]">
+        <div className="px-[15px] mb-[15px] md:mb-[17px]">
           <p className="text-[#71737c] text-[14px] lg:text-[16px] font-medium leading-[20px] lg:leading-[24px]">
             {creator.bio}
           </p>
         </div>
 
         {/* Category Badges */}
-        <div className="px-[15px] mb-[15px]">
+        <div className="px-[15px] mb-[15px] md:mb-[17px]">
           <div className="flex items-center gap-[8px] lg:gap-[10px] flex-wrap">
             {creator.niches.map((niche, index) => (
               <Badge
@@ -206,7 +210,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
         {/* Hashtags */}
         {creator.hashtags && creator.hashtags.length > 0 && (
-          <div className="px-[15px] mb-[15px]">
+          <div className="px-[15px] mb-[15px] md:mb-[17px]">
             <div 
               className="flex items-center gap-[6px] lg:gap-[8px] flex-wrap"
             >
@@ -226,7 +230,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
         )}
 
         {/* Metrics Cards - Single Row */}
-        <div className="px-[15px] mb-[15px]">
+        <div className="px-[15px] mb-[15px] md:mb-[17px]">
           <div className="grid grid-cols-5 gap-[3px] lg:gap-[4px]">
             {/* Followers */}
             <div className="bg-white rounded-[12px] px-[6px] py-[10px] flex flex-col items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
@@ -386,7 +390,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
         </div>
 
         {/* Buzz Score Card */}
-        <div className="px-[15px] mb-[15px]">
+        <div className="px-[15px] mb-[15px] md:mb-[17px]">
           <div className="bg-white rounded-[12px] px-[20px] lg:px-[24px] pt-[13px] lg:pt-[12px] pb-[20px] lg:pb-[24px]">
             <div className="flex items-center justify-between mb-[12px] lg:mb-[15px]">
               <div className="flex items-center gap-[8px] lg:gap-[10px]">
@@ -451,7 +455,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
         </div>
 
         {/* Latest Posts */}
-        <div className="px-[15px] mb-[15px]">
+        <div className="px-[15px] mb-[15px] md:mb-[17px]">
           <h3 className="text-[#71737c] text-[14px] lg:text-[16px] font-semibold mb-[12px] lg:mb-[15px]">
             Latest Posts
           </h3>
