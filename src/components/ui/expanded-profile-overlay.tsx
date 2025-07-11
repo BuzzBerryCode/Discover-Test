@@ -72,7 +72,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
           sm:w-full sm:h-full sm:top-0 sm:right-0 sm:rounded-none sm:border-0
           ${/* Medium: 60% width, XL: 50% width, right side */ ''}
           md:w-[60%] md:h-full md:top-0 md:right-0 md:rounded-tl-[16px] md:rounded-bl-[16px] md:border-l md:border-t-0 md:border-r-0 md:border-b-0
-          lg:w-[50%] lg:rounded-tl-[15px] lg:rounded-bl-[15px]
+          lg:w-[60%] lg:rounded-tl-[15px] lg:rounded-bl-[15px]
           xl:w-[50%] xl:rounded-tl-[16px] xl:rounded-bl-[16px]
         `}
         style={{ borderWidth: '1px' }}
