@@ -102,11 +102,19 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
           {scoreOptions.map((option) => (
             <div
               key={option.value}
-              className="flex items-center justify-between p-3 rounded-[8px] transition-colors hover:bg-gray-50 cursor-pointer"
+              className={`flex items-center justify-between p-3 rounded-[8px] transition-colors cursor-pointer ${
+                selectedScores.has(option.value)
+                  ? 'bg-blue-100 hover:bg-blue-200'
+                  : 'hover:bg-gray-50'
+              }`}
               onClick={() => onScoreToggle(option.value)}
             >
               <div className="flex items-center gap-3">
-                <span className="font-medium text-[13px] lg:text-[14px] xl:text-[15px] text-neutral-new900">
+                <span className={`text-[13px] lg:text-[14px] xl:text-[15px] ${
+                  selectedScores.has(option.value)
+                    ? 'text-blue-700 font-semibold'
+                    : 'text-neutral-new900 font-medium'
+                }`}>
                   {option.label}
                 </span>
               </div>

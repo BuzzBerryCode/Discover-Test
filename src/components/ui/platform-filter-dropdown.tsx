@@ -121,9 +121,15 @@ export const PlatformFilterDropdown: React.FC<PlatformFilterDropdownProps> = ({
           <div
             key={platform.value}
             className={`flex items-center justify-between p-3 rounded-[8px] transition-colors ${
-              platform.available
-                ? 'hover:bg-gray-50 cursor-pointer'
+              platform.available && selectedPlatforms.has(platform.value)
+                ? 'bg-blue-100 hover:bg-blue-200'
+                : platform.available
+                ? 'hover:bg-gray-50'
                 : 'opacity-50 cursor-not-allowed'
+            } ${
+              platform.available
+                ? 'cursor-pointer'
+                : ''
             }`}
             onClick={() => handlePlatformClick(platform)}
           >
@@ -134,8 +140,12 @@ export const PlatformFilterDropdown: React.FC<PlatformFilterDropdownProps> = ({
                 alt={platform.label}
               />
               <div className="flex flex-col">
-                <span className={`font-medium text-[13px] lg:text-[14px] xl:text-[15px] ${
-                  platform.available ? 'text-neutral-new900' : 'text-gray-400'
+                <span className={`text-[13px] lg:text-[14px] xl:text-[15px] ${
+                  platform.available && selectedPlatforms.has(platform.value)
+                    ? 'text-blue-700 font-semibold'
+                    : platform.available
+                    ? 'text-neutral-new900 font-medium'
+                    : 'text-gray-400 font-medium'
                 }`}>
                   {platform.label}
                 </span>

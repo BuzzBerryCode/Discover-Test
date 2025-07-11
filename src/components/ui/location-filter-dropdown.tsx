@@ -115,7 +115,11 @@ export const LocationFilterDropdown: React.FC<LocationFilterDropdownProps> = ({
             {countries.map((country) => (
               <div
                 key={country}
-                className="flex items-center space-x-3 p-2 hover:bg-[#f9fafb] rounded-[6px] cursor-pointer"
+                className={`flex items-center space-x-3 p-2 rounded-[6px] cursor-pointer transition-colors ${
+                  selectedLocations.has(country)
+                    ? 'bg-blue-100 hover:bg-blue-200'
+                    : 'hover:bg-gray-50'
+                }`}
                 onClick={() => onLocationToggle(country)}
               >
                 <Checkbox
@@ -123,7 +127,11 @@ export const LocationFilterDropdown: React.FC<LocationFilterDropdownProps> = ({
                   onCheckedChange={() => onLocationToggle(country)}
                   className="w-4 h-4"
                 />
-                <label className="text-[14px] text-[#111827] cursor-pointer flex-1">
+                <label className={`text-[14px] cursor-pointer flex-1 ${
+                  selectedLocations.has(country)
+                    ? 'text-blue-700 font-medium'
+                    : 'text-[#111827]'
+                }`}>
                   {country}
                 </label>
               </div>
