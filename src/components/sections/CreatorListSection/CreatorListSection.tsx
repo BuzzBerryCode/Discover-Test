@@ -274,9 +274,11 @@ export const CreatorListSection = (): JSX.Element => {
               <Card
                 key={creator.id}
                 onClick={() => handleCreatorClick(creator)}
-                className={`w-full rounded-[15px] p-0 border-2 shadow-sm hover:shadow-md transition-all ${
+                className={`w-full rounded-[15px] p-0 border-2 shadow-sm hover:shadow-md transition-all cursor-pointer ${
                   selectedCards.has(creator.id) 
                     ? 'bg-gray-50 border-blue-300' 
+                    : selectedCreator?.id === creator.id
+                    ? 'bg-[#f1f6fe] border-transparent'
                     : 'bg-gray-50 border-transparent'
                 }`}
               >
@@ -531,9 +533,11 @@ export const CreatorListSection = (): JSX.Element => {
                   <div
                     key={creator.id}
                     onClick={() => handleCreatorClick(creator)}
-                    className={`gap-3 sm:gap-4 lg:gap-5 px-4 py-4 items-center hover:bg-gray-50 transition-colors ${
+                    className={`gap-3 sm:gap-4 lg:gap-5 px-4 py-4 items-center hover:bg-gray-50 transition-colors cursor-pointer ${
                       index !== sortedCreators.length - 1 ? 'border-b border-gray-100' : ''
-                    } cursor-pointer ${
+                    } ${
+                      selectedCreator?.id === creator.id ? 'bg-[#f1f6fe]' : ''
+                    } ${
                       currentMode === 'ai' 
                         ? "grid grid-cols-[50px_200px_100px_100px_100px_100px_140px_120px_90px_50px] lg:grid-cols-[60px_220px_110px_110px_110px_110px_140px_120px_100px_60px] xl:grid-cols-[60px_2fr_1fr_1fr_1fr_1fr_1.1fr_1fr_0.9fr_60px]"
                         : "grid grid-cols-[50px_200px_100px_100px_100px_140px_120px_90px_50px] lg:grid-cols-[60px_220px_110px_110px_110px_140px_120px_100px_60px] xl:grid-cols-[60px_2fr_1fr_1fr_1fr_1.1fr_1fr_0.9fr_60px]"

@@ -17,7 +17,6 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
   onClose,
 }) => {
   const [showAllHashtags, setShowAllHashtags] = useState(false);
-  const [showBuzzScoreInfo, setShowBuzzScoreInfo] = useState(false);
   const [emailButtonText, setEmailButtonText] = useState('Copy Email ID');
 
   // Handle escape key
@@ -99,10 +98,10 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
             {/* Creator Info */}
             <div className="flex flex-col gap-[4px] lg:gap-[6px] xl:gap-[8px] flex-1 min-w-0">
-                <span className="text-[#06152b] text-[16px] md:text-[23px] lg:text-[20px] xl:text-[24px] font-semibold">
+                <span className="text-[#06152b] text-[16px] md:text-[21px] lg:text-[20px] xl:text-[24px] font-semibold">
                 {creator.username}
               </span>
-              <div className="flex items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
+              <div className="flex items-center gap-[8px] lg:gap-[10px] xl:gap-[11px]">
                 <span className="text-[#71737c] text-[14px] lg:text-[16px] xl:text-[18px] font-medium">
                   {creator.username_tag || `@${creator.username.toLowerCase().replace(/\s+/g, '')}`}
                 </span>
@@ -409,23 +408,13 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                   {creator.buzz_score}%
                 </span>
               </div>
-              <Button
-                onClick={() => setShowBuzzScoreInfo(!showBuzzScoreInfo)}
-                className="relative bg-transparent hover:bg-transparent transition-colors"
-              >
+              <div className="bg-transparent">
                 <Icon
                   name="InformationIcon.svg"
                   className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] text-gray-600"
                   alt="Info"
                 />
-                {showBuzzScoreInfo && (
-                  <div className="absolute top-full right-0 mt-2 w-[280px] lg:w-[320px] bg-white border border-gray-200 rounded-[10px] shadow-lg p-[16px] lg:p-[20px] z-10">
-                    <p className="text-[14px] lg:text-[16px] text-gray-700 leading-[20px] lg:leading-[24px]">
-                      The buzz score is a performance score given to every creator based on their growth, engagement, and consistency.
-                    </p>
-                  </div>
-                )}
-              </Button>
+              </div>
             </div>
             
             {/* Buzz Score Bar */}
