@@ -18,12 +18,15 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 }) => {
   const [showAllHashtags, setShowAllHashtags] = useState(false);
   const [emailButtonText, setEmailButtonText] = useState('Copy Email ID');
+  const [showBuzzScoreInfo, setShowBuzzScoreInfo] = useState(false);
+  const buzzScoreInfoRef = useRef<HTMLDivElement>(null);
 
   // Handle escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
+        setShowBuzzScoreInfo(false);
       }
     };
 
@@ -36,6 +39,27 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
     };
   }, [isOpen, onClose]);
 
+  // Close buzz score info popup when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        buzzScoreInfoRef.current && 
+        !buzzScoreInfoRef.current.contains(event.target as Node)
+      ) {
+        setShowBuzzScoreInfo(false);
+      }
+    };
+
+    if (showBuzzScoreInfo) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [showBuzzScoreInfo]);
   // Handle email copy
   const handleEmailClick = async () => {
     if (creator.email) {
@@ -404,12 +428,34 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                   {creator.buzz_score}%
                 </span>
               </div>
-              <div className="bg-transparent">
+              <div className="relative">
+                <button
+                  onClick={() => setShowBuzzScoreInfo(!showBuzzScoreInfo)}
+                  className="bg-transparent hover:bg-gray-100 p-1 rounded-full transition-colors"
+                >
                 <Icon
                   name="InformationIcon.svg"
                   className="w-[10px] h-[10px] md:w-[12px] md:h-[12px] lg:w-[14px] lg:h-[14px] text-gray-600"
                   alt="Info"
                 />
+                </button>
+                
+                {/* Buzz Score Info Popup */}
+                {showBuzzScoreInfo && (
+                  <div
+                    ref={buzzScoreInfoRef}
+                    className="absolute top-full right-0 mt-2 w-[280px] sm:w-[320px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div>
+                        <h3 className="font-semibold text-gray-900 mb-2 text-sm">Buzz Score</h3>
+                        <p className="text-sm text-gray-600">
+                          The Buzz Score is a performance metric that we calculate based on account growth, engagement, and consistency. It provides a comprehensive view of a creator's overall performance and trending potential.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             
