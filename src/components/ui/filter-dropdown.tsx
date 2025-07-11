@@ -182,7 +182,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
         <Button
           size="sm"
           onClick={onApply}
-          className="h-8 px-4 bg-[#4f46e5] hover:bg-[#4338ca] text-white text-[12px] font-medium rounded-[6px] border-0"
+          className="h-8 px-4 bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] text-white text-[12px] font-medium rounded-[6px] border-0"
         >
           Confirm
         </Button>

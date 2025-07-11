@@ -87,7 +87,7 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
             variant="ghost"
             size="sm"
             onClick={onClose}
-            className="h-6 w-6 p-0 hover:bg-gray-100"
+            className="h-6 w-6 p-0 hover:bg-[#f9fafb]"
           >
             <Icon
               name="CloseIcon.svg"
@@ -141,7 +141,7 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
                 variant="ghost"
                 size="sm"
                 onClick={onReset}
-                className="text-[12px] lg:text-[13px] xl:text-[14px] text-gray-600 hover:text-gray-700"
+                className="h-8 px-3 text-[12px] font-medium text-[#6b7280] hover:text-[#374151] hover:bg-[#f9fafb]"
               >
                 Reset
               </Button>
@@ -149,9 +149,9 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
             <Button
               size="sm"
               onClick={onConfirm}
-              className="bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] text-white text-[12px] lg:text-[13px] xl:text-[14px] px-4 py-2"
+              className="h-8 px-4 bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] text-white text-[12px] font-medium rounded-[6px] border-0"
             >
-              Apply
+              Confirm
             </Button>
           </div>
         </div>
