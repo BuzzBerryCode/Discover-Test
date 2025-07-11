@@ -187,7 +187,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
         <div className="flex items-start justify-between p-[20px] lg:p-[25px] xl:p-[30px]">
           <div className="flex items-center gap-[12px] lg:gap-[15px] xl:gap-[18px] flex-1">
             {/* Profile Picture */}
-            <div className="w-[60px] h-[60px] lg:w-[70px] lg:h-[70px] xl:w-[80px] xl:h-[80px] bg-[#384455] rounded-full overflow-hidden flex-shrink-0">
+            <div className="w-[70px] h-[70px] lg:w-[80px] lg:h-[80px] xl:w-[90px] xl:h-[90px] bg-[#384455] rounded-full overflow-hidden flex-shrink-0">
               {creator.profile_pic ? (
                 <img 
                   src={creator.profile_pic} 
@@ -201,11 +201,11 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
             {/* Creator Info */}
             <div className="flex flex-col gap-[4px] lg:gap-[6px] xl:gap-[8px] flex-1 min-w-0">
-              <h2 className="font-bold text-[#06152b] text-[20px] lg:text-[24px] xl:text-[28px] leading-[24px] lg:leading-[28px] xl:leading-[32px] truncate">
+              <h2 className="font-bold text-[#06152b] text-[24px] lg:text-[28px] xl:text-[32px] leading-[28px] lg:leading-[32px] xl:leading-[36px] truncate">
                 {creator.username}
               </h2>
               <div className="flex items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
-                <span className="text-[#71737c] text-[14px] lg:text-[16px] xl:text-[18px] font-medium">
+                <span className="text-[#71737c] text-[16px] lg:text-[18px] xl:text-[20px] font-medium">
                   {creator.username_tag || `@${creator.username.toLowerCase().replace(/\s+/g, '')}`}
                 </span>
                 <div className="flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px]">
@@ -213,15 +213,15 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                     onClick={handleEmailClick}
                     onMouseEnter={handleEmailMouseEnter}
                     onMouseLeave={handleEmailMouseLeave}
-                    className="relative p-[6px] lg:p-[8px] xl:p-[10px] bg-transparent border-0 rounded-[6px] hover:bg-gray-100 transition-colors"
+                    className="relative p-[8px] lg:p-[10px] xl:p-[12px] bg-transparent border-0 rounded-[8px] hover:bg-gray-100 transition-colors"
                   >
                     <Icon
                       name="EmailIcon.svg"
-                      className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
+                      className="w-[20px] h-[20px] lg:w-[22px] lg:h-[22px] xl:w-[24px] xl:h-[24px]"
                       alt="Email"
                     />
                     {showEmailTooltip && (
-                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded whitespace-nowrap">
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-black text-white text-sm rounded whitespace-nowrap">
                         Copy Email ID
                       </div>
                     )}
@@ -230,15 +230,15 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                     onClick={handleDMClick}
                     onMouseEnter={handleDMMouseEnter}
                     onMouseLeave={handleDMMouseLeave}
-                    className="relative p-[6px] lg:p-[8px] xl:p-[10px] bg-transparent border-0 rounded-[6px] hover:bg-gray-100 transition-colors"
+                    className="relative p-[8px] lg:p-[10px] xl:p-[12px] bg-transparent border-0 rounded-[8px] hover:bg-gray-100 transition-colors"
                   >
                     <Icon
                       name="DMIcon.svg"
-                      className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
+                      className="w-[20px] h-[20px] lg:w-[22px] lg:h-[22px] xl:w-[24px] xl:h-[24px]"
                       alt="DM"
                     />
                     {showDMTooltip && (
-                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded whitespace-nowrap">
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-black text-white text-sm rounded whitespace-nowrap">
                         DM Creator
                       </div>
                     )}
@@ -249,7 +249,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                     <Icon
                       key={iconIndex}
                       name={getSocialMediaIcon(social.platform)}
-                      className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
+                      className="w-[20px] h-[20px] lg:w-[22px] lg:h-[22px] xl:w-[24px] xl:h-[24px]"
                       alt={`${social.platform} logo`}
                     />
                   ))}
@@ -260,16 +260,16 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
           {/* Match Score and Close Button */}
           <div className="flex items-center gap-[8px] lg:gap-[10px] xl:gap-[12px] flex-shrink-0">
-            <div className="bg-green-100 text-green-600 px-[12px] lg:px-[15px] xl:px-[18px] py-[6px] lg:py-[8px] xl:py-[10px] rounded-[8px] font-bold text-[14px] lg:text-[16px] xl:text-[18px]">
+            <div className="bg-green-100 text-green-600 px-[16px] lg:px-[20px] xl:px-[24px] py-[8px] lg:py-[10px] xl:py-[12px] rounded-[10px] font-bold text-[16px] lg:text-[18px] xl:text-[20px]">
               Match {creator.match_score || 0}%
             </div>
             <Button
               onClick={onClose}
-              className="p-[6px] lg:p-[8px] xl:p-[10px] bg-transparent border-0 rounded-[6px] hover:bg-gray-100 transition-colors"
+              className="p-[8px] lg:p-[10px] xl:p-[12px] bg-transparent border-0 rounded-[8px] hover:bg-gray-100 transition-colors"
             >
               <Icon
                 name="CloseIcon.svg"
-                className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px] text-gray-600"
+                className="w-[20px] h-[20px] lg:w-[22px] lg:h-[22px] xl:w-[24px] xl:h-[24px] text-gray-600"
                 alt="Close"
               />
             </Button>
@@ -282,10 +282,10 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
             <div className="flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px]">
               <Icon
                 name="LocationIcon.svg"
-                className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px] text-gray-600"
+                className="w-[18px] h-[18px] lg:w-[20px] lg:h-[20px] xl:w-[22px] xl:h-[22px] text-gray-600"
                 alt="Location"
               />
-              <span className="text-[#71737c] text-[14px] lg:text-[16px] xl:text-[18px] font-medium">
+              <span className="text-[#71737c] text-[16px] lg:text-[18px] xl:text-[20px] font-medium">
                 {creator.location}
               </span>
             </div>
@@ -294,7 +294,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
         {/* Bio */}
         <div className="px-[20px] lg:px-[25px] xl:px-[30px] mb-[20px] lg:mb-[25px] xl:mb-[30px]">
-          <p className="text-[#71737c] text-[14px] lg:text-[16px] xl:text-[18px] font-medium leading-[20px] lg:leading-[24px] xl:leading-[28px]">
+          <p className="text-[#71737c] text-[16px] lg:text-[18px] xl:text-[20px] font-medium leading-[24px] lg:leading-[28px] xl:leading-[32px]">
             {creator.bio}
           </p>
         </div>
@@ -306,9 +306,9 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
               <Badge
                 key={index}
                 variant="outline"
-                className="px-[12px] lg:px-[15px] xl:px-[18px] py-[6px] lg:py-[8px] xl:py-[10px] bg-sky-50 rounded-[8px] border-[#dbe2eb]"
+                className="px-[16px] lg:px-[20px] xl:px-[24px] py-[8px] lg:py-[10px] xl:py-[12px] bg-sky-50 rounded-[10px] border-[#dbe2eb]"
               >
-                <span className="font-medium text-neutral-new900 text-[12px] lg:text-[14px] xl:text-[16px]">
+                <span className="font-medium text-neutral-new900 text-[14px] lg:text-[16px] xl:text-[18px]">
                   {niche}
                 </span>
               </Badge>
@@ -327,9 +327,9 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                 <Badge
                   key={index}
                   variant="outline"
-                  className="px-[8px] lg:px-[10px] xl:px-[12px] py-[4px] lg:py-[6px] xl:py-[8px] bg-gray-100 rounded-[6px] border-gray-300 flex-shrink-0"
+                  className="px-[12px] lg:px-[14px] xl:px-[16px] py-[6px] lg:py-[8px] xl:py-[10px] bg-gray-100 rounded-[8px] border-gray-300 flex-shrink-0"
                 >
-                  <span className="font-medium text-gray-600 text-[12px] lg:text-[14px] xl:text-[16px]">
+                  <span className="font-medium text-gray-600 text-[14px] lg:text-[16px] xl:text-[18px]">
                     {hashtag}
                   </span>
                 </Badge>
@@ -337,11 +337,11 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
               {hasMoreHashtags && (
                 <Button
                   onClick={() => setShowAllHashtags(!showAllHashtags)}
-                  className="p-[4px] lg:p-[6px] xl:p-[8px] bg-transparent border-0 rounded-[6px] hover:bg-gray-100 transition-colors flex-shrink-0"
+                  className="p-[6px] lg:p-[8px] xl:p-[10px] bg-transparent border-0 rounded-[8px] hover:bg-gray-100 transition-colors flex-shrink-0"
                 >
                   <Icon
                     name="HashtagsDropdownIcon.svg"
-                    className={`w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px] transition-transform ${
+                    className={`w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px] transition-transform ${
                       showAllHashtags ? 'rotate-180' : ''
                     }`}
                     alt="Show more hashtags"
@@ -354,30 +354,30 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
         {/* Metrics Cards - Single Row */}
         <div className="px-[20px] lg:px-[25px] xl:px-[30px] mb-[25px] lg:mb-[30px] xl:mb-[35px]">
-          <div className="grid grid-cols-5 gap-[8px] lg:gap-[10px] xl:gap-[12px]">
+          <div className="grid grid-cols-5 gap-[12px] lg:gap-[15px] xl:gap-[18px]">
             {/* Followers */}
-            <div className="bg-white rounded-[10px] p-[12px] lg:p-[15px] xl:p-[18px] flex flex-col items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
-              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] flex items-center justify-center">
+            <div className="bg-white rounded-[12px] p-[16px] lg:p-[20px] xl:p-[24px] flex flex-col items-center gap-[10px] lg:gap-[12px] xl:gap-[14px]">
+              <div className="flex items-center justify-center">
                 <Icon
                   name="FollowerIcon.svg"
-                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
+                  className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px] xl:w-[32px] xl:h-[32px]"
                   alt="Followers"
                 />
               </div>
               <div className="text-center">
-                <div className="text-[#71737c] text-[10px] lg:text-[12px] xl:text-[14px] font-medium mb-1">
+                <div className="text-[#71737c] text-[12px] lg:text-[14px] xl:text-[16px] font-medium mb-2">
                   Followers
                 </div>
-                <div className="text-[#06152b] text-[14px] lg:text-[16px] xl:text-[18px] font-bold mb-1">
+                <div className="text-[#06152b] text-[16px] lg:text-[18px] xl:text-[20px] font-bold mb-2">
                   {formatNumber(creator.followers)}
                 </div>
-                <div className="flex items-center justify-center gap-1">
+                <div className="flex items-center justify-center gap-2">
                   <Icon 
                     name={creator.followers_change_type === 'positive' ? 'PositiveChangeIcon.svg' : 'NegativeChangeIcon.svg'}
-                    className="w-[10px] h-[10px] lg:w-[12px] lg:h-[12px] xl:w-[14px] xl:h-[14px]" 
+                    className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" 
                     alt={creator.followers_change_type === 'positive' ? 'Positive change' : 'Negative change'} 
                   />
-                  <span className={`text-[10px] lg:text-[12px] xl:text-[14px] font-medium ${
+                  <span className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium ${
                     creator.followers_change_type === 'positive' ? 'text-[#1ad598]' : 'text-[#ea3a3d]'
                   }`}>
                     {creator.followers_change_type === 'positive' ? '+' : ''}{creator.followers_change?.toFixed(2) || '0.00'}%
@@ -387,28 +387,28 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
             </div>
 
             {/* Avg. Views */}
-            <div className="bg-white rounded-[10px] p-[12px] lg:p-[15px] xl:p-[18px] flex flex-col items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
-              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] flex items-center justify-center">
+            <div className="bg-white rounded-[12px] p-[16px] lg:p-[20px] xl:p-[24px] flex flex-col items-center gap-[10px] lg:gap-[12px] xl:gap-[14px]">
+              <div className="flex items-center justify-center">
                 <Icon
                   name="AvgViewsIcon.svg"
-                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
+                  className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px] xl:w-[32px] xl:h-[32px]"
                   alt="Avg. Views"
                 />
               </div>
               <div className="text-center">
-                <div className="text-[#71737c] text-[10px] lg:text-[12px] xl:text-[14px] font-medium mb-1">
+                <div className="text-[#71737c] text-[12px] lg:text-[14px] xl:text-[16px] font-medium mb-2">
                   Avg. Views
                 </div>
-                <div className="text-[#06152b] text-[14px] lg:text-[16px] xl:text-[18px] font-bold mb-1">
+                <div className="text-[#06152b] text-[16px] lg:text-[18px] xl:text-[20px] font-bold mb-2">
                   {formatNumber(creator.avg_views)}
                 </div>
-                <div className="flex items-center justify-center gap-1">
+                <div className="flex items-center justify-center gap-2">
                   <Icon 
                     name={creator.avg_views_change_type === 'positive' ? 'PositiveChangeIcon.svg' : 'NegativeChangeIcon.svg'}
-                    className="w-[10px] h-[10px] lg:w-[12px] lg:h-[12px] xl:w-[14px] xl:h-[14px]" 
+                    className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" 
                     alt={creator.avg_views_change_type === 'positive' ? 'Positive change' : 'Negative change'} 
                   />
-                  <span className={`text-[10px] lg:text-[12px] xl:text-[14px] font-medium ${
+                  <span className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium ${
                     creator.avg_views_change_type === 'positive' ? 'text-[#1ad598]' : 'text-[#ea3a3d]'
                   }`}>
                     {creator.avg_views_change_type === 'positive' ? '+' : ''}{creator.avg_views_change?.toFixed(2) || '0.00'}%
@@ -418,28 +418,28 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
             </div>
 
             {/* Engagement */}
-            <div className="bg-white rounded-[10px] p-[12px] lg:p-[15px] xl:p-[18px] flex flex-col items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
-              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] flex items-center justify-center">
+            <div className="bg-white rounded-[12px] p-[16px] lg:p-[20px] xl:p-[24px] flex flex-col items-center gap-[10px] lg:gap-[12px] xl:gap-[14px]">
+              <div className="flex items-center justify-center">
                 <Icon
                   name="AvgEngagementIcon.svg"
-                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
+                  className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px] xl:w-[32px] xl:h-[32px]"
                   alt="Engagement"
                 />
               </div>
               <div className="text-center">
-                <div className="text-[#71737c] text-[10px] lg:text-[12px] xl:text-[14px] font-medium mb-1">
+                <div className="text-[#71737c] text-[12px] lg:text-[14px] xl:text-[16px] font-medium mb-2">
                   Engagement
                 </div>
-                <div className="text-[#06152b] text-[14px] lg:text-[16px] xl:text-[18px] font-bold mb-1">
+                <div className="text-[#06152b] text-[16px] lg:text-[18px] xl:text-[20px] font-bold mb-2">
                   {creator.engagement.toFixed(1)}%
                 </div>
-                <div className="flex items-center justify-center gap-1">
+                <div className="flex items-center justify-center gap-2">
                   <Icon 
                     name={creator.engagement_change_type === 'positive' ? 'PositiveChangeIcon.svg' : 'NegativeChangeIcon.svg'}
-                    className="w-[10px] h-[10px] lg:w-[12px] lg:h-[12px] xl:w-[14px] xl:h-[14px]" 
+                    className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" 
                     alt={creator.engagement_change_type === 'positive' ? 'Positive change' : 'Negative change'} 
                   />
-                  <span className={`text-[10px] lg:text-[12px] xl:text-[14px] font-medium ${
+                  <span className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium ${
                     creator.engagement_change_type === 'positive' ? 'text-[#1ad598]' : 'text-[#ea3a3d]'
                   }`}>
                     {creator.engagement_change_type === 'positive' ? '+' : ''}{creator.engagement_change?.toFixed(2) || '0.00'}%
@@ -449,28 +449,28 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
             </div>
 
             {/* Avg. Likes */}
-            <div className="bg-white rounded-[10px] p-[12px] lg:p-[15px] xl:p-[18px] flex flex-col items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
-              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] flex items-center justify-center">
+            <div className="bg-white rounded-[12px] p-[16px] lg:p-[20px] xl:p-[24px] flex flex-col items-center gap-[10px] lg:gap-[12px] xl:gap-[14px]">
+              <div className="flex items-center justify-center">
                 <Icon
                   name="AvgLikesIcon.svg"
-                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
+                  className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px] xl:w-[32px] xl:h-[32px]"
                   alt="Avg. Likes"
                 />
               </div>
               <div className="text-center">
-                <div className="text-[#71737c] text-[10px] lg:text-[12px] xl:text-[14px] font-medium mb-1">
+                <div className="text-[#71737c] text-[12px] lg:text-[14px] xl:text-[16px] font-medium mb-2">
                   Avg. Likes
                 </div>
-                <div className="text-[#06152b] text-[14px] lg:text-[16px] xl:text-[18px] font-bold mb-1">
+                <div className="text-[#06152b] text-[16px] lg:text-[18px] xl:text-[20px] font-bold mb-2">
                   {formatNumber(creator.avg_likes || 0)}
                 </div>
-                <div className="flex items-center justify-center gap-1">
+                <div className="flex items-center justify-center gap-2">
                   <Icon 
                     name={creator.avg_likes_change_type === 'positive' ? 'PositiveChangeIcon.svg' : 'NegativeChangeIcon.svg'}
-                    className="w-[10px] h-[10px] lg:w-[12px] lg:h-[12px] xl:w-[14px] xl:h-[14px]" 
+                    className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" 
                     alt={creator.avg_likes_change_type === 'positive' ? 'Positive change' : 'Negative change'} 
                   />
-                  <span className={`text-[10px] lg:text-[12px] xl:text-[14px] font-medium ${
+                  <span className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium ${
                     creator.avg_likes_change_type === 'positive' ? 'text-[#1ad598]' : 'text-[#ea3a3d]'
                   }`}>
                     {creator.avg_likes_change_type === 'positive' ? '+' : ''}{creator.avg_likes_change?.toFixed(2) || '0.00'}%
@@ -480,28 +480,28 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
             </div>
 
             {/* Avg. Comments */}
-            <div className="bg-white rounded-[10px] p-[12px] lg:p-[15px] xl:p-[18px] flex flex-col items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
-              <div className="w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px] flex items-center justify-center">
+            <div className="bg-white rounded-[12px] p-[16px] lg:p-[20px] xl:p-[24px] flex flex-col items-center gap-[10px] lg:gap-[12px] xl:gap-[14px]">
+              <div className="flex items-center justify-center">
                 <Icon
                   name="AvgCommentsIcon.svg"
-                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
+                  className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px] xl:w-[32px] xl:h-[32px]"
                   alt="Avg. Comments"
                 />
               </div>
               <div className="text-center">
-                <div className="text-[#71737c] text-[10px] lg:text-[12px] xl:text-[14px] font-medium mb-1">
+                <div className="text-[#71737c] text-[12px] lg:text-[14px] xl:text-[16px] font-medium mb-2">
                   Avg. Comments
                 </div>
-                <div className="text-[#06152b] text-[14px] lg:text-[16px] xl:text-[18px] font-bold mb-1">
+                <div className="text-[#06152b] text-[16px] lg:text-[18px] xl:text-[20px] font-bold mb-2">
                   {formatNumber(creator.avg_comments || 0)}
                 </div>
-                <div className="flex items-center justify-center gap-1">
+                <div className="flex items-center justify-center gap-2">
                   <Icon 
                     name={creator.avg_comments_change_type === 'positive' ? 'PositiveChangeIcon.svg' : 'NegativeChangeIcon.svg'}
-                    className="w-[10px] h-[10px] lg:w-[12px] lg:h-[12px] xl:w-[14px] xl:h-[14px]" 
+                    className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" 
                     alt={creator.avg_comments_change_type === 'positive' ? 'Positive change' : 'Negative change'} 
                   />
-                  <span className={`text-[10px] lg:text-[12px] xl:text-[14px] font-medium ${
+                  <span className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium ${
                     creator.avg_comments_change_type === 'positive' ? 'text-[#1ad598]' : 'text-[#ea3a3d]'
                   }`}>
                     {creator.avg_comments_change_type === 'positive' ? '+' : ''}{creator.avg_comments_change?.toFixed(2) || '0.00'}%
@@ -514,14 +514,14 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
         {/* Buzz Score Card */}
         <div className="px-[20px] lg:px-[25px] xl:px-[30px] mb-[25px] lg:mb-[30px] xl:mb-[35px]">
-          <div className="bg-white rounded-[10px] p-[15px] lg:p-[18px] xl:p-[20px]">
+          <div className="bg-white rounded-[12px] p-[20px] lg:p-[24px] xl:p-[28px]">
             <div className="flex items-center justify-between mb-[12px] lg:mb-[15px] xl:mb-[18px]">
               <div className="flex items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
                 <span className="text-[#00518B] text-[14px] lg:text-[16px] xl:text-[18px] font-bold">
                   Buzz Score
                 </span>
                 <span 
-                  className="text-[14px] lg:text-[16px] xl:text-[18px] font-bold"
+                  className="text-[16px] lg:text-[18px] xl:text-[20px] font-bold"
                   style={{
                     background: 'linear-gradient(90deg, #FC4C4B 0%, #CD45BA 50%, #6E57FF 100%)',
                     WebkitBackgroundClip: 'text',
@@ -534,16 +534,16 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
               </div>
               <Button
                 onClick={() => setShowBuzzScoreInfo(!showBuzzScoreInfo)}
-                className="relative p-[4px] lg:p-[6px] xl:p-[8px] bg-transparent border-0 hover:bg-gray-100 rounded-[4px] transition-colors"
+                className="relative p-[6px] lg:p-[8px] xl:p-[10px] bg-transparent border-0 hover:bg-gray-100 rounded-[6px] transition-colors"
               >
                 <Icon
                   name="InformationIcon.svg"
-                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px] text-gray-600"
+                  className="w-[18px] h-[18px] lg:w-[20px] lg:h-[20px] xl:w-[22px] xl:h-[22px] text-gray-600"
                   alt="Info"
                 />
                 {showBuzzScoreInfo && (
-                  <div className="absolute top-full right-0 mt-2 w-[280px] lg:w-[320px] xl:w-[360px] bg-white border border-gray-200 rounded-[8px] shadow-lg p-[12px] lg:p-[15px] xl:p-[18px] z-10">
-                    <p className="text-[12px] lg:text-[14px] xl:text-[16px] text-gray-700 leading-[16px] lg:leading-[18px] xl:leading-[20px]">
+                  <div className="absolute top-full right-0 mt-2 w-[280px] lg:w-[320px] xl:w-[360px] bg-white border border-gray-200 rounded-[10px] shadow-lg p-[16px] lg:p-[20px] xl:p-[24px] z-10">
+                    <p className="text-[14px] lg:text-[16px] xl:text-[18px] text-gray-700 leading-[20px] lg:leading-[24px] xl:leading-[28px]">
                       The buzz score is a performance score given to every creator based on their growth, engagement, and consistency.
                     </p>
                   </div>
@@ -553,7 +553,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
             
             {/* Buzz Score Bar */}
             <div className="relative">
-              <div className="w-full h-[12px] lg:h-[14px] xl:h-[16px] bg-gradient-to-r from-[#FC4C4B] via-[#CD45BA] to-[#6E57FF] rounded-[6px] lg:rounded-[7px] xl:rounded-[8px] relative">
+              <div className="w-full h-[16px] lg:h-[18px] xl:h-[20px] bg-gradient-to-r from-[#FC4C4B] via-[#CD45BA] to-[#6E57FF] rounded-[8px] lg:rounded-[9px] xl:rounded-[10px] relative">
                 {/* Indicating Dot */}
                 <div 
                   className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2"
@@ -561,7 +561,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                 >
                   <Icon
                     name="IndicatingDot.svg"
-                    className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
+                    className="w-[20px] h-[20px] lg:w-[22px] lg:h-[22px] xl:w-[24px] xl:h-[24px]"
                     alt="Score indicator"
                   />
                 </div>
@@ -569,12 +569,12 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
               
               {/* Indicating Arrow */}
               <div 
-                className="absolute -top-[20px] lg:-top-[24px] xl:-top-[28px] transform -translate-x-1/2"
+                className="absolute -top-[24px] lg:-top-[28px] xl:-top-[32px] transform -translate-x-1/2"
                 style={{ left: `${creator.buzz_score}%` }}
               >
                 <Icon
                   name="IndicatingArrow.svg"
-                  className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]"
+                  className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]"
                   alt="Score arrow"
                 />
               </div>
@@ -584,12 +584,12 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
         {/* Latest Posts */}
         <div className="px-[20px] lg:px-[25px] xl:px-[30px] mb-[20px] lg:mb-[25px] xl:mb-[30px]">
-          <h3 className="text-[#71737c] text-[16px] lg:text-[18px] xl:text-[20px] font-semibold mb-[15px] lg:mb-[18px] xl:mb-[20px]">
+          <h3 className="text-[#71737c] text-[18px] lg:text-[20px] xl:text-[22px] font-semibold mb-[18px] lg:mb-[22px] xl:mb-[26px]">
             Latest Posts
           </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-[8px] lg:gap-[10px] xl:gap-[12px]">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-[12px] lg:gap-[15px] xl:gap-[18px]">
             {[...creator.thumbnails.slice(0, 3), '/images/PostThumbnail-3.svg'].map((thumbnail, index) => (
-              <div key={index} className="aspect-[9/16] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] overflow-hidden">
+              <div key={index} className="aspect-[9/16] rounded-[10px] lg:rounded-[12px] xl:rounded-[14px] overflow-hidden">
                 <img
                   src={thumbnail}
                   alt={`${creator.username} post ${index + 1}`}
