@@ -37,42 +37,10 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
   const [minInput, setMinInput] = React.useState(config.formatValue(value[0]));
   const [maxInput, setMaxInput] = React.useState(config.formatValue(value[1]));
 
-  // Helper function to format numbers with commas
-  const formatNumberWithCommas = (num: number): string => {
-    return num.toLocaleString();
-  };
-
-  // Helper function to remove commas and parse number
-  const parseNumberFromInput = (input: string): number => {
-    return parseInt(input.replace(/,/g, '')) || 0;
-  };
-
-  // Helper function to format input based on filter type
-  const formatInputValue = (num: number): string => {
-    if (config.title.includes('Engagement')) {
-      return `${num}%`;
-    }
-    if (config.title.includes('Followers') || config.title.includes('Views')) {
-      return formatNumberWithCommas(num);
-    }
-    return num.toString();
-  };
-
-  // Helper function to get placeholder text
-  const getPlaceholder = (num: number): string => {
-    if (config.title.includes('Engagement')) {
-      return `${num}%`;
-    }
-    if (config.title.includes('Followers') || config.title.includes('Views')) {
-      return formatNumberWithCommas(num);
-    }
-    return num.toString();
-  };
-
   // Update input values when value prop changes
   useEffect(() => {
-    setMinInput(formatInputValue(value[0]));
-    setMaxInput(formatInputValue(value[1]));
+    setMinInput(value[0].toString());
+    setMaxInput(value[1].toString());
   }, [value, config]);
 
   // Handle input changes
@@ -80,13 +48,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
     const inputValue = e.target.value;
     setMinInput(inputValue);
     
-    let numericValue: number;
-    if (config.title.includes('Engagement')) {
-      numericValue = parseInt(inputValue.replace('%', '')) || 0;
-    } else {
-      numericValue = parseNumberFromInput(inputValue);
-    }
-    
+    const numericValue = parseInt(inputValue) || 0;
     if (!isNaN(numericValue) && numericValue >= config.min && numericValue <= value[1]) {
       onValueChange([numericValue, value[1]]);
     }
@@ -96,13 +58,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
     const inputValue = e.target.value;
     setMaxInput(inputValue);
     
-    let numericValue: number;
-    if (config.title.includes('Engagement')) {
-      numericValue = parseInt(inputValue.replace('%', '')) || 0;
-    } else {
-      numericValue = parseNumberFromInput(inputValue);
-    }
-    
+    const numericValue = parseInt(inputValue) || 0;
     if (!isNaN(numericValue) && numericValue <= config.max && numericValue >= value[0]) {
       onValueChange([value[0], numericValue]);
     }
@@ -110,11 +66,11 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
 
   // Handle input blur to format values
   const handleMinInputBlur = () => {
-    setMinInput(formatInputValue(value[0]));
+    setMinInput(value[0].toString());
   };
 
   const handleMaxInputBlur = () => {
-    setMaxInput(formatInputValue(value[1]));
+    setMaxInput(value[1].toString());
   };
 
   // Position dropdown
@@ -181,7 +137,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
             onChange={handleMinInputChange}
             onBlur={handleMinInputBlur}
             className="w-full h-[40px] px-3 py-2 border border-[#d1d5db] rounded-[8px] text-[14px] text-[#111827] bg-[#f9fafb] focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:border-transparent"
-            placeholder={getPlaceholder(config.min)}
+            placeholder={config.min.toString()}
           />
         </div>
 
@@ -196,7 +152,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
             onChange={handleMaxInputChange}
             onBlur={handleMaxInputBlur}
             className="w-full h-[40px] px-3 py-2 border border-[#d1d5db] rounded-[8px] text-[14px] text-[#111827] bg-[#f9fafb] focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:border-transparent"
-            placeholder={getPlaceholder(config.max)}
+            placeholder={config.max.toString()}
           />
         </div>
 
