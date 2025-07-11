@@ -54,12 +54,68 @@ export const PlatformFilterDropdown: React.FC<PlatformFilterDropdownProps> = ({
     if (isOpen && dropdownRef.current && triggerRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const dropdown = dropdownRef.current;
+      const viewport = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
+      
+      // Calculate optimal position
+      let top = triggerRect.bottom + 8;
+      let left = triggerRect.left;
+      
+      // Adjust for viewport boundaries
+      const dropdownWidth = window.innerWidth < 640 ? 280 : window.innerWidth < 1024 ? 320 : 360;
+      const dropdownHeight = 350; // Estimated max height
+      
+      // Horizontal positioning
+      if (left + dropdownWidth > viewport.width) {
+        left = triggerRect.right - dropdownWidth;
+      }
+      if (left < 8) {
+        left = 8;
+      }
+      
+      // Vertical positioning - show above if not enough space below
+      if (top + dropdownHeight > viewport.height && triggerRect.top > dropdownHeight) {
+        top = triggerRect.top - dropdownHeight - 8;
+      }
       
       dropdown.style.position = 'fixed';
-      dropdown.style.top = `${triggerRect.bottom + 8}px`;
-      dropdown.style.left = `${triggerRect.left}px`;
-      dropdown.style.minWidth = `${triggerRect.width}px`;
+      dropdown.style.top = `${top}px`;
+      dropdown.style.left = `${left}px`;
       dropdown.style.zIndex = '9999';
+      
+      // Handle scroll to keep dropdown positioned
+      const handleScroll = () => {
+        if (triggerRef.current && dropdownRef.current) {
+          const newTriggerRect = triggerRef.current.getBoundingClientRect();
+          let newTop = newTriggerRect.bottom + 8;
+          let newLeft = newTriggerRect.left;
+          
+          // Reapply boundary checks
+          if (newLeft + dropdownWidth > viewport.width) {
+            newLeft = newTriggerRect.right - dropdownWidth;
+          }
+          if (newLeft < 8) {
+            newLeft = 8;
+          }
+          
+          if (newTop + dropdownHeight > viewport.height && newTriggerRect.top > dropdownHeight) {
+            newTop = newTriggerRect.top - dropdownHeight - 8;
+          }
+          
+          dropdownRef.current.style.top = `${newTop}px`;
+          dropdownRef.current.style.left = `${newLeft}px`;
+        }
+      };
+      
+      window.addEventListener('scroll', handleScroll, true);
+      window.addEventListener('resize', handleScroll);
+      
+      return () => {
+        window.removeEventListener('scroll', handleScroll, true);
+        window.removeEventListener('resize', handleScroll);
+      };
     }
   }, [isOpen, triggerRef]);
 
@@ -93,58 +149,60 @@ export const PlatformFilterDropdown: React.FC<PlatformFilterDropdownProps> = ({
   return (
     <div
       ref={dropdownRef}
-      className="bg-white border border-[#dbe2eb] rounded-[12px] shadow-lg p-4 w-[280px] lg:w-[320px] xl:w-[360px]"
+      className="bg-white border border-[#dbe2eb] rounded-[12px] shadow-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[360px] max-h-[90vh]"
     >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="font-semibold text-[14px] lg:text-[16px] xl:text-[18px] text-neutral-new900">
-          Filter by Platform
-        </h3>
-      </div>
+      <div className="p-3 sm:p-4">
+        {/* Header */}
+        <div className="mb-3 sm:mb-4">
+          <h3 className="font-semibold text-[14px] sm:text-[16px] text-neutral-new900">
+            Filter by Platform
+          </h3>
+        </div>
 
-      {/* Platform options */}
-      <div className="space-y-3 mb-4">
-        {platformOptions.map((platform) => (
-          <div
-            key={platform.value}
-            className={`flex items-center justify-between p-3 rounded-[8px] transition-colors ${
-              platform.available && selectedPlatforms.has(platform.value)
-                ? 'bg-blue-100 hover:bg-blue-200'
-                : platform.available
-                ? 'hover:bg-gray-50'
-                : 'opacity-50 cursor-not-allowed'
-            } ${
-              platform.available
-                ? 'cursor-pointer'
-                : ''
-            }`}
-            onClick={() => handlePlatformClick(platform)}
-          >
-            <div className="flex items-center gap-3">
-              <div className="flex flex-col">
-                <span className={`text-[13px] lg:text-[14px] xl:text-[15px] ${
-                  platform.available && selectedPlatforms.has(platform.value)
-                    ? 'text-blue-700 font-semibold'
-                    : platform.available
-                    ? 'text-neutral-new900 font-medium'
-                    : 'text-gray-400 font-medium'
-                }`}>
-                  {platform.label}
-                </span>
-                {!platform.available && (
-                  <span className="text-[11px] lg:text-[12px] text-gray-400">
-                    Coming soon
+        {/* Platform options */}
+        <div className="space-y-2 sm:space-y-3 mb-3 sm:mb-4">
+          {platformOptions.map((platform) => (
+            <div
+              key={platform.value}
+              className={`flex items-center justify-between p-2 sm:p-3 rounded-[8px] transition-colors ${
+                platform.available && selectedPlatforms.has(platform.value)
+                  ? 'bg-blue-100 hover:bg-blue-200'
+                  : platform.available
+                  ? 'hover:bg-gray-50'
+                  : 'opacity-50 cursor-not-allowed'
+              } ${
+                platform.available
+                  ? 'cursor-pointer'
+                  : ''
+              }`}
+              onClick={() => handlePlatformClick(platform)}
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex flex-col">
+                  <span className={`text-[12px] sm:text-[14px] ${
+                    platform.available && selectedPlatforms.has(platform.value)
+                      ? 'text-blue-700 font-semibold'
+                      : platform.available
+                      ? 'text-neutral-new900 font-medium'
+                      : 'text-gray-400 font-medium'
+                  }`}>
+                    {platform.label}
                   </span>
-                )}
+                  {!platform.available && (
+                    <span className="text-[10px] sm:text-[12px] text-gray-400">
+                      Coming soon
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-        <span className="text-[12px] font-medium text-[#6b7280]">
+      <div className="p-2 sm:p-3 border-t border-[#f3f4f6] flex justify-between items-center">
+        <span className="text-[11px] sm:text-[12px] font-medium text-[#6b7280]">
           {selectedPlatforms.size} selected
         </span>
         <div className="flex items-center gap-2">
@@ -153,19 +211,19 @@ export const PlatformFilterDropdown: React.FC<PlatformFilterDropdownProps> = ({
               variant="ghost"
               size="sm"
               onClick={onReset}
-              className="h-8 px-3 text-[12px] font-medium text-[#6b7280] hover:text-[#374151] hover:bg-[#f9fafb]"
+              className="h-7 sm:h-8 px-2 sm:px-3 text-[11px] sm:text-[12px] font-medium text-[#6b7280] hover:text-[#374151] hover:bg-[#f9fafb]"
             >
               Reset
             </Button>
           )}
           <Button
             onClick={onConfirm}
-            className="h-8 px-4 text-[12px] font-medium text-white bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] rounded-[6px] border-0"
+            className="h-7 sm:h-8 px-3 sm:px-4 text-[11px] sm:text-[12px] font-medium text-white bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] rounded-[6px] border-0"
           >
             Confirm
           </Button>
         </div>
-        </div>
       </div>
+    </div>
   );
 };

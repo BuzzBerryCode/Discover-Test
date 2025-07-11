@@ -78,12 +78,68 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
     if (isOpen && dropdownRef.current && triggerRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const dropdown = dropdownRef.current;
+      const viewport = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
       
-      // Position below the trigger button
+      // Calculate optimal position
+      let top = triggerRect.bottom + 8;
+      let left = triggerRect.left;
+      
+      // Adjust for viewport boundaries
+      const dropdownWidth = 320;
+      const dropdownHeight = 400; // Estimated max height
+      
+      // Horizontal positioning
+      if (left + dropdownWidth > viewport.width) {
+        left = triggerRect.right - dropdownWidth;
+      }
+      if (left < 8) {
+        left = 8;
+      }
+      
+      // Vertical positioning - show above if not enough space below
+      if (top + dropdownHeight > viewport.height && triggerRect.top > dropdownHeight) {
+        top = triggerRect.top - dropdownHeight - 8;
+      }
+      
       dropdown.style.position = 'fixed';
-      dropdown.style.top = `${triggerRect.bottom + 8}px`;
-      dropdown.style.left = `${triggerRect.left}px`;
+      dropdown.style.top = `${top}px`;
+      dropdown.style.left = `${left}px`;
       dropdown.style.zIndex = '9999';
+      
+      // Handle scroll to keep dropdown positioned
+      const handleScroll = () => {
+        if (triggerRef.current && dropdownRef.current) {
+          const newTriggerRect = triggerRef.current.getBoundingClientRect();
+          let newTop = newTriggerRect.bottom + 8;
+          let newLeft = newTriggerRect.left;
+          
+          // Reapply boundary checks
+          if (newLeft + dropdownWidth > viewport.width) {
+            newLeft = newTriggerRect.right - dropdownWidth;
+          }
+          if (newLeft < 8) {
+            newLeft = 8;
+          }
+          
+          if (newTop + dropdownHeight > viewport.height && newTriggerRect.top > dropdownHeight) {
+            newTop = newTriggerRect.top - dropdownHeight - 8;
+          }
+          
+          dropdownRef.current.style.top = `${newTop}px`;
+          dropdownRef.current.style.left = `${newLeft}px`;
+        }
+      };
+      
+      window.addEventListener('scroll', handleScroll, true);
+      window.addEventListener('resize', handleScroll);
+      
+      return () => {
+        window.removeEventListener('scroll', handleScroll, true);
+        window.removeEventListener('resize', handleScroll);
+      };
     }
   }, [isOpen, triggerRef]);
 
@@ -116,19 +172,19 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
   return (
     <div
       ref={dropdownRef}
-      className="w-[320px] bg-white border border-[#e5e7eb] rounded-[12px] shadow-lg overflow-hidden"
+      className="w-[280px] sm:w-[320px] lg:w-[360px] bg-white border border-[#e5e7eb] rounded-[12px] shadow-lg overflow-hidden max-h-[90vh]"
     >
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         {/* Header */}
-        <div className="mb-4">
-          <h3 className="text-[16px] font-semibold text-[#111827] mb-1">
+        <div className="mb-3 sm:mb-4">
+          <h3 className="text-[14px] sm:text-[16px] font-semibold text-[#111827] mb-1">
             {config.title}
           </h3>
         </div>
 
         {/* Min Input */}
-        <div className="mb-4">
-          <label className="block text-[14px] font-medium text-[#374151] mb-2">
+        <div className="mb-3 sm:mb-4">
+          <label className="block text-[12px] sm:text-[14px] font-medium text-[#374151] mb-2">
             Min {config.unit}
           </label>
           <input
@@ -136,14 +192,14 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
             value={minInput}
             onChange={handleMinInputChange}
             onBlur={handleMinInputBlur}
-            className="w-full h-[40px] px-3 py-2 border border-[#d1d5db] rounded-[8px] text-[14px] text-[#111827] bg-[#f9fafb] focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:border-transparent"
+            className="w-full h-[36px] sm:h-[40px] px-3 py-2 border border-[#d1d5db] rounded-[8px] text-[12px] sm:text-[14px] text-[#111827] bg-[#f9fafb] focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:border-transparent"
             placeholder={config.min.toString()}
           />
         </div>
 
         {/* Max Input */}
-        <div className="mb-6">
-          <label className="block text-[14px] font-medium text-[#374151] mb-2">
+        <div className="mb-4 sm:mb-6">
+          <label className="block text-[12px] sm:text-[14px] font-medium text-[#374151] mb-2">
             Max {config.unit}
           </label>
           <input
@@ -151,13 +207,13 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
             value={maxInput}
             onChange={handleMaxInputChange}
             onBlur={handleMaxInputBlur}
-            className="w-full h-[40px] px-3 py-2 border border-[#d1d5db] rounded-[8px] text-[14px] text-[#111827] bg-[#f9fafb] focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:border-transparent"
+            className="w-full h-[36px] sm:h-[40px] px-3 py-2 border border-[#d1d5db] rounded-[8px] text-[12px] sm:text-[14px] text-[#111827] bg-[#f9fafb] focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:border-transparent"
             placeholder={config.max.toString()}
           />
         </div>
 
         {/* Range Slider */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <RangeSlider
             min={config.min}
             max={config.max}
@@ -170,19 +226,19 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
       </div>
 
       {/* Footer with buttons */}
-      <div className="p-3 border-t border-[#f3f4f6] flex justify-between items-center">
+      <div className="p-2 sm:p-3 border-t border-[#f3f4f6] flex justify-between items-center">
         <Button
           variant="ghost"
           size="sm"
           onClick={onReset}
-          className="h-8 px-3 text-[12px] font-medium text-[#6b7280] hover:text-[#374151] hover:bg-[#f9fafb]"
+          className="h-7 sm:h-8 px-2 sm:px-3 text-[11px] sm:text-[12px] font-medium text-[#6b7280] hover:text-[#374151] hover:bg-[#f9fafb]"
         >
           Reset
         </Button>
         <Button
           size="sm"
           onClick={onApply}
-          className="h-8 px-4 bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] text-white text-[12px] font-medium rounded-[6px] border-0"
+          className="h-7 sm:h-8 px-3 sm:px-4 bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] text-white text-[11px] sm:text-[12px] font-medium rounded-[6px] border-0"
         >
           Confirm
         </Button>

@@ -73,29 +73,29 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
   return (
     <div
       ref={dropdownRef}
-      className="bg-white border border-[#dbe2eb] rounded-[12px] shadow-lg overflow-hidden w-[280px] lg:w-[320px] xl:w-[360px]"
+      className="bg-white border border-[#dbe2eb] rounded-[12px] shadow-lg overflow-hidden w-[280px] sm:w-[320px] lg:w-[360px] max-h-[90vh]"
     >
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         {/* Header */}
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-semibold text-[14px] lg:text-[16px] xl:text-[18px] text-neutral-new900">
+        <div className="mb-3 sm:mb-4">
+          <h3 className="font-semibold text-[14px] sm:text-[16px] text-neutral-new900">
             Filter by Buzz Score
           </h3>
         </div>
 
         {/* Score options */}
-        <div className="space-y-3 mb-4">
+        <div className="space-y-2 sm:space-y-3 mb-3 sm:mb-4">
           {scoreOptions.map((option) => (
             <div
               key={option.value}
-              className={`flex items-center justify-between p-3 rounded-[8px] transition-colors cursor-pointer ${
+              className={`flex items-center justify-between p-2 sm:p-3 rounded-[8px] transition-colors cursor-pointer ${
                 selectedScores.has(option.value)
                   ? 'bg-blue-100 hover:bg-blue-200'
                   : 'hover:bg-gray-50'
               }`}
               onClick={() => onScoreToggle(option.value)}
             >
-              <span className={`text-[13px] lg:text-[14px] xl:text-[15px] ${
+              <span className={`text-[12px] sm:text-[14px] ${
                 selectedScores.has(option.value)
                   ? 'text-blue-700 font-semibold'
                   : 'text-neutral-new900 font-medium'
@@ -105,10 +105,11 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
             </div>
           ))}
         </div>
+      </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-          <span className="text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500">
+      <div className="p-2 sm:p-3 border-t border-[#f3f4f6] flex justify-between items-center">
+        <span className="text-[11px] sm:text-[12px] text-gray-500">
             {selectedScores.size} selected
           </span>
           <div className="flex items-center gap-2">
@@ -126,12 +127,12 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
               size="sm"
               onClick={onConfirm}
               className="h-8 px-4 bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] text-white text-[12px] font-medium rounded-[6px] border-0"
-            >
+            className="h-7 sm:h-8 px-3 sm:px-4 bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] text-white text-[11px] sm:text-[12px] font-medium rounded-[6px] border-0"
               Confirm
             </Button>
           </div>
         </div>
-      </div>
+    </div>
     </div>
   );
 };
