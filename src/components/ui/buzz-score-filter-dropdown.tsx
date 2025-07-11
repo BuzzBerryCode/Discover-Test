@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { Button } from "./button";
-import { Icon } from "./icon";
 
 interface BuzzScoreFilterDropdownProps {
   isOpen: boolean;
@@ -82,18 +81,6 @@ export const BuzzScoreFilterDropdown: React.FC<BuzzScoreFilterDropdownProps> = (
           <h3 className="font-semibold text-[14px] lg:text-[16px] xl:text-[18px] text-neutral-new900">
             Filter by Buzz Score
           </h3>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClose}
-            className="h-6 w-6 p-0 hover:bg-[#f9fafb]"
-          >
-            <Icon
-              name="CloseIcon.svg"
-              className="w-4 h-4"
-              alt="Close"
-            />
-          </Button>
         </div>
 
         {/* Score options */}
