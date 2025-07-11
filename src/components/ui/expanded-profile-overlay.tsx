@@ -95,7 +95,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
             {/* Creator Info */}
             <div className="flex flex-col gap-[4px] lg:gap-[6px] xl:gap-[8px] flex-1 min-w-0">
-                <span className="text-[#71737c] text-[14px] lg:text-[16px] font-medium">
+                <span className="text-[#06152b] text-[16px] lg:text-[20px] xl:text-[24px] font-semibold">
                 {creator.username}
               </span>
               <div className="flex items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
@@ -432,7 +432,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
                 style={{ left: `${creator.buzz_score}%` }}
               >
                 <div 
-                  className="border-l-[5.355px] border-r-[5.355px] border-b-[5.25px] border-l-transparent border-r-transparent border-b-black"
+                  className="border-l-[5.355px] border-r-[5.355px] border-t-[5.25px] border-l-transparent border-r-transparent border-t-black"
                   style={{ width: '10.71px', height: '5.25px' }}
                 />
               </div>
