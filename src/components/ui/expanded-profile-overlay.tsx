@@ -85,7 +85,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
         <div className="flex items-start justify-between p-[15px] mb-[15px] md:mb-[17px]">
           <div className="flex items-center gap-[12px] lg:gap-[15px] xl:gap-[18px] flex-1">
             {/* Profile Picture */}
-            <div className="w-[60px] h-[60px] lg:w-[70px] lg:h-[70px] xl:w-[70px] xl:h-[70px] bg-[#384455] rounded-full overflow-hidden flex-shrink-0">
+            <div className="w-[62px] h-[62px] lg:w-[72px] lg:h-[72px] xl:w-[72px] xl:h-[72px] bg-[#384455] rounded-full overflow-hidden flex-shrink-0">
               {creator.profile_pic ? (
                 <img 
                   src={creator.profile_pic} 
@@ -99,7 +99,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
             {/* Creator Info */}
             <div className="flex flex-col gap-[4px] lg:gap-[6px] xl:gap-[8px] flex-1 min-w-0">
-                <span className="text-[#06152b] text-[16px] lg:text-[20px] xl:text-[24px] font-semibold">
+                <span className="text-[#06152b] text-[16px] md:text-[23px] lg:text-[20px] xl:text-[24px] font-semibold">
                 {creator.username}
               </span>
               <div className="flex items-center gap-[8px] lg:gap-[10px] xl:gap-[12px]">
@@ -393,7 +393,7 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
         <div className="px-[15px] mb-[15px] md:mb-[17px]">
           <div className="bg-white rounded-[12px] px-[20px] lg:px-[24px] pt-[13px] lg:pt-[12px] pb-[20px] lg:pb-[24px]">
             <div className="flex items-center justify-between mb-[12px] lg:mb-[15px]">
-              <div className="flex items-center gap-[8px] lg:gap-[10px]">
+              <div className="flex items-center gap-[7px] lg:gap-[10px]">
                 <span className="text-[#00518B] text-[15px] lg:text-[17px] font-bold">
                   Buzz Score
                 </span>
@@ -456,10 +456,10 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
 
         {/* Latest Posts */}
         <div className="px-[15px] mb-[15px] md:mb-[17px]">
-          <h3 className="text-[#71737c] text-[14px] lg:text-[16px] font-semibold mb-[12px] lg:mb-[15px]">
+          <h3 className="text-[#71737c] text-[14px] md:text-[16px] lg:text-[16px] font-semibold mb-[12px] lg:mb-[15px]">
             Latest Posts
           </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-[12px] lg:gap-[15px]">
+          <div className="grid grid-cols-4 sm:grid-cols-4 gap-[8px] lg:gap-[15px]">
             {[...creator.thumbnails.slice(0, 3), '/images/PostThumbnail-3.svg'].map((thumbnail, index) => (
               <div key={index} className="aspect-[9/16] rounded-[10px] lg:rounded-[12px] overflow-hidden">
                 <img
