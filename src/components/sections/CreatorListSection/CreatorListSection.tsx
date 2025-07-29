@@ -224,11 +224,11 @@ export const CreatorListSection = (): JSX.Element => {
                 <Icon
                   name={viewMode === 'list' ? "ListIconSelected.svg" : "ListIcon.svg"}
                   className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px] flex-shrink-0"
-            className="h-[35px] px-[8px] lg:px-[12px] xl:px-[16px] bg-white border-[#dbe2eb] rounded-[10px] font-medium text-[14px] text-neutral-new900 flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] hover:bg-gray-50 transition-colors"
+                  alt="List mode icon"
                 />
                 <span className={`font-medium hidden sm:inline ${viewMode === 'list' ? 'text-graysblack' : 'text-[#999999]'}`}>List</span>
               </ToggleGroupItem>
-              className="w-[15px] h-[15px]"
+            </ToggleGroup>
           </div>
         </div>
 
@@ -238,28 +238,27 @@ export const CreatorListSection = (): JSX.Element => {
             variant="outline"
             className="h-[32px] lg:h-[40px] xl:h-[44px] inline-flex items-center justify-center gap-[4px] lg:gap-[6px] xl:gap-[8px] px-[8px] lg:px-[12px] xl:px-[16px] py-[6px] lg:py-[8px] xl:py-[10px] bg-basewhite rounded-[8px] border-[#dbe2eb] hover:bg-gray-50 transition-colors text-[12px] lg:text-[14px] xl:text-[15px] w-full sm:w-auto flex-shrink-0 min-w-0 max-w-full"
           >
-            className="h-[35px] px-[8px] lg:px-[12px] xl:px-[16px] bg-white border-[#dbe2eb] rounded-[10px] font-medium text-[14px] text-neutral-new900 flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] hover:bg-gray-50 transition-colors"
+            <Icon
               name="SavedListIcon.svg"
               className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px] flex-shrink-0"
               alt="Save in list icon"
             />
-              className="w-[18px] h-[18px]"
+            <span className="font-medium text-neutral-new900 truncate min-w-0">
               Save in a list
             </span>
           </Button>
 
           <div className="flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px] w-full sm:w-auto min-w-0 overflow-hidden">
             <Button
-              className={`h-[35px] px-[8px] lg:px-[12px] xl:px-[16px] rounded-none border-0 font-medium text-[14px] transition-colors ${
-              className={`h-[35px] px-[8px] lg:px-[12px] xl:px-[16px] rounded-none border-0 font-medium text-[14px] transition-colors ${
+              onClick={handleSelectAll}
+              variant="outline"
               className="h-[32px] lg:h-[40px] xl:h-[44px] inline-flex items-center justify-center gap-[4px] lg:gap-[6px] xl:gap-[8px] px-[8px] lg:px-[12px] xl:px-[16px] py-[6px] lg:py-[8px] xl:py-[10px] bg-basewhite rounded-[8px] border-[#dbe2eb] hover:bg-gray-50 transition-colors text-[12px] lg:text-[14px] xl:text-[15px] flex-1 sm:flex-none flex-shrink-0 min-w-0 max-w-full"
             >
               <span className="font-medium text-neutral-new900 truncate min-w-0">
                 Select All
               </span>
               <Checkbox
-                className="w-[15px] h-[15px] mr-[4px] lg:mr-[6px] xl:mr-[8px]"
-                className="w-[15px] h-[15px] mr-[4px] lg:mr-[6px] xl:mr-[8px]"
+                checked={selectAll}
                 className="w-[18px] h-[18px] lg:w-[20px] lg:h-[20px] xl:w-[22px] xl:h-[22px] p-0 border-2 border-gray-300 rounded-[3px] data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600 flex-shrink-0"
               />
             </Button>
@@ -379,10 +378,8 @@ export const CreatorListSection = (): JSX.Element => {
                           className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px] xl:w-[28px] xl:h-[28px]"
                           alt="Engage icon"
                         />
-                        <div className="font-bold text-[#1ad598] text-[11px] lg:text-[13px] xl:text-[14px] leading-[14px] lg:leading-[16px] xl:leading-[18px] text-center">
-                          <div className="font-medium text-[#0A1529] text-[11px] lg:text-[13px] xl:text-[14px] leading-[14px] lg:leading-[16px] xl:leading-[18px] text-center">
-                            {creator.engagement.toFixed(2)}%
-                          </div>
+                        <div className="font-medium text-[#0A1529] text-[11px] lg:text-[13px] xl:text-[14px] leading-[14px] lg:leading-[16px] xl:leading-[18px] text-center">
+                          {creator.engagement.toFixed(2)}%
                         </div>
                       </div>
                     </div>
@@ -736,68 +733,44 @@ export const CreatorListSection = (): JSX.Element => {
             {/* Pagination Buttons */}
             <div className="flex items-center justify-center gap-[4px] xs:gap-[6px] sm:gap-[8px] lg:gap-[10px] xl:gap-[12px] w-full overflow-x-auto">
               <div className="flex items-center gap-[4px] xs:gap-[6px] sm:gap-[8px] lg:gap-[10px] xl:gap-[12px] flex-shrink-0 min-w-fit px-2 sm:px-0">
-              <Button
-                variant="outline"
-                onClick={previousPage}
-                disabled={currentPage === 1}
-                className="h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] px-[6px] xs:px-[8px] sm:px-[10px] lg:px-[14px] xl:px-[18px] bg-white border-[#dbe2eb] rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[3px] xs:gap-[4px] sm:gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-shrink-0"
-              >
-                <Icon name="ArrowLeftIcon.svg" className="w-[10px] h-[10px] xs:w-[12px] xs:h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" alt="Previous" />
-                <span className="hidden sm:inline">Previous</span>
-                <span className="sm:hidden">Prev</span>
-              </Button>
-              
-              {/* Page Numbers */}
-              <div className="flex items-center gap-[2px] xs:gap-[3px] sm:gap-[4px] lg:gap-[6px] xl:gap-[8px] flex-shrink-0">
-                {(() => {
-                  const pages = [];
-                  
-                  // Always show page 1
-                  pages.push(
-                    <Button
-                      key={1}
-                      variant="outline"
-                      onClick={() => handlePageChange(1)}
-                      className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
-                        currentPage === 1
-                          ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
-                          : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
-                      }`}
-                    >
-                      1
-                    </Button>
-                  );
-                  
-                  // Responsive page count based on screen size
-                  const maxVisiblePages = window.innerWidth < 480 ? 5 : window.innerWidth < 768 ? 6 : 7;
-                  
-                  if (totalPages <= maxVisiblePages) {
-                    // Show all pages if within limit
-                    for (let i = 2; i <= totalPages; i++) {
-                      pages.push(
-                        <Button
-                          key={i}
-                          variant="outline"
-                          onClick={() => handlePageChange(i)}
-                          className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
-                            currentPage === i
-                              ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
-                              : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
-                            }`}
-                        >
-                          {i}
-                        </Button>
-                      );
-                    }
-                  } else {
-                    // Complex pagination with ellipsis
-                    const showEarly = currentPage <= 3;
-                    const showLate = currentPage >= totalPages - 2;
+                <Button
+                  variant="outline"
+                  onClick={previousPage}
+                  disabled={currentPage === 1}
+                  className="h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] px-[6px] xs:px-[8px] sm:px-[10px] lg:px-[14px] xl:px-[18px] bg-white border-[#dbe2eb] rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[3px] xs:gap-[4px] sm:gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-shrink-0"
+                >
+                  <Icon name="ArrowLeftIcon.svg" className="w-[10px] h-[10px] xs:w-[12px] xs:h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" alt="Previous" />
+                  <span className="hidden sm:inline">Previous</span>
+                  <span className="sm:hidden">Prev</span>
+                </Button>
+                
+                {/* Page Numbers */}
+                <div className="flex items-center gap-[2px] xs:gap-[3px] sm:gap-[4px] lg:gap-[6px] xl:gap-[8px] flex-shrink-0">
+                  {(() => {
+                    const pages = [];
                     
-                    if (showEarly) {
-                      // Show pages 2, 3, 4, ..., last
-                      const endPage = Math.min(4, totalPages - 1);
-                      for (let i = 2; i <= endPage; i++) {
+                    // Always show page 1
+                    pages.push(
+                      <Button
+                        key={1}
+                        variant="outline"
+                        onClick={() => handlePageChange(1)}
+                        className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                          currentPage === 1
+                            ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
+                            : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
+                        }`}
+                      >
+                        1
+                      </Button>
+                    );
+                    
+                    // Responsive page count based on screen size
+                    const maxVisiblePages = window.innerWidth < 480 ? 5 : window.innerWidth < 768 ? 6 : 7;
+                    
+                    if (totalPages <= maxVisiblePages) {
+                      // Show all pages if within limit
+                      for (let i = 2; i <= totalPages; i++) {
                         pages.push(
                           <Button
                             key={i}
@@ -813,27 +786,15 @@ export const CreatorListSection = (): JSX.Element => {
                           </Button>
                         );
                       }
+                    } else {
+                      // Complex pagination with ellipsis
+                      const showEarly = currentPage <= 3;
+                      const showLate = currentPage >= totalPages - 2;
                       
-                      if (totalPages > 5) {
-                        pages.push(
-                          <span key="ellipsis1" className="px-1 xs:px-2 text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500 flex-shrink-0">
-                            ...
-                          </span>
-                        );
-                      }
-                    } else if (showLate) {
-                      // Show 1, ..., last-3, last-2, last-1, last
-                      if (totalPages > 5) {
-                        pages.push(
-                          <span key="ellipsis2" className="px-1 xs:px-2 text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500 flex-shrink-0">
-                            ...
-                          </span>
-                        );
-                      }
-                      
-                      const startPage = Math.max(2, totalPages - 3);
-                      for (let i = startPage; i <= totalPages - 1; i++) {
-                        if (i > 1) {
+                      if (showEarly) {
+                        // Show pages 2, 3, 4, ..., last
+                        const endPage = Math.min(4, totalPages - 1);
+                        for (let i = 2; i <= endPage; i++) {
                           pages.push(
                             <Button
                               key={i}
@@ -849,80 +810,115 @@ export const CreatorListSection = (): JSX.Element => {
                             </Button>
                           );
                         }
+                        
+                        if (totalPages > 5) {
+                          pages.push(
+                            <span key="ellipsis1" className="px-1 xs:px-2 text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500 flex-shrink-0">
+                              ...
+                            </span>
+                          );
+                        }
+                      } else if (showLate) {
+                        // Show 1, ..., last-3, last-2, last-1, last
+                        if (totalPages > 5) {
+                          pages.push(
+                            <span key="ellipsis2" className="px-1 xs:px-2 text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500 flex-shrink-0">
+                              ...
+                            </span>
+                          );
+                        }
+                        
+                        const startPage = Math.max(2, totalPages - 3);
+                        for (let i = startPage; i <= totalPages - 1; i++) {
+                          if (i > 1) {
+                            pages.push(
+                              <Button
+                                key={i}
+                                variant="outline"
+                                onClick={() => handlePageChange(i)}
+                                className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                                  currentPage === i
+                                    ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
+                                    : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
+                                  }`}
+                              >
+                                {i}
+                              </Button>
+                            );
+                          }
+                        }
+                      } else {
+                        // Show 1, ..., current-1, current, current+1, ..., last
+                        pages.push(
+                          <span key="ellipsis3" className="px-1 xs:px-2 text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500 flex-shrink-0">
+                            ...
+                          </span>
+                        );
+                        
+                        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+                          pages.push(
+                            <Button
+                              key={i}
+                              variant="outline"
+                              onClick={() => handlePageChange(i)}
+                              className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                                currentPage === i
+                                  ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
+                                  : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
+                                }`}
+                            >
+                              {i}
+                            </Button>
+                          );
+                        }
+                        
+                        pages.push(
+                          <span key="ellipsis4" className="px-1 xs:px-2 text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500 flex-shrink-0">
+                            ...
+                          </span>
+                        );
                       }
-                    } else {
-                      // Show 1, ..., current-1, current, current+1, ..., last
-                      pages.push(
-                        <span key="ellipsis3" className="px-1 xs:px-2 text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500 flex-shrink-0">
-                          ...
-                        </span>
-                      );
                       
-                      for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+                      // Always show last page (if not page 1)
+                      if (totalPages > 1) {
                         pages.push(
                           <Button
-                            key={i}
+                            key={totalPages}
                             variant="outline"
-                            onClick={() => handlePageChange(i)}
+                            onClick={() => handlePageChange(totalPages)}
                             className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
-                              currentPage === i
+                              currentPage === totalPages
                                 ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
                                 : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
                               }`}
                           >
-                            {i}
+                            {totalPages}
                           </Button>
                         );
                       }
-                      
-                      pages.push(
-                        <span key="ellipsis4" className="px-1 xs:px-2 text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500 flex-shrink-0">
-                          ...
-                        </span>
-                      );
                     }
                     
-                    // Always show last page (if not page 1)
-                    if (totalPages > 1) {
-                      pages.push(
-                        <Button
-                          key={totalPages}
-                          variant="outline"
-                          onClick={() => handlePageChange(totalPages)}
-                          className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
-                            currentPage === totalPages
-                              ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
-                              : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
-                            }`}
-                        >
-                          {totalPages}
-                        </Button>
-                      );
-                    }
-                  }
-                  
-                  return pages;
-                })()}
+                    return pages;
+                  })()}
+                </div>
+                
+                <Button
+                  variant="outline"
+                  onClick={nextPage}
+                  disabled={currentPage === totalPages}
+                  className="h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] px-[6px] xs:px-[8px] sm:px-[10px] lg:px-[14px] xl:px-[18px] bg-white border-[#dbe2eb] rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[3px] xs:gap-[4px] sm:gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-shrink-0"
+                >
+                  <span className="hidden sm:inline">Next</span>
+                  <span className="sm:hidden">Next</span>
+                  <Icon name="ArrowRightIcon.svg" className="w-[10px] h-[10px] xs:w-[12px] xs:h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" alt="Next" />
+                </Button>
               </div>
-              
-              <Button
-                variant="outline"
-                onClick={nextPage}
-                disabled={currentPage === totalPages}
-                className="h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] px-[6px] xs:px-[8px] sm:px-[10px] lg:px-[14px] xl:px-[18px] bg-white border-[#dbe2eb] rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[3px] xs:gap-[4px] sm:gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-shrink-0"
-              >
-                <span className="hidden sm:inline">Next</span>
-                <span className="sm:hidden">Next</span>
-                <Icon name="ArrowRightIcon.svg" className="w-[10px] h-[10px] xs:w-[12px] xs:h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" alt="Next" />
-              </Button>
-              </div>
-            </ToggleGroupItem>
+            </div>
             
             {/* Page Info - Now below buttons and centered */}
             <div className="text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] font-medium text-[#71737c] font-['Inter',Helvetica] text-center px-2">
               Showing {((currentPage - 1) * 24) + 1} to {Math.min(currentPage * 24, totalCreators)} of {totalCreators} creators
-            </ToggleGroupItem>
-          </ToggleGroup>
+            </div>
           </div>
         </div>
       )}
