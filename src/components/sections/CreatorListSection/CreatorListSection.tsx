@@ -723,28 +723,27 @@ export const CreatorListSection = (): JSX.Element => {
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <div className="flex-shrink-0 mt-4 pt-4 border-t border-gray-200">
-          <div className="flex items-center justify-between">
+        <div className="flex-shrink-0 mt-[20px] lg:mt-[25px] xl:mt-[30px] pt-[15px] lg:pt-[20px] xl:pt-[25px] border-t border-[#f1f4f9]">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-[12px] lg:gap-[15px] xl:gap-[18px]">
             {/* Page Info */}
-            <div className="text-sm text-gray-600">
+            <div className="text-[12px] lg:text-[13px] xl:text-[14px] font-medium text-[#71737c] font-['Inter',Helvetica] order-2 sm:order-1">
               Showing {((currentPage - 1) * 24) + 1} to {Math.min(currentPage * 24, totalCreators)} of {totalCreators} creators
             </div>
             
             {/* Pagination Buttons */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-[8px] lg:gap-[10px] xl:gap-[12px] order-1 sm:order-2">
               <Button
                 variant="outline"
-                size="sm"
                 onClick={previousPage}
                 disabled={currentPage === 1}
-                className="h-8 px-3 text-sm"
+                className="h-[32px] lg:h-[36px] xl:h-[40px] px-[12px] lg:px-[16px] xl:px-[20px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px]"
               >
-                <Icon name="ArrowLeftIcon.svg" className="w-4 h-4 mr-1" alt="Previous" />
+                <Icon name="ArrowLeftIcon.svg" className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" alt="Previous" />
                 Previous
               </Button>
               
               {/* Page Numbers */}
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px]">
                 {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                   let pageNum;
                   if (totalPages <= 5) {
@@ -760,10 +759,13 @@ export const CreatorListSection = (): JSX.Element => {
                   return (
                     <Button
                       key={pageNum}
-                      variant={currentPage === pageNum ? "default" : "outline"}
-                      size="sm"
+                      variant="outline"
                       onClick={() => handlePageChange(pageNum)}
-                      className="h-8 w-8 p-0 text-sm"
+                      className={`h-[32px] lg:h-[36px] xl:h-[40px] w-[32px] lg:w-[36px] xl:w-[40px] p-0 rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] transition-colors ${
+                        currentPage === pageNum
+                          ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)]'
+                          : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50'
+                      }`}
                     >
                       {pageNum}
                     </Button>
@@ -773,13 +775,12 @@ export const CreatorListSection = (): JSX.Element => {
               
               <Button
                 variant="outline"
-                size="sm"
                 onClick={nextPage}
                 disabled={currentPage === totalPages}
-                className="h-8 px-3 text-sm"
+                className="h-[32px] lg:h-[36px] xl:h-[40px] px-[12px] lg:px-[16px] xl:px-[20px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px]"
               >
                 Next
-                <Icon name="ArrowRightIcon.svg" className="w-4 h-4 ml-1" alt="Next" />
+                <Icon name="ArrowRightIcon.svg" className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" alt="Next" />
               </Button>
             </div>
           </div>
