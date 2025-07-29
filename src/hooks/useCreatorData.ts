@@ -339,18 +339,17 @@ export const useCreatorData = () => {
   // Load niches from database
   const loadNiches = async () => {
     try {
-      // Get unique niches from both primary_niche and secondary_niche columns
+      // Get unique niches from primary_niche column only
       const { data, error: queryError } = await supabase
         .from('creatordata')
-        .select('primary_niche, secondary_niche');
+        .select('primary_niche');
       
       if (queryError) throw queryError;
       
-      // Extract unique niches
+      // Extract unique primary niches only
       const nicheSet = new Set<string>();
       data?.forEach(creator => {
         if (creator.primary_niche) nicheSet.add(creator.primary_niche);
-        if (creator.secondary_niche) nicheSet.add(creator.secondary_niche);
       });
       
       // Convert to Niche objects
