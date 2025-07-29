@@ -14,7 +14,7 @@ import { ExpandedProfileOverlay } from "../../ui/expanded-profile-overlay";
 import { useCreatorData } from "../../../hooks/useCreatorData";
 import { formatNumber, formatEngagement, getSocialMediaIcon, getMatchScoreColor } from "../../../utils/formatters";
 import { ViewMode, SortField, SortDirection, SortState, Creator } from "../../../types/database";
-import { cn } from "../../../utils/cn";
+import { cn } from "../../../lib/utils";
 
 export const CreatorListSection = (): JSX.Element => {
   const { 
@@ -289,8 +289,7 @@ export const CreatorListSection = (): JSX.Element => {
                 className={cn(
                   "w-full rounded-[15px] p-0 border-2 shadow-sm hover:shadow-md transition-all cursor-pointer",
                   selectedCards.has(creator.id) 
-                    ? 'bg-[#f1f6fe] border-blue-300'
-                    : selectedCreator?.id === creator.id
+                  (selectedCards.has(creator.id) || selectedCreator?.id === creator.id)
                     ? 'bg-[#f1f6fe] border-transparent'
                     : 'bg-white border-gray-200 hover:border-gray-300'
                 )}
