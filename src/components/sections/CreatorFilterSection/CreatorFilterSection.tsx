@@ -115,6 +115,31 @@ export const CreatorFilterSection = (): JSX.Element => {
   // Get dynamic niche names from database
   const allCategories = niches.map(niche => niche.name);
 
+  // Helper function to determine if a niche is primary or secondary
+  const getNicheType = (nicheName: string): 'primary' | 'secondary' => {
+    // This would ideally come from your database, but for now we'll use a simple heuristic
+    // You can replace this with actual database logic to determine niche types
+    const secondaryKeywords = ['sub', 'secondary', 'niche', 'micro', 'specific'];
+    const isSecondary = secondaryKeywords.some(keyword => 
+      nicheName.toLowerCase().includes(keyword)
+    );
+    return isSecondary ? 'secondary' : 'primary';
+  };
+
+  // Helper function to get niche styling
+  const getNicheStyles = (nicheName: string, isSelected: boolean) => {
+    const nicheType = getNicheType(nicheName);
+    
+    if (nicheType === 'secondary') {
+      return isSelected
+        ? 'bg-green-100 border-green-300 text-green-700 hover:bg-green-200'
+        : 'bg-green-50 border-green-200 text-green-700 hover:bg-green-100';
+    } else {
+      return isSelected
+        ? 'bg-blue-100 border-blue-300 text-blue-700 hover:bg-blue-200'
+        : 'bg-sky-50 border-[#dbe2eb] text-neutral-new900 hover:bg-sky-100';
+    }
+  };
   // Get ordered categories with selected ones first
   const getOrderedCategories = () => {
     const selected = allCategories.filter(cat => selectedCategories.has(cat));
@@ -471,11 +496,7 @@ export const CreatorFilterSection = (): JSX.Element => {
                     key={`visible-category-${index}`}
                     variant="outline"
                     onClick={() => handleCategorySelect(category)}
-                    className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[10px] xl:px-[12px] rounded-[8px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] transition-colors cursor-pointer flex-shrink-0 border whitespace-nowrap ${
-                      selectedCategories.has(category)
-                        ? 'bg-blue-100 border-blue-300 text-blue-700 hover:bg-blue-200'
-                        : 'bg-sky-50 border-[#dbe2eb] text-neutral-new900 hover:bg-sky-100'
-                    }`}
+                    className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[10px] xl:px-[12px] rounded-[10px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] transition-colors cursor-pointer flex-shrink-0 border whitespace-nowrap ${getNicheStyles(category, selectedCategories.has(category))}`}
                   >
                     {category}
                   </Button>
@@ -537,16 +558,20 @@ export const CreatorFilterSection = (): JSX.Element => {
                                   e.stopPropagation();
                                   handleCategorySelect(category);
                                 }}
-                                className={`text-left px-3 lg:px-4 xl:px-5 py-2 lg:py-3 xl:py-4 rounded-[8px] text-[12px] lg:text-[13px] xl:text-[14px] font-medium transition-colors ${
+                                className={`text-left px-3 lg:px-4 xl:px-5 py-2 lg:py-3 xl:py-4 rounded-[10px] text-[12px] lg:text-[13px] xl:text-[14px] font-medium transition-colors ${
                                   selectedCategories.has(category)
-                                    ? 'bg-blue-100 text-blue-700 hover:bg-blue-200'
-                                    : 'text-neutral-new900 hover:bg-gray-50'
+                                    ? getNicheStyles(category, true).replace('border-green-300', '').replace('border-blue-300', '').replace('border-[#dbe2eb]', '')
+                                    : getNicheType(category) === 'secondary' 
+                                      ? 'text-green-700 hover:bg-green-50' 
+                                      : 'text-neutral-new900 hover:bg-gray-50'
                                 }`}
                               >
                                 <div className="flex items-center justify-between">
                                   <span className="truncate">{category}</span>
                                   {selectedCategories.has(category) && (
-                                    <div className="w-2 h-2 lg:w-3 lg:h-3 xl:w-4 xl:h-4 bg-blue-600 rounded-full flex-shrink-0"></div>
+                                    <div className={`w-2 h-2 lg:w-3 lg:h-3 xl:w-4 xl:h-4 rounded-full flex-shrink-0 ${
+                                      getNicheType(category) === 'secondary' ? 'bg-green-600' : 'bg-blue-600'
+                                    }`}></div>
                                   )}
                                 </div>
                               </button>
