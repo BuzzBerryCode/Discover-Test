@@ -19,7 +19,6 @@ import { cn } from "../../../lib/utils";
 export const CreatorListSection = (): JSX.Element => {
   const { 
     creators, 
-  const [selectedCards, setSelectedCards] = useState<Set<string>>(new Set());
     error, 
     currentMode, 
     currentPage, 
@@ -288,7 +287,6 @@ export const CreatorListSection = (): JSX.Element => {
                 onClick={() => handleCreatorClick(creator)}
                 className={cn(
                   "w-full rounded-[15px] p-0 border-2 shadow-sm hover:shadow-md transition-all cursor-pointer",
-                  selectedCards.has(creator.id) 
                   (selectedCards.has(creator.id) || selectedCreator?.id === creator.id)
                     ? 'bg-[#f1f6fe] border-transparent'
                     : 'bg-white border-gray-200 hover:border-gray-300'
