@@ -252,7 +252,7 @@ export const CreatorListSection = (): JSX.Element => {
             <Button
               variant="outline"
               onClick={handleSelectAll}
-              className="h-[32px] lg:h-[40px] xl:h-[44px] inline-flex items-center justify-center gap-[4px] lg:gap-[6px] xl:gap-[8px] px-[8px] lg:px-[12px] xl:px-[16px] py-[6px] lg:py-[8px] xl:py-[10px] bg-basewhite rounded-[8px] border-[#dbe2eb] hover:bg-gray-50 transition-colors text-[12px] lg:text-[14px] xl:text-[15px] flex-1 sm:flex-none flex-shrink-0 min-w-0 max-w-full"
+              className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[10px] xl:px-[12px] rounded-[8px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] flex items-center gap-[3px] lg:gap-[4px] xl:gap-[6px] transition-colors whitespace-nowrap ${
             >
               <span className="font-medium text-neutral-new900 truncate min-w-0">
                 Select All
@@ -260,7 +260,7 @@ export const CreatorListSection = (): JSX.Element => {
               <Checkbox
                 checked={selectAll}
                 onChange={handleSelectAll}
-                className="w-[18px] h-[18px] lg:w-[20px] lg:h-[20px] xl:w-[22px] xl:h-[22px] p-0 border-2 border-gray-300 rounded-[3px] data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600 flex-shrink-0"
+                className="w-[14px] h-[14px] lg:w-[16px] lg:h-[16px] xl:w-[18px] xl:h-[18px] rounded-sm border-2 border-gray-300 checked:bg-blue-600 checked:border-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               />
             </Button>
           </div>
@@ -287,7 +287,7 @@ export const CreatorListSection = (): JSX.Element => {
                 onClick={() => handleCreatorClick(creator)}
                 className={`w-full rounded-[15px] p-0 border-2 shadow-sm hover:shadow-md transition-all cursor-pointer ${
                   selectedCards.has(creator.id) 
-                    ? 'bg-gray-50 border-blue-300' 
+                className={`flex items-center justify-center gap-[3px] lg:gap-[4px] xl:gap-[6px] px-[6px] lg:px-[8px] xl:px-[12px] py-[4px] lg:py-[6px] xl:py-[8px] h-[28px] lg:h-[32px] xl:h-[36px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] transition-colors rounded-[8px] ${
                     : selectedCreator?.id === creator.id
                     ? 'bg-[#f1f6fe] border-transparent'
                     : 'bg-gray-50 border-transparent'
