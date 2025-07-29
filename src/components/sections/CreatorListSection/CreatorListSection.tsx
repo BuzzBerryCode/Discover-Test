@@ -677,13 +677,13 @@ export const CreatorListSection = (): JSX.Element => {
                               niche.type === 'primary'
                                 ? 'bg-blue-50 border-blue-200 text-blue-800'
                                 : 'bg-gray-50 border-gray-200 text-gray-600'
-                            }`}
+                                : 'bg-green-50 border-green-200 text-green-700 font-medium'
                           >
                             <span className={`text-[10px] lg:text-[12px] xl:text-[13px] ${
                               niche.type === 'primary' ? 'font-semibold' : 'font-medium'
                             }`}>
                               {niche.type === 'primary' ? niche.name : `• ${niche.name}`}
-                            </span>
+                            {niche.name}
                           </Badge>
                           {index === 1 && creator.niches.length > 2 && (
                             <span className="text-gray-500 ml-1 text-xs lg:text-[13px] xl:text-[13px]">
