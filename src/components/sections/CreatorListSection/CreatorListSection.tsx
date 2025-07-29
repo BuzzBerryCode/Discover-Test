@@ -287,7 +287,7 @@ export const CreatorListSection = (): JSX.Element => {
                 onClick={() => handleCreatorClick(creator)}
                 className={`w-full rounded-[15px] p-0 border-2 shadow-sm hover:shadow-md transition-all cursor-pointer ${
                   selectedCards.has(creator.id) 
-                    ? 'bg-gray-50 border-blue-300' 
+                className={`flex items-center justify-center gap-[3px] lg:gap-[4px] xl:gap-[6px] px-[6px] lg:px-[8px] xl:px-[12px] py-[4px] lg:py-[6px] xl:py-[8px] h-[28px] lg:h-[32px] xl:h-[36px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] transition-all duration-200 rounded-[8px] ${
                     : selectedCreator?.id === creator.id
                     ? 'bg-[#f1f6fe] border-transparent'
                     : 'bg-gray-50 border-transparent'
@@ -413,7 +413,7 @@ export const CreatorListSection = (): JSX.Element => {
                           className={`px-[6px] lg:px-[8px] xl:px-[10px] py-[2px] lg:py-[3px] xl:py-[4px] rounded-[4px] lg:rounded-[6px] xl:rounded-[8px] ${
                             niche.type === 'primary' 
                               ? 'bg-sky-50 border-[#dbe2eb] text-neutral-new900' 
-                              : 'bg-green-50 border-green-200 text-green-700'
+                className={`flex items-center justify-center gap-[3px] lg:gap-[4px] xl:gap-[6px] px-[6px] lg:px-[8px] xl:px-[12px] py-[4px] lg:py-[6px] xl:py-[8px] h-[28px] lg:h-[32px] xl:h-[36px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] transition-all duration-200 rounded-[8px] ${
                           }`}
                         >
                           <span className="font-medium text-[10px] lg:text-[11px] xl:text-[12px]">
@@ -431,7 +431,7 @@ export const CreatorListSection = (): JSX.Element => {
                         >
                           <img
                             className="w-full aspect-[9/16] object-cover rounded-[8px]"
-                            alt={`${creator.username} post ${thumbIndex + 1}`}
+              className="h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[8px] xl:px-[12px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] text-neutral-new900 flex items-center gap-[3px] lg:gap-[4px] xl:gap-[6px] hover:bg-gray-50 transition-colors"
                             src={thumbnail}
                           />
                         </div>
@@ -445,7 +445,7 @@ export const CreatorListSection = (): JSX.Element => {
         ) : (
           // List View - Horizontal scrollable table with proper responsive design and sorting
           <div className="w-full overflow-x-auto lg:overflow-x-visible">
-            <div className={currentMode === 'ai' ? "min-w-[1200px] lg:min-w-[1300px] xl:min-w-0" : "min-w-[1100px] lg:min-w-[1200px] xl:min-w-0"}>
+              className="h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[8px] xl:px-[12px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] text-neutral-new900 flex items-center gap-[3px] lg:gap-[4px] xl:gap-[6px] hover:bg-gray-50 transition-colors"
               {/* Table Header */}
               <div className={`gap-3 sm:gap-4 lg:gap-5 px-4 py-3 bg-gray-50 rounded-t-lg border-b border-gray-200 text-[10px] sm:text-xs lg:text-[13px] xl:text-[14px] font-medium text-gray-600 ${
                 currentMode === 'ai' 
