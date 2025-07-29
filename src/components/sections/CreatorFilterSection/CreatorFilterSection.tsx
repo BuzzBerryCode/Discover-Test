@@ -437,17 +437,17 @@ export const CreatorFilterSection = (): JSX.Element => {
   }, [isDropdownOpen]);
 
   return (
-    <Card className="p-[15px] lg:p-[20px] xl:p-[25px] w-full bg-white rounded-[12px] flex-shrink-0 shadow-sm overflow-visible">
-      <div className="flex flex-col gap-[12px] lg:gap-[15px] xl:gap-[18px] w-full">
+    <Card className="p-[12px] lg:p-[15px] xl:p-[18px] w-full bg-white rounded-[10px] flex-shrink-0 shadow-sm overflow-visible">
+      <div className="flex flex-col gap-[10px] lg:gap-[12px] xl:gap-[15px] w-full">
         <div className="flex items-center justify-between w-full">
-          <div className="flex items-center gap-[12px] lg:gap-[16px] xl:gap-[20px]">
-            <h2 className="font-semibold text-[18px] lg:text-[22px] xl:text-[26px] text-neutral-100 leading-[24px] lg:leading-[33px] xl:leading-[38px] font-['Inter',Helvetica]">
+          <div className="flex items-center gap-[10px] lg:gap-[12px] xl:gap-[15px]">
+            <h2 className="font-semibold text-[16px] lg:text-[18px] xl:text-[20px] text-neutral-100 leading-[20px] lg:leading-[24px] xl:leading-[28px] font-['Inter',Helvetica]">
               Find Creators
             </h2>
             
             <Separator 
               orientation="vertical" 
-              className="h-[24px] lg:h-[28px] xl:h-[32px] bg-[#e1e5e9]" 
+              className="h-[20px] lg:h-[24px] xl:h-[28px] bg-[#e1e5e9]" 
             />
             
             <AIToggle
@@ -471,7 +471,7 @@ export const CreatorFilterSection = (): JSX.Element => {
                     key={`visible-category-${index}`}
                     variant="outline"
                     onClick={() => handleCategorySelect(category)}
-                    className={`h-[32px] lg:h-[40px] xl:h-[44px] py-[6px] lg:py-[8px] xl:py-[10px] px-[8px] lg:px-[12px] xl:px-[16px] rounded-[8px] font-medium text-[12px] lg:text-[14px] xl:text-[15px] transition-colors cursor-pointer flex-shrink-0 border whitespace-nowrap ${
+                    className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[10px] xl:px-[12px] rounded-[6px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] transition-colors cursor-pointer flex-shrink-0 border whitespace-nowrap ${
                       selectedCategories.has(category)
                         ? 'bg-blue-100 border-blue-300 text-blue-700 hover:bg-blue-200'
                         : 'bg-sky-50 border-[#dbe2eb] text-neutral-new900 hover:bg-sky-100'
@@ -485,7 +485,7 @@ export const CreatorFilterSection = (): JSX.Element => {
               <div className="flex items-center flex-shrink-0">
                 <Separator 
                   orientation="vertical" 
-                  className="h-[32px] lg:h-[40px] xl:h-[44px] mr-[6px] lg:mr-[8px] xl:mr-[10px]" 
+                  className="h-[28px] lg:h-[32px] xl:h-[36px] mr-[6px] lg:mr-[8px] xl:mr-[10px]" 
                 />
 
                 <Button
@@ -493,7 +493,7 @@ export const CreatorFilterSection = (): JSX.Element => {
                   variant="outline"
                   onClick={handleClearAll}
                   disabled={selectedCategories.size === 0}
-                  className={`h-[32px] lg:h-[40px] xl:h-[44px] py-[6px] lg:py-[8px] xl:py-[10px] px-[8px] lg:px-[12px] xl:px-[16px] rounded-[8px] font-medium text-[12px] lg:text-[14px] xl:text-[15px] flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] transition-colors whitespace-nowrap mr-[6px] lg:mr-[8px] xl:mr-[10px] ${
+                  className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[10px] xl:px-[12px] rounded-[6px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] transition-colors whitespace-nowrap mr-[6px] lg:mr-[8px] xl:mr-[10px] ${
                     selectedCategories.size === 0
                       ? 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed'
                       : 'bg-basewhite border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50'
@@ -508,7 +508,7 @@ export const CreatorFilterSection = (): JSX.Element => {
                     variant="outline"
                     onClick={toggleDropdown}
                     type="button"
-                    className="h-[32px] lg:h-[40px] xl:h-[44px] py-[6px] lg:py-[8px] xl:py-[10px] px-[8px] lg:px-[12px] xl:px-[16px] bg-basewhite border-[#dbe2eb] rounded-[8px] font-medium text-[12px] lg:text-[14px] xl:text-[15px] text-neutral-new900 flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] hover:bg-gray-50 transition-colors whitespace-nowrap"
+                    className="h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[10px] xl:px-[12px] bg-basewhite border-[#dbe2eb] rounded-[6px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] text-neutral-new900 flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] hover:bg-gray-50 transition-colors whitespace-nowrap"
                   >
                     View All
                     <Icon
@@ -606,7 +606,7 @@ export const CreatorFilterSection = (): JSX.Element => {
                   ref={(el) => (filterButtonRefs.current[filter.key] = el)}
                   variant="outline"
                   onClick={() => toggleFilterDropdown(filter.key)}
-                  className={`h-[32px] lg:h-[40px] xl:h-[44px] py-[6px] lg:py-[8px] xl:py-[10px] px-[4px] sm:px-[6px] lg:px-[8px] xl:px-[12px] rounded-[8px] font-medium text-[12px] lg:text-[14px] xl:text-[15px] flex items-center justify-center gap-[2px] sm:gap-[4px] lg:gap-[6px] xl:gap-[8px] transition-colors w-full min-w-0 ${
+                  className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[3px] sm:px-[4px] lg:px-[6px] xl:px-[8px] rounded-[6px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] flex items-center justify-center gap-[2px] sm:gap-[3px] lg:gap-[4px] xl:gap-[6px] transition-colors w-full min-w-0 ${
                     appliedFilters.has(filter.key)
                       ? 'bg-blue-100 border-blue-300 text-blue-700 hover:bg-blue-200'
                       : 'bg-basewhite border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50'
@@ -614,7 +614,7 @@ export const CreatorFilterSection = (): JSX.Element => {
                 >
                   <Icon
                     name={filter.icon}
-                    className="w-[12px] h-[12px] sm:w-[14px] sm:h-[14px] lg:w-[16px] lg:h-[16px] xl:w-[18px] xl:h-[18px] flex-shrink-0"
+                    className="w-[10px] h-[10px] sm:w-[12px] sm:h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px] flex-shrink-0"
                     alt={`${filter.name} icon`}
                   />
                   <span className="hidden sm:block lg:hidden truncate min-w-0 text-[10px] sm:text-[11px]">
@@ -628,7 +628,7 @@ export const CreatorFilterSection = (): JSX.Element => {
                   <span className="hidden lg:block truncate min-w-0">{filter.name}</span>
                   <Icon
                     name="DropdownIcon.svg"
-                    className={`w-[6px] h-[4px] sm:w-[8px] sm:h-[5px] lg:w-[10px] lg:h-[6px] xl:w-[12px] xl:h-[7px] flex-shrink-0 transition-transform ${
+                    className={`w-[5px] h-[3px] sm:w-[6px] sm:h-[4px] lg:w-[8px] lg:h-[5px] xl:w-[10px] xl:h-[6px] flex-shrink-0 transition-transform ${
                       openFilter === filter.key ? 'rotate-180' : ''
                     }`}
                     alt="Dropdown icon"
@@ -694,18 +694,18 @@ export const CreatorFilterSection = (): JSX.Element => {
           <div className="flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-shrink-0">
             <Separator 
               orientation="vertical" 
-              className="hidden sm:block h-[32px] lg:h-[40px] xl:h-[44px]" 
+              className="hidden sm:block h-[28px] lg:h-[32px] xl:h-[36px]" 
             />
 
             <Button
               onClick={handleApplyFilters}
               disabled={loading}
-              className="h-[32px] lg:h-[40px] xl:h-[44px] py-[6px] lg:py-[8px] xl:py-[10px] px-[12px] sm:px-[16px] lg:px-[24px] xl:px-[32px] bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] border-transparent rounded-[8px] font-medium text-[12px] lg:text-[14px] xl:text-[15px] text-white flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] hover:text-gray-100 transition-all justify-center whitespace-nowrap flex-shrink-0 min-w-[100px] sm:min-w-[120px] lg:min-w-[160px] xl:min-w-[180px] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[10px] sm:px-[12px] lg:px-[18px] xl:px-[24px] bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] border-transparent rounded-[6px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] text-white flex items-center gap-[3px] lg:gap-[4px] xl:gap-[6px] hover:text-gray-100 transition-all justify-center whitespace-nowrap flex-shrink-0 min-w-[80px] sm:min-w-[100px] lg:min-w-[120px] xl:min-w-[140px] disabled:opacity-50 disabled:cursor-not-allowed"
               variant="outline"
             >
               <Icon
                 name="FilterIcon.svg"
-                className="w-[12px] h-[12px] sm:w-[14px] sm:h-[14px] lg:w-[16px] lg:h-[16px] xl:w-[18px] xl:h-[18px] text-white flex-shrink-0"
+                className="w-[10px] h-[10px] sm:w-[12px] sm:h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px] text-white flex-shrink-0"
                 alt="Filter icon"
               />
               <span className="hidden lg:inline">{loading ? 'Applying...' : 'Apply Filters'}</span>

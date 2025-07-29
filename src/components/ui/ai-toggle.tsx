@@ -44,7 +44,7 @@ export const AIToggle: React.FC<AIToggleProps> = ({ value, onChange, className =
         {/* AI Recommendations Option */}
         <button
           onClick={() => onChange('ai')}
-          className={`relative flex items-center justify-center gap-[4px] lg:gap-[6px] xl:gap-[8px] px-[8px] lg:px-[12px] xl:px-[16px] py-[6px] lg:py-[8px] xl:py-[10px] h-[32px] lg:h-[40px] xl:h-[44px] font-medium text-[12px] lg:text-[14px] xl:text-[15px] transition-all duration-200 rounded-[10px] ${
+          className={`relative flex items-center justify-center gap-[3px] lg:gap-[4px] xl:gap-[6px] px-[6px] lg:px-[8px] xl:px-[12px] py-[4px] lg:py-[6px] xl:py-[8px] h-[28px] lg:h-[32px] xl:h-[36px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] transition-all duration-200 rounded-[8px] ${
             value === 'ai'
               ? 'bg-gradient-to-r from-[#E7CBFD] to-[#E0DEEA] text-neutral-new900'
               : 'bg-white text-neutral-new900 hover:bg-gray-50'
@@ -61,7 +61,7 @@ export const AIToggle: React.FC<AIToggleProps> = ({ value, onChange, className =
           >
             <Icon
               name="InformationIcon.svg"
-              className="w-[16px] h-[16px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px] text-gray-500"
+              className="w-[14px] h-[14px] lg:w-[16px] lg:h-[16px] xl:w-[18px] xl:h-[18px] text-gray-500"
               alt="Information"
             />
           </button>
@@ -70,7 +70,7 @@ export const AIToggle: React.FC<AIToggleProps> = ({ value, onChange, className =
         {/* All Creators Option */}
         <button
           onClick={() => onChange('all')}
-          className={`flex items-center justify-center px-[8px] lg:px-[12px] xl:px-[16px] py-[6px] lg:py-[8px] xl:py-[10px] h-[32px] lg:h-[40px] xl:h-[44px] font-medium text-[12px] lg:text-[14px] xl:text-[15px] transition-all duration-200 rounded-[10px] ${
+          className={`flex items-center justify-center px-[6px] lg:px-[8px] xl:px-[12px] py-[4px] lg:py-[6px] xl:py-[8px] h-[28px] lg:h-[32px] xl:h-[36px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] transition-all duration-200 rounded-[8px] ${
             value === 'all'
               ? 'bg-gradient-to-r from-[#E7CBFD] to-[#E0DEEA] text-neutral-new900'
               : 'bg-white text-neutral-new900 hover:bg-gray-50'
