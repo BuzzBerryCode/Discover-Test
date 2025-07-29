@@ -916,12 +916,13 @@ export const CreatorListSection = (): JSX.Element => {
                 <Icon name="ArrowRightIcon.svg" className="w-[10px] h-[10px] xs:w-[12px] xs:h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" alt="Next" />
               </Button>
               </div>
-            </div>
+            </ToggleGroupItem>
             
             {/* Page Info - Now below buttons and centered */}
             <div className="text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] font-medium text-[#71737c] font-['Inter',Helvetica] text-center px-2">
               Showing {((currentPage - 1) * 24) + 1} to {Math.min(currentPage * 24, totalCreators)} of {totalCreators} creators
-            </div>
+            </ToggleGroupItem>
+          </ToggleGroup>
           </div>
         </div>
       )}
