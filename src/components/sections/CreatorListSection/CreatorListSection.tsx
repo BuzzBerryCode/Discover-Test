@@ -19,7 +19,7 @@ import { cn } from "../../../lib/utils";
 export const CreatorListSection = (): JSX.Element => {
   const { 
     creators, 
-    loading, 
+  const [selectedCards, setSelectedCards] = useState<Set<string>>(new Set());
     error, 
     currentMode, 
     currentPage, 
@@ -64,10 +64,10 @@ export const CreatorListSection = (): JSX.Element => {
       setSelectedCards(new Set());
       setSelectAll(false);
     } else {
-      // Select all
-      const allCreatorIds = new Set(creators.map(creator => creator.id));
+    if (selectedCards.size === creators.length) {
+      setSelectedCards(new Set());
       setSelectedCards(allCreatorIds);
-      setSelectAll(true);
+      setSelectedCards(new Set(creators.map(creator => creator.id)));
     }
   };
 
