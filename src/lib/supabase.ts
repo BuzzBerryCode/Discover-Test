@@ -9,207 +9,191 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// Database types for better type safety
+// Database types matching your exact Supabase schema
 export type Database = {
   public: {
     Tables: {
-      creators: {
+      creatordata: {
         Row: {
           id: string;
-          profile_pic: string | null;
-          username: string;
-          username_tag: string | null;
-          bio: string | null;
-          location: string | null;
-          email: string | null;
-          followers: number;
-          followers_change: number | null;
-          followers_change_type: 'positive' | 'negative' | null;
-          engagement: number;
-          engagement_change: number | null;
-          engagement_change_type: 'positive' | 'negative' | null;
-          avg_views: number;
-          avg_views_change: number | null;
-          avg_views_change_type: 'positive' | 'negative' | null;
-          avg_likes: number | null;
-          avg_likes_change: number | null;
-          avg_likes_change_type: 'positive' | 'negative' | null;
-          avg_comments: number | null;
-          avg_comments_change: number | null;
-          avg_comments_change_type: 'positive' | 'negative' | null;
-          buzz_score: number;
-          niches: string[];
-          hashtags: string[] | null;
-          thumbnails: string[];
+          uuid: string;
+          handle: string;
+          display_name: string;
+          profile_url: string;
+          profile_image_url: string;
+          bio: string;
+          platform: string;
+          primary_niche: string;
+          secondary_niche: string;
+          location: string;
+          followers_count: number;
+          average_views: number;
+          average_comments: number;
+          engagement_rate: number;
+          hashtags: string[];
+          email: string;
+          recent_post_1: any; // JSONB
+          recent_post_2: any; // JSONB
+          recent_post_3: any; // JSONB
+          recent_post_4: any; // JSONB
+          recent_post_5: any; // JSONB
+          recent_post_6: any; // JSONB
+          recent_post_7: any; // JSONB
+          recent_post_8: any; // JSONB
+          recent_post_9: any; // JSONB
+          recent_post_10: any; // JSONB
+          recent_post_11: any; // JSONB
+          recent_post_12: any; // JSONB
+          paid_ad_placements: boolean;
           created_at: string;
-          updated_at: string;
+          average_likes: any; // JSONB
+          brand_tags: string;
+          bio_links: string;
+          followers_change: number;
+          followers_change_type: string;
+          engagement_rate_change: number;
+          engagement_rate_change_type: string;
+          average_views_change: number;
+          average_views_change_type: string;
+          average_likes_change: number;
+          average_likes_change_type: string;
+          average_comments_change: number;
+          average_comments_change_type: string;
+          buzz_score: number;
         };
         Insert: {
           id?: string;
-          profile_pic?: string | null;
-          username: string;
-          username_tag?: string | null;
-          bio?: string | null;
-          location?: string | null;
-          email?: string | null;
-          followers: number;
-          followers_change?: number | null;
-          followers_change_type?: 'positive' | 'negative' | null;
-          engagement: number;
-          engagement_change?: number | null;
-          engagement_change_type?: 'positive' | 'negative' | null;
-          avg_views: number;
-          avg_views_change?: number | null;
-          avg_views_change_type?: 'positive' | 'negative' | null;
-          avg_likes?: number | null;
-          avg_likes_change?: number | null;
-          avg_likes_change_type?: 'positive' | 'negative' | null;
-          avg_comments?: number | null;
-          avg_comments_change?: number | null;
-          avg_comments_change_type?: 'positive' | 'negative' | null;
-          buzz_score: number;
-          niches: string[];
-          hashtags?: string[] | null;
-          thumbnails: string[];
+          uuid?: string;
+          handle: string;
+          display_name: string;
+          profile_url?: string;
+          profile_image_url?: string;
+          bio?: string;
+          platform: string;
+          primary_niche?: string;
+          secondary_niche?: string;
+          location?: string;
+          followers_count: number;
+          average_views: number;
+          average_comments: number;
+          engagement_rate: number;
+          hashtags?: string[];
+          email?: string;
+          recent_post_1?: any;
+          recent_post_2?: any;
+          recent_post_3?: any;
+          recent_post_4?: any;
+          recent_post_5?: any;
+          recent_post_6?: any;
+          recent_post_7?: any;
+          recent_post_8?: any;
+          recent_post_9?: any;
+          recent_post_10?: any;
+          recent_post_11?: any;
+          recent_post_12?: any;
+          paid_ad_placements?: boolean;
           created_at?: string;
-          updated_at?: string;
-        };
-        Update: {
-          id?: string;
-          profile_pic?: string | null;
-          username?: string;
-          username_tag?: string | null;
-          bio?: string | null;
-          location?: string | null;
-          email?: string | null;
-          followers?: number;
-          followers_change?: number | null;
-          followers_change_type?: 'positive' | 'negative' | null;
-          engagement?: number;
-          engagement_change?: number | null;
-          engagement_change_type?: 'positive' | 'negative' | null;
-          avg_views?: number;
-          avg_views_change?: number | null;
-          avg_views_change_type?: 'positive' | 'negative' | null;
-          avg_likes?: number | null;
-          avg_likes_change?: number | null;
-          avg_likes_change_type?: 'positive' | 'negative' | null;
-          avg_comments?: number | null;
-          avg_comments_change?: number | null;
-          avg_comments_change_type?: 'positive' | 'negative' | null;
+          average_likes?: any;
+          brand_tags?: string;
+          bio_links?: string;
+          followers_change?: number;
+          followers_change_type?: string;
+          engagement_rate_change?: number;
+          engagement_rate_change_type?: string;
+          average_views_change?: number;
+          average_views_change_type?: string;
+          average_likes_change?: number;
+          average_likes_change_type?: string;
+          average_comments_change?: number;
+          average_comments_change_type?: string;
           buzz_score?: number;
-          niches?: string[];
-          hashtags?: string[] | null;
-          thumbnails?: string[];
-          created_at?: string;
-          updated_at?: string;
-        };
-      };
-      ai_recommended_creators: {
-        Row: {
-          id: string;
-          creator_id: string;
-          user_id: string;
-          match_score: number;
-          created_at: string;
-          updated_at: string;
-        };
-        Insert: {
-          id?: string;
-          creator_id: string;
-          user_id: string;
-          match_score: number;
-          created_at?: string;
-          updated_at?: string;
         };
         Update: {
           id?: string;
-          creator_id?: string;
-          user_id?: string;
-          match_score?: number;
+          uuid?: string;
+          handle?: string;
+          display_name?: string;
+          profile_url?: string;
+          profile_image_url?: string;
+          bio?: string;
+          platform?: string;
+          primary_niche?: string;
+          secondary_niche?: string;
+          location?: string;
+          followers_count?: number;
+          average_views?: number;
+          average_comments?: number;
+          engagement_rate?: number;
+          hashtags?: string[];
+          email?: string;
+          recent_post_1?: any;
+          recent_post_2?: any;
+          recent_post_3?: any;
+          recent_post_4?: any;
+          recent_post_5?: any;
+          recent_post_6?: any;
+          recent_post_7?: any;
+          recent_post_8?: any;
+          recent_post_9?: any;
+          recent_post_10?: any;
+          recent_post_11?: any;
+          recent_post_12?: any;
+          paid_ad_placements?: boolean;
           created_at?: string;
-          updated_at?: string;
-        };
-      };
-      social_media: {
-        Row: {
-          id: string;
-          creator_id: string;
-          platform: 'instagram' | 'tiktok' | 'youtube' | 'twitter';
-          username: string;
-          url: string;
-          created_at: string;
-        };
-        Insert: {
-          id?: string;
-          creator_id: string;
-          platform: 'instagram' | 'tiktok' | 'youtube' | 'twitter';
-          username: string;
-          url: string;
-          created_at?: string;
-        };
-        Update: {
-          id?: string;
-          creator_id?: string;
-          platform?: 'instagram' | 'tiktok' | 'youtube' | 'twitter';
-          username?: string;
-          url?: string;
-          created_at?: string;
-        };
-      };
-      niches: {
-        Row: {
-          id: string;
-          name: string;
-          created_at: string;
-        };
-        Insert: {
-          id?: string;
-          name: string;
-          created_at?: string;
-        };
-        Update: {
-          id?: string;
-          name?: string;
-          created_at?: string;
-        };
-      };
-    };
-    Views: {
-      ai_recommended_creators_view: {
-        Row: {
-          id: string;
-          profile_pic: string | null;
-          username: string;
-          username_tag: string | null;
-          bio: string | null;
-          location: string | null;
-          email: string | null;
-          followers: number;
-          followers_change: number | null;
-          followers_change_type: 'positive' | 'negative' | null;
-          engagement: number;
-          engagement_change: number | null;
-          engagement_change_type: 'positive' | 'negative' | null;
-          avg_views: number;
-          avg_views_change: number | null;
-          avg_views_change_type: 'positive' | 'negative' | null;
-          avg_likes: number | null;
-          avg_likes_change: number | null;
-          avg_likes_change_type: 'positive' | 'negative' | null;
-          avg_comments: number | null;
-          avg_comments_change: number | null;
-          avg_comments_change_type: 'positive' | 'negative' | null;
-          buzz_score: number;
-          niches: string[];
-          hashtags: string[] | null;
-          thumbnails: string[];
-          match_score: number;
-          user_id: string;
-          created_at: string;
-          updated_at: string;
+          average_likes?: any;
+          brand_tags?: string;
+          bio_links?: string;
+          followers_change?: number;
+          followers_change_type?: string;
+          engagement_rate_change?: number;
+          engagement_rate_change_type?: string;
+          average_views_change?: number;
+          average_views_change_type?: string;
+          average_likes_change?: number;
+          average_likes_change_type?: string;
+          average_comments_change?: number;
+          average_comments_change_type?: string;
+          buzz_score?: number;
         };
       };
     };
   };
 };
+
+// Helper type for the transformed creator data
+export interface CreatorData {
+  id: string;
+  profile_pic: string;
+  match_score?: number; // This will be calculated/assigned by AI
+  buzz_score: number;
+  username: string;
+  username_tag: string;
+  social_media: Array<{
+    platform: string;
+    username: string;
+    url: string;
+  }>;
+  bio: string;
+  followers: number;
+  followers_change: number;
+  followers_change_type: 'positive' | 'negative';
+  engagement: number;
+  engagement_change: number;
+  engagement_change_type: 'positive' | 'negative';
+  avg_views: number;
+  avg_views_change: number;
+  avg_views_change_type: 'positive' | 'negative';
+  avg_likes: number;
+  avg_likes_change: number;
+  avg_likes_change_type: 'positive' | 'negative';
+  avg_comments: number;
+  avg_comments_change: number;
+  avg_comments_change_type: 'positive' | 'negative';
+  niches: string[];
+  hashtags: string[];
+  thumbnails: string[];
+  location: string;
+  email: string;
+  created_at: string;
+  updated_at: string;
+}

@@ -1,106 +1,70 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase';
+import { supabase, CreatorData } from '../lib/supabase';
 import { Creator, CreatorMetrics, Niche, DatabaseFilters, CreatorListMode } from '../types/database';
 
-// TODO: Remove mock data once Supabase is connected
-// Mock data for development - will be replaced with Supabase calls
-const mockCreators: Creator[] = [
-  {
-    id: '1',
-    profile_pic: '/images/creator-1.jpg',
-    match_score: 91,  // AI match score
-    buzz_score: 82,   // General buzz score
-    username: 'Peter Robbins',
-    username_tag: '@peterrobbins',
-    social_media: [
-      { platform: 'instagram', username: 'peterrobbins', url: 'https://instagram.com/peterrobbins' },
-      { platform: 'tiktok', username: 'peterrobbins', url: 'https://tiktok.com/@peterrobbins' }
-    ],
-    bio: 'Founder • Simpliscale 🏆 IG Stories Have More Value $1M+ Saved with Automation',
-    followers: 132043,
-    followers_change: 16.24,
-    followers_change_type: 'positive',
-    engagement: 16.24,
-    engagement_change: 16.24,
-    engagement_change_type: 'positive',
-    avg_views: 32374,
-    avg_views_change: 16.24,
-    avg_views_change_type: 'positive',
-    avg_likes: 78500,
-    avg_likes_change: 16.24,
-    avg_likes_change_type: 'positive',
-    avg_comments: 2580,
-    avg_comments_change: 16.24,
-    avg_comments_change_type: 'positive',
-    niches: ['Productivity', 'Tech'],
-    hashtags: ['#ai', '#automation', '#makemoneyonline', '#business', '#operations', '#productivity', '#tech', '#entrepreneur'],
-    thumbnails: ['/images/PostThumbnail.svg', '/images/PostThumbnail-1.svg', '/images/PostThumbnail-2.svg'],
-    location: 'San Francisco, USA',
-    email: 'peter@simpliscale.com',
-    created_at: '2024-01-01T00:00:00Z',
-    updated_at: '2024-01-01T00:00:00Z'
-  },
-  // Duplicate for demo purposes
-  ...Array(5).fill(null).map((_, index) => ({
-    id: `${index + 2}`,
-    profile_pic: '/images/creator-1.jpg',
-    match_score: 91 - (index * 3), // Different AI match scores: 88, 85, 82, 79, 76
-    buzz_score: 75 + (index * 4),  // Different buzz scores: 79, 83, 87, 91, 95
-    username: 'Peter Robbins',
-    username_tag: '@peterrobbins',
-    social_media: [
-      { platform: 'instagram', username: 'peterrobbins', url: 'https://instagram.com/peterrobbins' },
-      { platform: 'tiktok', username: 'peterrobbins', url: 'https://tiktok.com/@peterrobbins' }
-    ],
-    bio: 'Founder • Simpliscale 🏆 IG Stories Have More Value $1M+ Saved with Automation',
-    followers: 132043 + (index * 10000),
-    followers_change: 16.24 - (index * 2), // Varying change percentages
-    followers_change_type: index % 2 === 0 ? 'positive' : 'negative',
-    engagement: 16.24 + (index * 0.5),
-    engagement_change: 16.24 - (index * 1.5),
-    engagement_change_type: index % 3 === 0 ? 'positive' : 'negative',
-    avg_views: 32374 + (index * 5000),
-    avg_views_change: 16.24 + (index * 2),
-    avg_views_change_type: 'positive',
-    avg_likes: 78500 + (index * 5000),
-    avg_likes_change: 16.24 - (index * 1),
-    avg_likes_change_type: index % 2 === 0 ? 'positive' : 'negative',
-    avg_comments: 2580 + (index * 200),
-    avg_comments_change: 16.24 + (index * 0.5),
-    avg_comments_change_type: 'positive',
-    niches: ['Productivity', 'Tech'],
-    hashtags: ['#ai', '#automation', '#makemoneyonline', '#business', '#operations', '#productivity', '#tech', '#entrepreneur'],
-    thumbnails: ['/images/PostThumbnail.svg', '/images/PostThumbnail-1.svg', '/images/PostThumbnail-2.svg'],
-    location: 'San Francisco, USA',
-    email: 'peter@simpliscale.com',
-    created_at: '2024-01-01T00:00:00Z',
-    updated_at: '2024-01-01T00:00:00Z'
-  }))
-];
+// Transform Supabase data to match UI expectations
+const transformCreatorData = (dbCreator: any): Creator => {
+  // Extract recent posts and create thumbnails array
+  const recentPosts = [];
+  for (let i = 1; i <= 12; i++) {
+    const post = dbCreator[`recent_post_${i}`];
+    if (post && post.video_url) {
+      recentPosts.push(post.video_url);
+    }
+  }
 
-const mockNiches: Niche[] = [
-  { id: '1', name: 'Productivity', created_at: '2024-01-01T00:00:00Z' },
-  { id: '2', name: 'Trading', created_at: '2024-01-01T00:00:00Z' },
-  { id: '3', name: 'Crypto', created_at: '2024-01-01T00:00:00Z' },
-  { id: '4', name: 'AI', created_at: '2024-01-01T00:00:00Z' },
-  { id: '5', name: 'Fashion', created_at: '2024-01-01T00:00:00Z' },
-  { id: '6', name: 'Fitness', created_at: '2024-01-01T00:00:00Z' },
-  { id: '7', name: 'Travel', created_at: '2024-01-01T00:00:00Z' },
-  { id: '8', name: 'Business', created_at: '2024-01-01T00:00:00Z' },
-  { id: '9', name: 'Developer', created_at: '2024-01-01T00:00:00Z' },
-  { id: '10', name: 'Gaming', created_at: '2024-01-01T00:00:00Z' },
-  { id: '11', name: 'Comedy', created_at: '2024-01-01T00:00:00Z' },
-  { id: '12', name: 'Finance', created_at: '2024-01-01T00:00:00Z' },
-];
+  // Create social media array from platform data
+  const socialMedia = [{
+    platform: dbCreator.platform.toLowerCase(),
+    username: dbCreator.handle,
+    url: dbCreator.profile_url || `https://${dbCreator.platform.toLowerCase()}.com/${dbCreator.handle}`
+  }];
+
+  // Create niches array from primary and secondary niches
+  const niches = [dbCreator.primary_niche, dbCreator.secondary_niche].filter(Boolean);
+
+  return {
+    id: dbCreator.id,
+    profile_pic: dbCreator.profile_image_url,
+    match_score: dbCreator.match_score || undefined, // Will be set by AI logic
+    buzz_score: dbCreator.buzz_score || 0,
+    username: dbCreator.display_name,
+    username_tag: `@${dbCreator.handle}`,
+    social_media: socialMedia,
+    bio: dbCreator.bio || '',
+    followers: dbCreator.followers_count || 0,
+    followers_change: dbCreator.followers_change || 0,
+    followers_change_type: (dbCreator.followers_change_type as 'positive' | 'negative') || 'positive',
+    engagement: dbCreator.engagement_rate || 0,
+    engagement_change: dbCreator.engagement_rate_change || 0,
+    engagement_change_type: (dbCreator.engagement_rate_change_type as 'positive' | 'negative') || 'positive',
+    avg_views: dbCreator.average_views || 0,
+    avg_views_change: dbCreator.average_views_change || 0,
+    avg_views_change_type: (dbCreator.average_views_change_type as 'positive' | 'negative') || 'positive',
+    avg_likes: typeof dbCreator.average_likes === 'object' ? dbCreator.average_likes?.value || 0 : dbCreator.average_likes || 0,
+    avg_likes_change: dbCreator.average_likes_change || 0,
+    avg_likes_change_type: (dbCreator.average_likes_change_type as 'positive' | 'negative') || 'positive',
+    avg_comments: dbCreator.average_comments || 0,
+    avg_comments_change: dbCreator.average_comments_change || 0,
+    avg_comments_change_type: (dbCreator.average_comments_change_type as 'positive' | 'negative') || 'positive',
+    niches: niches,
+    hashtags: dbCreator.hashtags || [],
+    thumbnails: recentPosts.slice(0, 3), // Take first 3 for thumbnails
+    location: dbCreator.location || '',
+    email: dbCreator.email || '',
+    created_at: dbCreator.created_at || new Date().toISOString(),
+    updated_at: dbCreator.created_at || new Date().toISOString()
+  };
+};
 
 // Custom hook for creator data management
 export const useCreatorData = () => {
-  const [creators, setCreators] = useState<Creator[]>(mockCreators);
-  const [filteredCreators, setFilteredCreators] = useState<Creator[]>(mockCreators);
-  const [aiRecommendedCreators, setAiRecommendedCreators] = useState<Creator[]>(mockCreators); // AI recommended creators
-  const [allCreators, setAllCreators] = useState<Creator[]>(mockCreators); // All creators from database
+  const [creators, setCreators] = useState<Creator[]>([]);
+  const [filteredCreators, setFilteredCreators] = useState<Creator[]>([]);
+  const [aiRecommendedCreators, setAiRecommendedCreators] = useState<Creator[]>([]);
+  const [allCreators, setAllCreators] = useState<Creator[]>([]);
   const [currentMode, setCurrentMode] = useState<CreatorListMode>('ai');
-  const [niches, setNiches] = useState<Niche[]>(mockNiches);
+  const [niches, setNiches] = useState<Niche[]>([]);
   const [metrics, setMetrics] = useState<CreatorMetrics | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -122,222 +86,215 @@ export const useCreatorData = () => {
     const totalViews = creatorList.reduce((sum, creator) => sum + creator.avg_views, 0);
     const totalEngagement = creatorList.reduce((sum, creator) => sum + creator.engagement, 0);
 
-    // Mock change percentage calculation (in real app, this would compare with previous period)
-    const changePercentage = Math.random() * 20 - 10; // Random between -10 and +10
+    // Calculate average change percentage across all creators
+    const avgFollowersChange = creatorList.reduce((sum, creator) => sum + (creator.followers_change || 0), 0) / creatorList.length;
 
     return {
       total_creators: creatorList.length,
       avg_followers: Math.round(totalFollowers / creatorList.length),
       avg_views: Math.round(totalViews / creatorList.length),
       avg_engagement: Math.round((totalEngagement / creatorList.length) * 100) / 100,
-      change_percentage: Math.round(changePercentage * 100) / 100,
-      change_type: changePercentage >= 0 ? 'positive' : 'negative'
+      change_percentage: Math.round(avgFollowersChange * 100) / 100,
+      change_type: avgFollowersChange >= 0 ? 'positive' : 'negative'
     };
   };
 
-  // Apply filters to creators
+  // Apply filters to creators using Supabase queries
   const applyFilters = async (filters: DatabaseFilters, mode: CreatorListMode = currentMode) => {
     setLoading(true);
     setError(null);
 
     try {
-      // TODO: Implement Supabase filtering
-      /*
-      const tableName = mode === 'ai' ? 'ai_recommended_creators_view' : 'creators';
-      let query = supabase.from(tableName).select(`
-        *,
-        social_media:social_media(*)
-      `);
+      let query = supabase.from('creatordata').select('*');
       
-      // Apply filters
+      // Apply niche filters
       if (filters.niches?.length) {
-        query = query.overlaps('niches', filters.niches);
+        const nicheConditions = filters.niches.map(niche => 
+          `primary_niche.eq.${niche},secondary_niche.eq.${niche}`
+        ).join(',');
+        query = query.or(nicheConditions);
       }
       
-      if (filters.followers_min !== undefined || filters.followers_max !== undefined) {
-        query = query.gte('followers', filters.followers_min || 0)
-                     .lte('followers', filters.followers_max || 999999999);
-      }
-      
-      if (filters.engagement_min !== undefined || filters.engagement_max !== undefined) {
-        query = query.gte('engagement', filters.engagement_min || 0)
-                     .lte('engagement', filters.engagement_max || 100);
-      }
-      
-      if (filters.avg_views_min !== undefined || filters.avg_views_max !== undefined) {
-        query = query.gte('avg_views', filters.avg_views_min || 0)
-                     .lte('avg_views', filters.avg_views_max || 999999999);
-      }
-      
-      // Add platform filtering through social_media join
+      // Apply platform filters
       if (filters.platforms?.length) {
-        // This would require a more complex query with joins
+        query = query.in('platform', filters.platforms.map(p => p.charAt(0).toUpperCase() + p.slice(1)));
       }
       
-      // Add buzz score filtering
+      // Apply followers range filter
+      if (filters.followers_min !== undefined || filters.followers_max !== undefined) {
+        if (filters.followers_min !== undefined) {
+          query = query.gte('followers_count', filters.followers_min);
+        }
+        if (filters.followers_max !== undefined) {
+          query = query.lte('followers_count', filters.followers_max);
+        }
+      }
+      
+      // Apply engagement range filter
+      if (filters.engagement_min !== undefined || filters.engagement_max !== undefined) {
+        if (filters.engagement_min !== undefined) {
+          query = query.gte('engagement_rate', filters.engagement_min);
+        }
+        if (filters.engagement_max !== undefined) {
+          query = query.lte('engagement_rate', filters.engagement_max);
+        }
+      }
+      
+      // Apply average views range filter
+      if (filters.avg_views_min !== undefined || filters.avg_views_max !== undefined) {
+        if (filters.avg_views_min !== undefined) {
+          query = query.gte('average_views', filters.avg_views_min);
+        }
+        if (filters.avg_views_max !== undefined) {
+          query = query.lte('average_views', filters.avg_views_max);
+        }
+      }
+      
+      // Apply location filter
+      if (filters.locations?.length) {
+        query = query.in('location', filters.locations);
+      }
+      
+      // Apply buzz score filters
       if (filters.buzz_scores?.length) {
-        const scoreConditions = filters.buzz_scores.map(range => {
+        const buzzConditions = filters.buzz_scores.map(range => {
           switch (range) {
-            case '90%+': return 'buzz_score >= 90';
-            case '80-90%': return 'buzz_score >= 80 AND buzz_score < 90';
-            case '70-80%': return 'buzz_score >= 70 AND buzz_score < 80';
-            case '60-70%': return 'buzz_score >= 60 AND buzz_score < 70';
-            case 'Less than 60%': return 'buzz_score < 60';
+            case '90%+': return 'buzz_score.gte.90';
+            case '80-90%': return 'buzz_score.gte.80.and.buzz_score.lt.90';
+            case '70-80%': return 'buzz_score.gte.70.and.buzz_score.lt.80';
+            case '60-70%': return 'buzz_score.gte.60.and.buzz_score.lt.70';
+            case 'Less than 60%': return 'buzz_score.lt.60';
             default: return '';
           }
         }).filter(Boolean);
         
-        if (scoreConditions.length) {
-          query = query.or(scoreConditions.join(','));
+        if (buzzConditions.length) {
+          query = query.or(buzzConditions.join(','));
         }
       }
+
+      const { data, error: queryError } = await query;
       
-      const { data, error } = await query;
+      if (queryError) throw queryError;
       
-      if (error) throw error;
-      setFilteredCreators(data || []);
-      */
-
-      // Mock filtering logic for development
-      const sourceCreators = mode === 'ai' ? aiRecommendedCreators : allCreators;
-      let filtered = [...sourceCreators];
-
-      if (filters.niches && filters.niches.length > 0) {
-        filtered = filtered.filter(creator => 
-          creator.niches.some(niche => filters.niches!.includes(niche))
-        );
-      }
-
-      if (filters.platforms && filters.platforms.length > 0) {
-        filtered = filtered.filter(creator =>
-          creator.social_media.some(social => filters.platforms!.includes(social.platform))
-        );
-      }
-
-      if (filters.match_scores && filters.match_scores.length > 0) {
-      }
-      if (filters.buzz_scores && filters.buzz_scores.length > 0) {
-        filtered = filtered.filter(creator => {
-          const score = creator.buzz_score; // Filter by buzz score, not match score
-          return filters.buzz_scores!.some(range => {
-            switch (range) {
-              case '90%+': return score >= 90;
-              case '80-90%': return score >= 80 && score < 90;
-              case '70-80%': return score >= 70 && score < 80;
-              case '60-70%': return score >= 60 && score < 70;
-              case 'Less than 60%': return score < 60;
-              default: return false;
-            }
-          });
-        });
-      }
-
-      if (filters.followers_min !== undefined || filters.followers_max !== undefined) {
-        filtered = filtered.filter(creator => 
-          creator.followers >= (filters.followers_min || 0) &&
-          creator.followers <= (filters.followers_max || 999999999)
-        );
-      }
-
-      if (filters.engagement_min !== undefined || filters.engagement_max !== undefined) {
-        filtered = filtered.filter(creator => 
-          creator.engagement >= (filters.engagement_min || 0) &&
-          creator.engagement <= (filters.engagement_max || 100)
-        );
-      }
-
-      if (filters.avg_views_min !== undefined || filters.avg_views_max !== undefined) {
-        filtered = filtered.filter(creator => 
-          creator.avg_views >= (filters.avg_views_min || 0) &&
-          creator.avg_views <= (filters.avg_views_max || 999999999)
-        );
-      }
-
-      setFilteredCreators(filtered);
+      // Transform the data and apply AI logic if needed
+      let transformedCreators = (data || []).map(transformCreatorData);
       
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // If in AI mode, assign match scores (this would be replaced with actual AI logic)
+      if (mode === 'ai') {
+        transformedCreators = transformedCreators.map(creator => ({
+          ...creator,
+          match_score: Math.floor(Math.random() * 40) + 60 // Temporary: 60-100% match scores
+        }));
+        setAiRecommendedCreators(transformedCreators);
+      } else {
+        setAllCreators(transformedCreators);
+      }
+      
+      setFilteredCreators(transformedCreators);
       
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : 'An error occurred while filtering creators');
+      console.error('Filter error:', err);
     } finally {
       setLoading(false);
     }
   };
 
   // Switch between AI recommendations and all creators
-  const switchMode = (mode: CreatorListMode) => {
+  const switchMode = async (mode: CreatorListMode) => {
     setCurrentMode(mode);
-    const sourceCreators = mode === 'ai' ? aiRecommendedCreators : allCreators;
-    setCreators(sourceCreators);
-    setFilteredCreators(sourceCreators);
+    
+    // Load appropriate data based on mode
+    if (mode === 'ai') {
+      if (aiRecommendedCreators.length === 0) {
+        await loadCreators('ai');
+      } else {
+        setCreators(aiRecommendedCreators);
+        setFilteredCreators(aiRecommendedCreators);
+      }
+    } else {
+      if (allCreators.length === 0) {
+        await loadCreators('all');
+      } else {
+        setCreators(allCreators);
+        setFilteredCreators(allCreators);
+      }
+    }
   };
 
-  // Load initial data
-  const loadCreators = async () => {
+  // Load creators from Supabase
+  const loadCreators = async (mode: CreatorListMode = currentMode) => {
     setLoading(true);
     setError(null);
 
     try {
-      // TODO: Implement Supabase queries
-      // Example implementation:
-      /*
-      if (currentMode === 'ai') {
-        const { data: aiData, error: aiError } = await supabase
-          .from('ai_recommended_creators_view')
-          .select(`
-            *,
-            social_media:social_media(*)
-          `)
-          .eq('user_id', userId); // Get from auth context
+      const { data, error: queryError } = await supabase
+        .from('creatordata')
+        .select('*')
+        .order('followers_count', { ascending: false });
+      
+      if (queryError) throw queryError;
+      
+      // Transform the data
+      let transformedCreators = (data || []).map(transformCreatorData);
+      
+      if (mode === 'ai') {
+        // Apply AI logic to assign match scores
+        transformedCreators = transformedCreators.map(creator => ({
+          ...creator,
+          match_score: Math.floor(Math.random() * 40) + 60 // Temporary: 60-100% match scores
+        }));
         
-        if (aiError) throw aiError;
-        setAiRecommendedCreators(aiData || []);
+        // Sort by match score for AI mode
+        transformedCreators.sort((a, b) => (b.match_score || 0) - (a.match_score || 0));
+        
+        setAiRecommendedCreators(transformedCreators);
       } else {
-        const { data: allData, error: allError } = await supabase
-          .from('creators')
-          .select(`
-            *,
-            social_media:social_media(*)
-          `);
-        
-        if (allError) throw allError;
-        setAllCreators(allData || []);
+        setAllCreators(transformedCreators);
       }
-      */
       
-      // Mock API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      setCreators(transformedCreators);
+      setFilteredCreators(transformedCreators);
       
-      // For now, use same mock data for both modes
-      setAiRecommendedCreators(mockCreators);
-      setAllCreators(mockCreators);
-      setCreators(mockCreators); // Start with AI recommendations
-      setFilteredCreators(mockCreators);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load creators');
+      console.error('Load creators error:', err);
     } finally {
       setLoading(false);
     }
   };
 
-  // Load niches
+  // Load niches from database
   const loadNiches = async () => {
     try {
-      // TODO: Implement Supabase query
-      /*
-      const { data, error } = await supabase
-        .from('niches')
-        .select('*')
-        .order('name');
+      // Get unique niches from both primary_niche and secondary_niche columns
+      const { data, error: queryError } = await supabase
+        .from('creatordata')
+        .select('primary_niche, secondary_niche');
       
-      if (error) throw error;
-      setNiches(data || []);
-      */
+      if (queryError) throw queryError;
       
-      setNiches(mockNiches);
+      // Extract unique niches
+      const nicheSet = new Set<string>();
+      data?.forEach(creator => {
+        if (creator.primary_niche) nicheSet.add(creator.primary_niche);
+        if (creator.secondary_niche) nicheSet.add(creator.secondary_niche);
+      });
+      
+      // Convert to Niche objects
+      const uniqueNiches: Niche[] = Array.from(nicheSet).map(name => ({
+        id: name.toLowerCase().replace(/\s+/g, '-'),
+        name,
+        created_at: new Date().toISOString()
+      }));
+      
+      setNiches(uniqueNiches);
+      
     } catch (err) {
       console.error('Failed to load niches:', err);
+      // Fallback to empty array
+      setNiches([]);
     }
   };
 
