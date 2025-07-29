@@ -673,16 +673,12 @@ export const CreatorListSection = (): JSX.Element => {
                         <div key={index} className="flex items-center">
                           <Badge
                             variant="outline"
-                            className={`px-[6px] lg:px-[10px] xl:px-[12px] py-[2px] lg:py-[4px] xl:py-[6px] rounded-[4px] lg:rounded-[6px] xl:rounded-[8px] border ${
+                            className={`px-[6px] lg:px-[8px] xl:px-[10px] py-[2px] lg:py-[3px] xl:py-[4px] rounded-[4px] lg:rounded-[5px] xl:rounded-[6px] border text-[10px] lg:text-[11px] xl:text-[12px] leading-[12px] lg:leading-[13px] xl:leading-[14px] ${
                               niche.type === 'primary'
-                                ? 'bg-blue-50 border-blue-200 text-blue-800'
-                                : 'bg-gray-50 border-gray-200 text-gray-600'
+                                ? 'bg-blue-50 border-blue-200 text-blue-800 font-semibold'
                                 : 'bg-green-50 border-green-200 text-green-700 font-medium'
+                            }`}
                           >
-                            <span className={`text-[10px] lg:text-[12px] xl:text-[13px] ${
-                              niche.type === 'primary' ? 'font-semibold' : 'font-medium'
-                            }`}>
-                              {niche.type === 'primary' ? niche.name : `• ${niche.name}`}
                             {niche.name}
                           </Badge>
                           {index === 1 && creator.niches.length > 2 && (
