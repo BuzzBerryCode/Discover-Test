@@ -444,7 +444,7 @@ export const CreatorFilterSection = (): JSX.Element => {
   }, [isDropdownOpen]);
 
   return (
-    <Card className="p-[12px] lg:p-[15px] xl:p-[18px] w-full bg-white rounded-[10px] flex-shrink-0 shadow-sm overflow-visible">
+    <Card className="p-[12px] lg:p-[15px] xl:p-[18px] w-full bg-white rounded-[10px] flex-shrink-0 shadow-sm overflow-visible border-0">
       <div className="flex flex-col gap-[10px] lg:gap-[12px] xl:gap-[15px] w-full">
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-[10px] lg:gap-[12px] xl:gap-[15px]">
