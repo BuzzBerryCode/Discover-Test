@@ -224,11 +224,11 @@ export const CreatorListSection = (): JSX.Element => {
                 <Icon
                   name={viewMode === 'list' ? "ListIconSelected.svg" : "ListIcon.svg"}
                   className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px] flex-shrink-0"
-                  alt="List view icon"
+            className="h-[35px] px-[8px] lg:px-[12px] xl:px-[16px] bg-white border-[#dbe2eb] rounded-[10px] font-medium text-[14px] text-neutral-new900 flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] hover:bg-gray-50 transition-colors"
                 />
                 <span className={`font-medium hidden sm:inline ${viewMode === 'list' ? 'text-graysblack' : 'text-[#999999]'}`}>List</span>
               </ToggleGroupItem>
-            </ToggleGroup>
+              className="w-[15px] h-[15px]"
           </div>
         </div>
 
@@ -238,28 +238,28 @@ export const CreatorListSection = (): JSX.Element => {
             variant="outline"
             className="h-[32px] lg:h-[40px] xl:h-[44px] inline-flex items-center justify-center gap-[4px] lg:gap-[6px] xl:gap-[8px] px-[8px] lg:px-[12px] xl:px-[16px] py-[6px] lg:py-[8px] xl:py-[10px] bg-basewhite rounded-[8px] border-[#dbe2eb] hover:bg-gray-50 transition-colors text-[12px] lg:text-[14px] xl:text-[15px] w-full sm:w-auto flex-shrink-0 min-w-0 max-w-full"
           >
-            <Icon
+            className="h-[35px] px-[8px] lg:px-[12px] xl:px-[16px] bg-white border-[#dbe2eb] rounded-[10px] font-medium text-[14px] text-neutral-new900 flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] hover:bg-gray-50 transition-colors"
               name="SavedListIcon.svg"
               className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px] flex-shrink-0"
               alt="Save in list icon"
             />
-            <span className="font-medium text-neutral-new900 truncate min-w-0">
+              className="w-[18px] h-[18px]"
               Save in a list
             </span>
           </Button>
 
           <div className="flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px] w-full sm:w-auto min-w-0 overflow-hidden">
             <Button
-              variant="outline"
-              onClick={handleSelectAll}
+              className={`h-[35px] px-[8px] lg:px-[12px] xl:px-[16px] rounded-none border-0 font-medium text-[14px] transition-colors ${
+              className={`h-[35px] px-[8px] lg:px-[12px] xl:px-[16px] rounded-none border-0 font-medium text-[14px] transition-colors ${
               className="h-[32px] lg:h-[40px] xl:h-[44px] inline-flex items-center justify-center gap-[4px] lg:gap-[6px] xl:gap-[8px] px-[8px] lg:px-[12px] xl:px-[16px] py-[6px] lg:py-[8px] xl:py-[10px] bg-basewhite rounded-[8px] border-[#dbe2eb] hover:bg-gray-50 transition-colors text-[12px] lg:text-[14px] xl:text-[15px] flex-1 sm:flex-none flex-shrink-0 min-w-0 max-w-full"
             >
               <span className="font-medium text-neutral-new900 truncate min-w-0">
                 Select All
               </span>
               <Checkbox
-                checked={selectAll}
-                onChange={handleSelectAll}
+                className="w-[15px] h-[15px] mr-[4px] lg:mr-[6px] xl:mr-[8px]"
+                className="w-[15px] h-[15px] mr-[4px] lg:mr-[6px] xl:mr-[8px]"
                 className="w-[18px] h-[18px] lg:w-[20px] lg:h-[20px] xl:w-[22px] xl:h-[22px] p-0 border-2 border-gray-300 rounded-[3px] data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600 flex-shrink-0"
               />
             </Button>
