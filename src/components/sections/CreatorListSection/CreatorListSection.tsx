@@ -287,7 +287,7 @@ export const CreatorListSection = (): JSX.Element => {
                 onClick={() => handleCreatorClick(creator)}
                 className={`w-full rounded-[15px] p-0 border-2 shadow-sm hover:shadow-md transition-all cursor-pointer ${
                   selectedCards.has(creator.id) 
-                className={`flex items-center justify-center gap-[3px] lg:gap-[4px] xl:gap-[6px] px-[6px] lg:px-[8px] xl:px-[12px] py-[4px] lg:py-[6px] xl:py-[8px] h-[28px] lg:h-[32px] xl:h-[36px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] transition-all duration-200 rounded-[8px] ${
+                    ? 'bg-[#f1f6fe] border-transparent'
                     : selectedCreator?.id === creator.id
                     ? 'bg-[#f1f6fe] border-transparent'
                     : 'bg-gray-50 border-transparent'
@@ -413,7 +413,7 @@ export const CreatorListSection = (): JSX.Element => {
                           className={`px-[6px] lg:px-[8px] xl:px-[10px] py-[2px] lg:py-[3px] xl:py-[4px] rounded-[4px] lg:rounded-[6px] xl:rounded-[8px] ${
                             niche.type === 'primary' 
                               ? 'bg-sky-50 border-[#dbe2eb] text-neutral-new900' 
-                className={`flex items-center justify-center gap-[3px] lg:gap-[4px] xl:gap-[6px] px-[6px] lg:px-[8px] xl:px-[12px] py-[4px] lg:py-[6px] xl:py-[8px] h-[28px] lg:h-[32px] xl:h-[36px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] transition-all duration-200 rounded-[8px] ${
+                              : 'bg-green-50 border-green-200 text-green-700'
                           }`}
                         >
                           <span className="font-medium text-[10px] lg:text-[11px] xl:text-[12px]">
@@ -431,7 +431,6 @@ export const CreatorListSection = (): JSX.Element => {
                         >
                           <img
                             className="w-full aspect-[9/16] object-cover rounded-[8px]"
-              className="h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[8px] xl:px-[12px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] text-neutral-new900 flex items-center gap-[3px] lg:gap-[4px] xl:gap-[6px] hover:bg-gray-50 transition-colors"
                             src={thumbnail}
                           />
                         </div>
@@ -445,7 +444,7 @@ export const CreatorListSection = (): JSX.Element => {
         ) : (
           // List View - Horizontal scrollable table with proper responsive design and sorting
           <div className="w-full overflow-x-auto lg:overflow-x-visible">
-              className="h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[8px] xl:px-[12px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] text-neutral-new900 flex items-center gap-[3px] lg:gap-[4px] xl:gap-[6px] hover:bg-gray-50 transition-colors"
+            <div className="min-w-[800px] lg:min-w-0">
               {/* Table Header */}
               <div className={`gap-3 sm:gap-4 lg:gap-5 px-4 py-3 bg-gray-50 rounded-t-lg border-b border-gray-200 text-[10px] sm:text-xs lg:text-[13px] xl:text-[14px] font-medium text-gray-600 ${
                 currentMode === 'ai' 
@@ -468,7 +467,7 @@ export const CreatorListSection = (): JSX.Element => {
                     <span className="truncate">Match Score</span>
                     <Icon 
                       name="SortIcon.svg" 
-                      className={`w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 flex-shrink-0 transition-transform ${
+                      className={\`w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 flex-shrink-0 transition-transform ${
                         sortState.field === 'match_score' && sortState.direction === 'asc' ? 'rotate-180' : ''
                       }`} 
                       alt="Sort" 
@@ -484,7 +483,7 @@ export const CreatorListSection = (): JSX.Element => {
                   <span className="truncate">Followers</span>
                   <Icon 
                     name="SortIcon.svg" 
-                    className={`w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 flex-shrink-0 transition-transform ${
+                    className={\`w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 flex-shrink-0 transition-transform ${
                       sortState.field === 'followers' && sortState.direction === 'asc' ? 'rotate-180' : ''
                     }`} 
                     alt="Sort" 
@@ -502,7 +501,7 @@ export const CreatorListSection = (): JSX.Element => {
                   </span>
                   <Icon 
                     name="SortIcon.svg" 
-                    className={`w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 flex-shrink-0 transition-transform ${
+                    className={\`w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 flex-shrink-0 transition-transform ${
                       sortState.field === 'avg_views' && sortState.direction === 'asc' ? 'rotate-180' : ''
                     }`} 
                     alt="Sort" 
@@ -517,7 +516,7 @@ export const CreatorListSection = (): JSX.Element => {
                   <span className="truncate">Engagement</span>
                   <Icon 
                     name="SortIcon.svg" 
-                    className={`w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 flex-shrink-0 transition-transform ${
+                    className={\`w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 flex-shrink-0 transition-transform ${
                       sortState.field === 'engagement' && sortState.direction === 'asc' ? 'rotate-180' : ''
                     }`} 
                     alt="Sort" 
@@ -548,7 +547,7 @@ export const CreatorListSection = (): JSX.Element => {
                   <div
                     key={creator.id}
                     onClick={() => handleCreatorClick(creator)}
-                    className={`gap-3 sm:gap-4 lg:gap-5 px-4 py-4 items-center hover:bg-gray-50 transition-colors cursor-pointer ${
+                    className={\`gap-3 sm:gap-4 lg:gap-5 px-4 py-4 items-center hover:bg-gray-50 transition-colors cursor-pointer ${
                       index !== sortedCreators.length - 1 ? 'border-b border-gray-100' : ''
                     } ${
                       selectedCreator?.id === creator.id ? 'bg-[#f1f6fe]' : ''
@@ -577,7 +576,7 @@ export const CreatorListSection = (): JSX.Element => {
                         {creator.profile_pic ? (
                           <img 
                             src={creator.profile_pic} 
-                            alt={`${creator.username} profile`}
+                            alt={\`${creator.username} profile`}
                             className="w-full h-full object-cover"
                           />
                         ) : (
@@ -595,7 +594,7 @@ export const CreatorListSection = (): JSX.Element => {
                                 key={iconIndex}
                                 name={getSocialMediaIcon(social.platform)}
                                 className="w-3 h-3 sm:w-4 sm:h-4"
-                                alt={`${social.platform} logo`}
+                                alt={\`${social.platform} logo`}
                               />
                             ))}
                           </div>
@@ -606,7 +605,7 @@ export const CreatorListSection = (): JSX.Element => {
                     {/* Match Score - Only show in AI mode */}
                     {currentMode === 'ai' && (
                       <div className="flex justify-center">
-                        <div className={`px-2 md:px-3 py-1 rounded-md text-xs lg:text-[13px] xl:text-[14px] font-bold ${getMatchScoreColor(creator.match_score || 0)}`}>
+                        <div className={\`px-2 md:px-3 py-1 rounded-md text-xs lg:text-[13px] xl:text-[14px] font-bold ${getMatchScoreColor(creator.match_score || 0)}`}>
                           {creator.match_score || 0}%
                         </div>
                       </div>
@@ -621,7 +620,7 @@ export const CreatorListSection = (): JSX.Element => {
                           className="w-2 h-2 sm:w-3 sm:h-3 lg:w-3 lg:h-3 flex-shrink-0" 
                           alt={creator.followers_change_type === 'positive' ? 'Positive change' : 'Negative change'} 
                         />
-                        <span className={`text-[10px] lg:text-[11px] xl:text-[11px] font-medium ${
+                        <span className={\`text-[10px] lg:text-[11px] xl:text-[11px] font-medium ${
                           creator.followers_change_type === 'positive' ? 'text-[#1ad598]' : 'text-[#ea3a3d]'
                         }`}>
                           {creator.followers_change_type === 'positive' ? '+' : ''}{creator.followers_change?.toFixed(2) || '0.00'}%
@@ -638,7 +637,7 @@ export const CreatorListSection = (): JSX.Element => {
                           className="w-2 h-2 sm:w-3 sm:h-3 lg:w-3 lg:h-3 flex-shrink-0" 
                           alt={creator.avg_views_change_type === 'positive' ? 'Positive change' : 'Negative change'} 
                         />
-                        <span className={`text-[10px] lg:text-[11px] xl:text-[11px] font-medium ${
+                        <span className={\`text-[10px] lg:text-[11px] xl:text-[11px] font-medium ${
                           creator.avg_views_change_type === 'positive' ? 'text-[#1ad598]' : 'text-[#ea3a3d]'
                         }`}>
                           {creator.avg_views_change_type === 'positive' ? '+' : ''}{creator.avg_views_change?.toFixed(2) || '0.00'}%
@@ -657,7 +656,7 @@ export const CreatorListSection = (): JSX.Element => {
                           className="w-2 h-2 sm:w-3 sm:h-3 lg:w-3 lg:h-3 flex-shrink-0" 
                           alt={creator.engagement_change_type === 'positive' ? 'Positive change' : 'Negative change'} 
                         />
-                        <span className={`text-[10px] lg:text-[11px] xl:text-[11px] font-medium ${
+                        <span className={\`text-[10px] lg:text-[11px] xl:text-[11px] font-medium ${
                           creator.engagement_change_type === 'positive' ? 'text-[#1ad598]' : 'text-[#ea3a3d]'
                         }`}>
                           {creator.engagement_change_type === 'positive' ? '+' : ''}{creator.engagement_change?.toFixed(2) || '0.00'}%
@@ -671,7 +670,7 @@ export const CreatorListSection = (): JSX.Element => {
                         <div key={index} className="flex items-center">
                           <Badge
                             variant="outline"
-                            className={`px-[6px] lg:px-[8px] xl:px-[10px] py-[2px] lg:py-[3px] xl:py-[4px] rounded-[4px] lg:rounded-[6px] xl:rounded-[8px] ${
+                            className={\`px-[6px] lg:px-[8px] xl:px-[10px] py-[2px] lg:py-[3px] xl:py-[4px] rounded-[4px] lg:rounded-[6px] xl:rounded-[8px] ${
                               niche.type === 'primary' 
                                 ? 'bg-sky-50 border-[#dbe2eb] text-neutral-new900' 
                                 : 'bg-green-50 border-green-200 text-green-700'
@@ -758,7 +757,7 @@ export const CreatorListSection = (): JSX.Element => {
                       key={1}
                       variant="outline"
                       onClick={() => handlePageChange(1)}
-                      className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                      className={\`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
                         currentPage === 1
                           ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
                           : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
@@ -779,7 +778,7 @@ export const CreatorListSection = (): JSX.Element => {
                           key={i}
                           variant="outline"
                           onClick={() => handlePageChange(i)}
-                          className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                          className={\`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
                             currentPage === i
                               ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
                               : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
@@ -803,7 +802,7 @@ export const CreatorListSection = (): JSX.Element => {
                             key={i}
                             variant="outline"
                             onClick={() => handlePageChange(i)}
-                            className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                            className={\`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
                               currentPage === i
                                 ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
                                 : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
@@ -839,7 +838,7 @@ export const CreatorListSection = (): JSX.Element => {
                               key={i}
                               variant="outline"
                               onClick={() => handlePageChange(i)}
-                              className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                              className={\`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
                                 currentPage === i
                                   ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
                                   : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
@@ -864,7 +863,7 @@ export const CreatorListSection = (): JSX.Element => {
                             key={i}
                             variant="outline"
                             onClick={() => handlePageChange(i)}
-                            className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                            className={\`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
                               currentPage === i
                                 ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
                                 : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
@@ -889,7 +888,7 @@ export const CreatorListSection = (): JSX.Element => {
                           key={totalPages}
                           variant="outline"
                           onClick={() => handlePageChange(totalPages)}
-                          className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                          className={\`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
                             currentPage === totalPages
                               ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
                               : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
