@@ -723,27 +723,28 @@ export const CreatorListSection = (): JSX.Element => {
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <div className="flex-shrink-0 mt-[20px] lg:mt-[25px] xl:mt-[30px] pt-[15px] lg:pt-[20px] xl:pt-[25px] border-t border-[#f1f4f9]">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-[12px] lg:gap-[15px] xl:gap-[18px]">
+        <div className="flex-shrink-0 mt-[20px] lg:mt-[25px] xl:mt-[30px] pt-[15px] lg:pt-[20px] xl:pt-[25px] border-t border-[#f1f4f9] w-full">
+          <div className="flex flex-col items-center gap-[12px] lg:gap-[15px] xl:gap-[18px] w-full">
             {/* Page Info */}
-            <div className="text-[12px] lg:text-[13px] xl:text-[14px] font-medium text-[#71737c] font-['Inter',Helvetica] order-2 sm:order-1">
+            <div className="text-[12px] lg:text-[13px] xl:text-[14px] font-medium text-[#71737c] font-['Inter',Helvetica] self-start w-full">
               Showing {((currentPage - 1) * 24) + 1} to {Math.min(currentPage * 24, totalCreators)} of {totalCreators} creators
             </div>
             
             {/* Pagination Buttons */}
-            <div className="flex items-center gap-[8px] lg:gap-[10px] xl:gap-[12px] order-1 sm:order-2">
+            <div className="flex items-center justify-center gap-[8px] lg:gap-[10px] xl:gap-[12px] w-full">
               <Button
                 variant="outline"
                 onClick={previousPage}
                 disabled={currentPage === 1}
-                className="h-[32px] lg:h-[36px] xl:h-[40px] px-[12px] lg:px-[16px] xl:px-[20px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px]"
+                className="h-[30px] lg:h-[34px] xl:h-[38px] px-[10px] lg:px-[14px] xl:px-[18px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-shrink-0"
               >
                 <Icon name="ArrowLeftIcon.svg" className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" alt="Previous" />
-                Previous
+                <span className="hidden xs:inline">Previous</span>
+                <span className="xs:hidden">Prev</span>
               </Button>
               
               {/* Page Numbers */}
-              <div className="flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px]">
+              <div className="flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] flex-shrink-0">
                 {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                   let pageNum;
                   if (totalPages <= 5) {
@@ -761,7 +762,7 @@ export const CreatorListSection = (): JSX.Element => {
                       key={pageNum}
                       variant="outline"
                       onClick={() => handlePageChange(pageNum)}
-                      className={`h-[32px] lg:h-[36px] xl:h-[40px] w-[32px] lg:w-[36px] xl:w-[40px] p-0 rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] transition-colors ${
+                      className={`h-[30px] lg:h-[34px] xl:h-[38px] w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
                         currentPage === pageNum
                           ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)]'
                           : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50'
@@ -777,9 +778,10 @@ export const CreatorListSection = (): JSX.Element => {
                 variant="outline"
                 onClick={nextPage}
                 disabled={currentPage === totalPages}
-                className="h-[32px] lg:h-[36px] xl:h-[40px] px-[12px] lg:px-[16px] xl:px-[20px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px]"
+                className="h-[30px] lg:h-[34px] xl:h-[38px] px-[10px] lg:px-[14px] xl:px-[18px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-shrink-0"
               >
-                Next
+                <span className="hidden xs:inline">Next</span>
+                <span className="xs:hidden">Next</span>
                 <Icon name="ArrowRightIcon.svg" className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" alt="Next" />
               </Button>
             </div>
