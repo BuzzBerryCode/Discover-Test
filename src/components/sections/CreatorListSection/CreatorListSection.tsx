@@ -19,7 +19,6 @@ import { cn } from "../../../lib/utils";
 export const CreatorListSection = (): JSX.Element => {
   const { 
     creators, 
-    loading,
     error, 
     currentMode, 
     currentPage, 
@@ -30,7 +29,7 @@ export const CreatorListSection = (): JSX.Element => {
     previousPage 
   } = useCreatorData();
 
-  // State for tracking selected cards
+  // State for card selection
   const [selectedCards, setSelectedCards] = useState<Set<string>>(new Set());
   const [selectAll, setSelectAll] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('cards');
@@ -64,9 +63,10 @@ export const CreatorListSection = (): JSX.Element => {
       setSelectedCards(new Set());
       setSelectAll(false);
     } else {
-      // Select all
+    if (selectedCards.size === creators.length) {
+      setSelectedCards(new Set());
+      setSelectedCards(allCreatorIds);
       setSelectedCards(new Set(creators.map(creator => creator.id)));
-      setSelectAll(true);
     }
   };
 
