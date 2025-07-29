@@ -19,6 +19,7 @@ import { cn } from "../../../lib/utils";
 export const CreatorListSection = (): JSX.Element => {
   const { 
     creators, 
+    loading,
     error, 
     currentMode, 
     currentPage, 
@@ -63,10 +64,9 @@ export const CreatorListSection = (): JSX.Element => {
       setSelectedCards(new Set());
       setSelectAll(false);
     } else {
-    if (selectedCards.size === creators.length) {
-      setSelectedCards(new Set());
-      setSelectedCards(allCreatorIds);
+      // Select all
       setSelectedCards(new Set(creators.map(creator => creator.id)));
+      setSelectAll(true);
     }
   };
 
