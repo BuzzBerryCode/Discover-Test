@@ -676,14 +676,14 @@ export const CreatorListSection = (): JSX.Element => {
                             className={`px-[6px] lg:px-[10px] xl:px-[12px] py-[2px] lg:py-[4px] xl:py-[6px] rounded-[4px] lg:rounded-[6px] xl:rounded-[8px] border ${
                               niche.type === 'primary'
                                 ? 'bg-blue-50 border-blue-200 text-blue-800'
-                                : 'bg-green-50 border-green-200 text-green-700'
-                            }`}
+                                : 'bg-gray-50 border-gray-200 text-gray-600'
+                                : 'bg-green-50 border-green-200 text-green-700 font-medium'
                           >
                             <span className={`text-[10px] lg:text-[12px] xl:text-[13px] ${
                               niche.type === 'primary' ? 'font-semibold' : 'font-medium'
                             }`}>
                               {niche.type === 'primary' ? niche.name : `• ${niche.name}`}
-                            </span>
+                            {niche.name}
                           </Badge>
                           {index === 1 && creator.niches.length > 2 && (
                             <span className="text-gray-500 ml-1 text-xs lg:text-[13px] xl:text-[13px]">
@@ -783,11 +783,11 @@ export const CreatorListSection = (): JSX.Element => {
                           key={i}
                           variant="outline"
                           onClick={() => handlePageChange(i)}
-                          className={\`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                          className={`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
                             currentPage === i
                               ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
                               : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
-                          }`}
+                            }`}
                         >
                           {i}
                         </Button>
@@ -811,7 +811,7 @@ export const CreatorListSection = (): JSX.Element => {
                               currentPage === i
                                 ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
                                 : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
-                            }`}
+                              }`}
                           >
                             {i}
                           </Button>
@@ -847,7 +847,7 @@ export const CreatorListSection = (): JSX.Element => {
                                 currentPage === i
                                   ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
                                   : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
-                              }`}
+                                }`}
                             >
                               {i}
                             </Button>
@@ -872,7 +872,7 @@ export const CreatorListSection = (): JSX.Element => {
                               currentPage === i
                                 ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
                                 : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
-                            }`}
+                              }`}
                           >
                             {i}
                           </Button>
@@ -897,7 +897,7 @@ export const CreatorListSection = (): JSX.Element => {
                             currentPage === totalPages
                               ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
                               : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
-                          }`}
+                            }`}
                         >
                           {totalPages}
                         </Button>
