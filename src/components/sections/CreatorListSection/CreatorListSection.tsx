@@ -410,10 +410,16 @@ export const CreatorListSection = (): JSX.Element => {
                         <Badge
                           key={tagIndex}
                           variant="outline"
-                          className="px-[6px] lg:px-[8px] xl:px-[10px] py-[3px] lg:py-[4px] xl:py-[5px] bg-sky-50 rounded-[6px] border-[#dbe2eb]"
+                          className={`px-[6px] lg:px-[10px] xl:px-[12px] py-[2px] lg:py-[4px] xl:py-[6px] rounded-[4px] lg:rounded-[6px] xl:rounded-[8px] border ${
+                            niche.type === 'primary'
+                              ? 'bg-blue-50 border-blue-200 text-blue-800'
+                              : 'bg-gray-50 border-gray-200 text-gray-600'
+                          }`}
                         >
-                          <span className="font-medium text-neutral-new900 text-[11px] lg:text-[12px] xl:text-[13px]">
-                            {niche}
+                          <span className={`text-[10px] lg:text-[12px] xl:text-[13px] ${
+                            niche.type === 'primary' ? 'font-semibold' : 'font-medium'
+                          }`}>
+                            {niche.type === 'primary' ? niche.name : `• ${niche.name}`}
                           </span>
                         </Badge>
                       ))}
@@ -667,10 +673,16 @@ export const CreatorListSection = (): JSX.Element => {
                         <div key={index} className="flex items-center">
                           <Badge
                             variant="outline"
-                            className="px-[6px] lg:px-[8px] xl:px-[10px] py-[3px] lg:py-[4px] xl:py-[5px] bg-sky-50 rounded-[6px] border-[#dbe2eb] text-xs lg:text-[13px] xl:text-[13px]"
+                            className={`px-[6px] lg:px-[10px] xl:px-[12px] py-[2px] lg:py-[4px] xl:py-[6px] rounded-[4px] lg:rounded-[6px] xl:rounded-[8px] border ${
+                              niche.type === 'primary'
+                                ? 'bg-blue-50 border-blue-200 text-blue-800'
+                                : 'bg-gray-50 border-gray-200 text-gray-600'
+                            }`}
                           >
-                            <span className="font-medium text-neutral-new900 truncate">
-                              {niche}
+                            <span className={`text-[10px] lg:text-[12px] xl:text-[13px] ${
+                              niche.type === 'primary' ? 'font-semibold' : 'font-medium'
+                            }`}>
+                              {niche.type === 'primary' ? niche.name : `• ${niche.name}`}
                             </span>
                           </Badge>
                           {index === 1 && creator.niches.length > 2 && (

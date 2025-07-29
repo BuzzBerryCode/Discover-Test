@@ -217,10 +217,16 @@ export const ExpandedProfileOverlay: React.FC<ExpandedProfileOverlayProps> = ({
               <Badge
                 key={index}
                 variant="outline"
-                className="px-[8px] md:px-[12px] lg:px-[16px] py-[4px] md:py-[6px] lg:py-[8px] bg-sky-50 rounded-[6px] md:rounded-[8px] border-[#dbe2eb]"
+                className={`px-[8px] md:px-[12px] lg:px-[16px] py-[4px] md:py-[6px] lg:py-[8px] rounded-[6px] md:rounded-[8px] border ${
+                  niche.type === 'primary'
+                    ? 'bg-blue-50 border-blue-200 text-blue-800'
+                    : 'bg-gray-50 border-gray-200 text-gray-600'
+                }`}
               >
-                <span className="font-medium text-neutral-new900 text-[11px] md:text-[13px] lg:text-[15px]">
-                  {niche}
+                <span className={`text-[11px] md:text-[13px] lg:text-[15px] ${
+                  niche.type === 'primary' ? 'font-semibold' : 'font-medium'
+                }`}>
+                  {niche.type === 'primary' ? niche.name : `• ${niche.name}`}
                 </span>
               </Badge>
             ))}

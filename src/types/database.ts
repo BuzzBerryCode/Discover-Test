@@ -30,7 +30,10 @@ export interface Creator {
   avg_comments?: number;
   avg_comments_change?: number;
   avg_comments_change_type?: 'positive' | 'negative';
-  niches: string[];
+  niches: Array<{
+    name: string;
+    type: 'primary' | 'secondary';
+  }>;
   hashtags?: string[];
   thumbnails: string[];
   location?: string;
