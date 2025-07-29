@@ -471,7 +471,7 @@ export const CreatorFilterSection = (): JSX.Element => {
                     key={`visible-category-${index}`}
                     variant="outline"
                     onClick={() => handleCategorySelect(category)}
-                    className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[10px] xl:px-[12px] rounded-[6px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] transition-colors cursor-pointer flex-shrink-0 border whitespace-nowrap ${
+                    className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[10px] xl:px-[12px] rounded-[8px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] transition-colors cursor-pointer flex-shrink-0 border whitespace-nowrap ${
                       selectedCategories.has(category)
                         ? 'bg-blue-100 border-blue-300 text-blue-700 hover:bg-blue-200'
                         : 'bg-sky-50 border-[#dbe2eb] text-neutral-new900 hover:bg-sky-100'
@@ -493,7 +493,7 @@ export const CreatorFilterSection = (): JSX.Element => {
                   variant="outline"
                   onClick={handleClearAll}
                   disabled={selectedCategories.size === 0}
-                  className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[10px] xl:px-[12px] rounded-[6px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] transition-colors whitespace-nowrap mr-[6px] lg:mr-[8px] xl:mr-[10px] ${
+                  className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[10px] xl:px-[12px] rounded-[8px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] transition-colors whitespace-nowrap mr-[6px] lg:mr-[8px] xl:mr-[10px] ${
                     selectedCategories.size === 0
                       ? 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed'
                       : 'bg-basewhite border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50'
@@ -508,7 +508,7 @@ export const CreatorFilterSection = (): JSX.Element => {
                     variant="outline"
                     onClick={toggleDropdown}
                     type="button"
-                    className="h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[10px] xl:px-[12px] bg-basewhite border-[#dbe2eb] rounded-[6px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] text-neutral-new900 flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] hover:bg-gray-50 transition-colors whitespace-nowrap"
+                    className="h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[6px] lg:px-[10px] xl:px-[12px] bg-basewhite border-[#dbe2eb] rounded-[8px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] text-neutral-new900 flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] hover:bg-gray-50 transition-colors whitespace-nowrap"
                   >
                     View All
                     <Icon
@@ -606,7 +606,7 @@ export const CreatorFilterSection = (): JSX.Element => {
                   ref={(el) => (filterButtonRefs.current[filter.key] = el)}
                   variant="outline"
                   onClick={() => toggleFilterDropdown(filter.key)}
-                  className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[3px] sm:px-[4px] lg:px-[6px] xl:px-[8px] rounded-[6px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] flex items-center justify-center gap-[2px] sm:gap-[3px] lg:gap-[4px] xl:gap-[6px] transition-colors w-full min-w-0 ${
+                  className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[3px] sm:px-[4px] lg:px-[6px] xl:px-[8px] rounded-[8px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] flex items-center justify-center gap-[2px] sm:gap-[3px] lg:gap-[4px] xl:gap-[6px] transition-colors w-full min-w-0 ${
                     appliedFilters.has(filter.key)
                       ? 'bg-blue-100 border-blue-300 text-blue-700 hover:bg-blue-200'
                       : 'bg-basewhite border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50'
@@ -700,7 +700,7 @@ export const CreatorFilterSection = (): JSX.Element => {
             <Button
               onClick={handleApplyFilters}
               disabled={loading}
-              className="h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[10px] sm:px-[12px] lg:px-[18px] xl:px-[24px] bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] border-transparent rounded-[6px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] text-white flex items-center gap-[3px] lg:gap-[4px] xl:gap-[6px] hover:text-gray-100 transition-all justify-center whitespace-nowrap flex-shrink-0 min-w-[80px] sm:min-w-[100px] lg:min-w-[120px] xl:min-w-[140px] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[10px] sm:px-[12px] lg:px-[18px] xl:px-[24px] bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] border-transparent rounded-[8px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] text-white flex items-center gap-[3px] lg:gap-[4px] xl:gap-[6px] hover:text-gray-100 transition-all justify-center whitespace-nowrap flex-shrink-0 min-w-[80px] sm:min-w-[100px] lg:min-w-[120px] xl:min-w-[140px] disabled:opacity-50 disabled:cursor-not-allowed"
               variant="outline"
             >
               <Icon
