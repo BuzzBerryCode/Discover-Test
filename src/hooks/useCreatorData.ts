@@ -46,19 +46,7 @@ const transformCreatorData = (dbCreator: any): Creator => {
   }];
 
   // Create niches array from primary and secondary niches
-  const niches = [];
-  if (dbCreator.primary_niche) {
-    niches.push({
-      name: dbCreator.primary_niche,
-      type: 'primary'
-    });
-  }
-  if (dbCreator.secondary_niche) {
-    niches.push({
-      name: dbCreator.secondary_niche,
-      type: 'secondary'
-    });
-  }
+  const niches = [dbCreator.primary_niche, dbCreator.secondary_niche].filter(Boolean);
 
   return {
     id: dbCreator.id,
@@ -182,7 +170,7 @@ export const useCreatorData = () => {
       
       // Apply niche filters
       if (filters.niches?.length) {
-        const nicheConditions = filters.niches.map(niche =>
+        const nicheConditions = filters.niches.map(niche => 
           `primary_niche.eq.${niche},secondary_niche.eq.${niche}`
         ).join(',');
         query = query.or(nicheConditions);
