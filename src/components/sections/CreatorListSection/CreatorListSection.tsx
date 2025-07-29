@@ -16,7 +16,18 @@ import { formatNumber, formatEngagement, getSocialMediaIcon, getMatchScoreColor 
 import { ViewMode, SortField, SortDirection, SortState, Creator } from "../../../types/database";
 
 export const CreatorListSection = (): JSX.Element => {
-  const { creators, loading, error, currentMode } = useCreatorData();
+  const { 
+    creators, 
+    loading, 
+    error, 
+    currentMode, 
+    currentPage, 
+    totalPages, 
+    totalCreators,
+    handlePageChange,
+    nextPage,
+    previousPage 
+  } = useCreatorData();
 
   // State for tracking selected cards
   const [selectedCards, setSelectedCards] = useState<Set<string>>(new Set());
@@ -262,7 +273,7 @@ export const CreatorListSection = (): JSX.Element => {
 
       {/* Dynamic Creator content - Cards or List */}
       <div className="flex-1 overflow-y-auto w-full">
-        {creators.length === 0 ? (
+        {totalCreators === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <div className="text-gray-500 text-lg font-medium mb-2">No creators found</div>
             <div className="text-gray-400 text-sm">Try adjusting your filters to see more results</div>
@@ -709,6 +720,71 @@ export const CreatorListSection = (): JSX.Element => {
           </div>
         )}
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex-shrink-0 mt-4 pt-4 border-t border-gray-200">
+          <div className="flex items-center justify-between">
+            {/* Page Info */}
+            <div className="text-sm text-gray-600">
+              Showing {((currentPage - 1) * 24) + 1} to {Math.min(currentPage * 24, totalCreators)} of {totalCreators} creators
+            </div>
+            
+            {/* Pagination Buttons */}
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={previousPage}
+                disabled={currentPage === 1}
+                className="h-8 px-3 text-sm"
+              >
+                <Icon name="ArrowLeftIcon.svg" className="w-4 h-4 mr-1" alt="Previous" />
+                Previous
+              </Button>
+              
+              {/* Page Numbers */}
+              <div className="flex items-center gap-1">
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  let pageNum;
+                  if (totalPages <= 5) {
+                    pageNum = i + 1;
+                  } else if (currentPage <= 3) {
+                    pageNum = i + 1;
+                  } else if (currentPage >= totalPages - 2) {
+                    pageNum = totalPages - 4 + i;
+                  } else {
+                    pageNum = currentPage - 2 + i;
+                  }
+                  
+                  return (
+                    <Button
+                      key={pageNum}
+                      variant={currentPage === pageNum ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => handlePageChange(pageNum)}
+                      className="h-8 w-8 p-0 text-sm"
+                    >
+                      {pageNum}
+                    </Button>
+                  );
+                })}
+              </div>
+              
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={nextPage}
+                disabled={currentPage === totalPages}
+                className="h-8 px-3 text-sm"
+              >
+                Next
+                <Icon name="ArrowRightIcon.svg" className="w-4 h-4 ml-1" alt="Next" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Expanded Profile Overlay */}
       {selectedCreator && (
