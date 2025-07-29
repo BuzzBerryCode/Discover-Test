@@ -725,18 +725,13 @@ export const CreatorListSection = (): JSX.Element => {
       {totalPages > 1 && (
         <div className="flex-shrink-0 mt-[20px] lg:mt-[25px] xl:mt-[30px] pt-[15px] lg:pt-[20px] xl:pt-[25px] border-t border-[#f1f4f9] w-full">
           <div className="flex flex-col items-center gap-[12px] lg:gap-[15px] xl:gap-[18px] w-full">
-            {/* Page Info */}
-            <div className="text-[12px] lg:text-[13px] xl:text-[14px] font-medium text-[#71737c] font-['Inter',Helvetica] self-start w-full">
-              Showing {((currentPage - 1) * 24) + 1} to {Math.min(currentPage * 24, totalCreators)} of {totalCreators} creators
-            </div>
-            
             {/* Pagination Buttons */}
             <div className="flex items-center justify-center gap-[8px] lg:gap-[10px] xl:gap-[12px] w-full">
               <Button
                 variant="outline"
                 onClick={previousPage}
                 disabled={currentPage === 1}
-                className="h-[30px] lg:h-[34px] xl:h-[38px] px-[10px] lg:px-[14px] xl:px-[18px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-shrink-0"
+                className="h-[30px] lg:h-[34px] xl:h-[38px] px-[10px] lg:px-[14px] xl:px-[18px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-shrink-0"
               >
                 <Icon name="ArrowLeftIcon.svg" className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" alt="Previous" />
                 <span className="hidden xs:inline">Previous</span>
@@ -745,45 +740,169 @@ export const CreatorListSection = (): JSX.Element => {
               
               {/* Page Numbers */}
               <div className="flex items-center gap-[4px] lg:gap-[6px] xl:gap-[8px] flex-shrink-0">
-                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                  let pageNum;
-                  if (totalPages <= 5) {
-                    pageNum = i + 1;
-                  } else if (currentPage <= 3) {
-                    pageNum = i + 1;
-                  } else if (currentPage >= totalPages - 2) {
-                    pageNum = totalPages - 4 + i;
-                  } else {
-                    pageNum = currentPage - 2 + i;
-                  }
+                {(() => {
+                  const pages = [];
                   
-                  return (
+                  // Always show page 1
+                  pages.push(
                     <Button
-                      key={pageNum}
+                      key={1}
                       variant="outline"
-                      onClick={() => handlePageChange(pageNum)}
+                      onClick={() => handlePageChange(1)}
                       className={`h-[30px] lg:h-[34px] xl:h-[38px] w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
-                        currentPage === pageNum
-                          ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)]'
-                          : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50'
+                        currentPage === 1
+                          ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
+                          : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
                       }`}
                     >
-                      {pageNum}
+                      1
                     </Button>
                   );
-                })}
+                  
+                  if (totalPages <= 7) {
+                    // Show all pages if 7 or fewer
+                    for (let i = 2; i <= totalPages; i++) {
+                      pages.push(
+                        <Button
+                          key={i}
+                          variant="outline"
+                          onClick={() => handlePageChange(i)}
+                          className={`h-[30px] lg:h-[34px] xl:h-[38px] w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                            currentPage === i
+                              ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
+                              : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
+                            }`}
+                        >
+                          {i}
+                        </Button>
+                      );
+                    }
+                  } else {
+                    // Complex pagination with ellipsis
+                    if (currentPage <= 4) {
+                      // Show pages 2, 3, 4, 5, ..., last
+                      for (let i = 2; i <= 5; i++) {
+                        pages.push(
+                          <Button
+                            key={i}
+                            variant="outline"
+                            onClick={() => handlePageChange(i)}
+                            className={`h-[30px] lg:h-[34px] xl:h-[38px] w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                              currentPage === i
+                                ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
+                                : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
+                              }`}
+                          >
+                            {i}
+                          </Button>
+                        );
+                      }
+                      
+                      if (totalPages > 6) {
+                        pages.push(
+                          <span key="ellipsis1" className="px-2 text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500">
+                            ...
+                          </span>
+                        );
+                      }
+                    } else if (currentPage >= totalPages - 3) {
+                      // Show 1, ..., last-4, last-3, last-2, last-1, last
+                      if (totalPages > 6) {
+                        pages.push(
+                          <span key="ellipsis2" className="px-2 text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500">
+                            ...
+                          </span>
+                        );
+                      }
+                      
+                      for (let i = totalPages - 4; i <= totalPages - 1; i++) {
+                        if (i > 1) {
+                          pages.push(
+                            <Button
+                              key={i}
+                              variant="outline"
+                              onClick={() => handlePageChange(i)}
+                              className={`h-[30px] lg:h-[34px] xl:h-[38px] w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                                currentPage === i
+                                  ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
+                                  : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
+                                }`}
+                            >
+                              {i}
+                            </Button>
+                          );
+                        }
+                      }
+                    } else {
+                      // Show 1, ..., current-1, current, current+1, ..., last
+                      pages.push(
+                        <span key="ellipsis3" className="px-2 text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500">
+                          ...
+                        </span>
+                      );
+                      
+                      for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+                        pages.push(
+                          <Button
+                            key={i}
+                            variant="outline"
+                            onClick={() => handlePageChange(i)}
+                            className={`h-[30px] lg:h-[34px] xl:h-[38px] w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                              currentPage === i
+                                ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
+                                : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
+                              }`}
+                          >
+                            {i}
+                          </Button>
+                        );
+                      }
+                      
+                      pages.push(
+                        <span key="ellipsis4" className="px-2 text-[12px] lg:text-[13px] xl:text-[14px] text-gray-500">
+                          ...
+                        </span>
+                      );
+                    }
+                    
+                    // Always show last page (if not page 1)
+                    if (totalPages > 1) {
+                      pages.push(
+                        <Button
+                          key={totalPages}
+                          variant="outline"
+                          onClick={() => handlePageChange(totalPages)}
+                          className={`h-[30px] lg:h-[34px] xl:h-[38px] w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
+                            currentPage === totalPages
+                              ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
+                              : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
+                            }`}
+                        >
+                          {totalPages}
+                        </Button>
+                      );
+                    }
+                  }
+                  
+                  return pages;
+                })()}
               </div>
               
               <Button
                 variant="outline"
                 onClick={nextPage}
                 disabled={currentPage === totalPages}
-                className="h-[30px] lg:h-[34px] xl:h-[38px] px-[10px] lg:px-[14px] xl:px-[18px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-shrink-0"
+                className="h-[30px] lg:h-[34px] xl:h-[38px] px-[10px] lg:px-[14px] xl:px-[18px] bg-white border-[#dbe2eb] rounded-[8px] font-medium text-[12px] lg:text-[13px] xl:text-[14px] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-shrink-0"
               >
                 <span className="hidden xs:inline">Next</span>
                 <span className="xs:hidden">Next</span>
                 <Icon name="ArrowRightIcon.svg" className="w-[12px] h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px]" alt="Next" />
               </Button>
+            </div>
+            
+            {/* Page Info - Now below buttons and centered */}
+            <div className="text-[12px] lg:text-[13px] xl:text-[14px] font-medium text-[#71737c] font-['Inter',Helvetica] text-center">
+              Showing {((currentPage - 1) * 24) + 1} to {Math.min(currentPage * 24, totalCreators)} of {totalCreators} creators
             </div>
           </div>
         </div>
