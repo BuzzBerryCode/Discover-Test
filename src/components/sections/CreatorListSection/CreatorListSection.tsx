@@ -285,13 +285,13 @@ export const CreatorListSection = (): JSX.Element => {
               <Card
                 key={creator.id}
                 onClick={() => handleCreatorClick(creator)}
-                className={`w-full rounded-[15px] p-0 border-2 shadow-sm hover:shadow-md transition-all cursor-pointer ${
+                className={cn(
+                  "w-full rounded-[15px] p-0 border-2 shadow-sm hover:shadow-md transition-all cursor-pointer",
                   selectedCards.has(creator.id) 
-                    ? 'border-blue-500 bg-blue-50' 
                     : selectedCreator?.id === creator.id
                     ? 'bg-[#f1f6fe] border-transparent'
-                    : 'bg-gray-50 border-transparent'
-                }`}
+                    : 'bg-white border-gray-200 hover:border-gray-300'
+                )}
               >
                 <CardContent className="flex flex-col gap-[8px] lg:gap-[10px] xl:gap-[12px] p-[12px] lg:p-[15px] xl:p-[18px]">
                   <div className="flex w-full items-start justify-between">
@@ -466,9 +466,12 @@ export const CreatorListSection = (): JSX.Element => {
                     <span className="truncate">Match Score</span>
                     <Icon 
                       name="SortIcon.svg" 
-                      className={\`w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 flex-shrink-0 transition-transform ${
-                        sortState.field === 'match_score' && sortState.direction === 'asc' ? 'rotate-180' : ''
-                      }`} 
+                      className={cn(
+                      className={cn(
+                      className={cn(
+                        "w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 flex-shrink-0 transition-transform",
+                        sortState.field === 'engagement' && sortState.direction === 'asc' ? 'rotate-180' : ''
+                      )}
                       alt="Sort" 
                     />
                   </button>
@@ -758,9 +761,10 @@ export const CreatorListSection = (): JSX.Element => {
                       onClick={() => handlePageChange(1)}
                       className={\`h-[28px] xs:h-[30px] lg:h-[34px] xl:h-[38px] w-[28px] xs:w-[30px] lg:w-[34px] xl:w-[38px] p-0 rounded-[6px] sm:rounded-[8px] font-medium text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] xl:text-[14px] transition-colors flex-shrink-0 ${
                         currentPage === 1
-                          ? 'bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] border-transparent text-white hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] hover:text-white'
-                          : 'bg-white border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50 hover:text-neutral-new900'
-                      }`}
+                      className={cn(
+                        "w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 flex-shrink-0 transition-transform",
+                        sortState.field === 'match_score' && sortState.direction === 'asc' ? 'rotate-180' : ''
+                      )}
                     >
                       1
                     </Button>
