@@ -524,207 +524,58 @@ export const CreatorFilterSection = (): JSX.Element => {
                   </Button>
 
                   {isDropdownOpen && (
-                    <div className="absolute top-full right-0 mt-2 w-[280px] sm:w-[320px] lg:w-[360px] bg-white border border-[#dbe2eb] rounded-[12px] shadow-lg z-[9999] max-h-[90vh] overflow-hidden">
-                      <div className="p-3 sm:p-4">
-                        <div className="mb-3 sm:mb-4">
-                          <h3 className="font-semibold text-[14px] sm:text-[16px] text-neutral-new900">
-                            All Categories
-                          </h3>
+                    <div className="absolute top-full right-0 mt-2 w-[280px] lg:w-[320px] xl:w-[360px] bg-white border border-[#dbe2eb] rounded-[12px] shadow-lg z-[9999] max-h-[300px] lg:max-h-[350px] xl:max-h-[400px] overflow-hidden">
+                      <div className="p-3 lg:p-4 xl:p-5">
+                        <div className="text-[12px] lg:text-[13px] xl:text-[14px] font-medium text-gray-600 mb-2 px-2">
+                          All Categories ({allCategories.length})
                         </div>
-                        
-                        <div className="max-h-[240px] sm:max-h-[280px] lg:max-h-[320px] overflow-y-auto mb-3 sm:mb-4">
-                          <div className="space-y-2 sm:space-y-3">
+                        <div className="max-h-[240px] lg:max-h-[280px] xl:max-h-[320px] overflow-y-auto">
+                          <div className="grid grid-cols-2 gap-2 lg:gap-3 xl:gap-4">
                             {getOrderedCategories().map((category, index) => (
-                              <div
+                              <button
                                 key={`dropdown-category-${index}`}
-                                className={`flex items-center justify-between p-2 sm:p-3 rounded-[8px] transition-colors cursor-pointer ${
-                                  selectedCategories.has(category)
-                                    ? 'bg-blue-100 hover:bg-blue-200'
-                                    : 'hover:bg-gray-50'
-                                }`}
+                                type="button"
                                 onClick={(e) => {
                                   e.preventDefault();
                                   e.stopPropagation();
                                   handleCategorySelect(category);
                                 }}
-                              >
-                                <span className={`text-[12px] sm:text-[14px] cursor-pointer flex-1 ${
+                                className={`text-left px-3 lg:px-4 xl:px-5 py-2 lg:py-3 xl:py-4 rounded-[10px] text-[12px] lg:text-[13px] xl:text-[14px] font-medium transition-colors ${
                                   selectedCategories.has(category)
-                                    ? 'text-blue-700 font-medium'
-                                    : 'text-neutral-new900'
-                                }`}>
-                                  {category}
-                                </span>
-                              </div>
+                                    ? getNicheStyles(category, true).replace('border-blue-300', '').replace('border-[#dbe2eb]', '')
+                                    : 'text-neutral-new900 hover:bg-gray-50'
+                                }`}
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className="truncate">{category}</span>
+                                  {selectedCategories.has(category) && (
+                                    <div className="w-2 h-2 lg:w-3 lg:h-3 xl:w-4 xl:h-4 rounded-full flex-shrink-0 bg-blue-600"></div>
+                                  )}
+                                </div>
+                              </button>
                             ))}
                           </div>
                         </div>
-                      </div>
-                      
-                      <div className="p-2 sm:p-3 border-t border-[#f3f4f6] flex justify-between items-center">
-                        <span className="text-[11px] sm:text-[12px] text-gray-500">
-                          {selectedCategories.size} selected
-                        </span>
-                        <div className="flex items-center gap-2">
-                          {selectedCategories.size > 0 && (
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                handleClearAll();
-                              }}
-                              className="h-7 sm:h-8 px-2 sm:px-3 text-[11px] sm:text-[12px] font-medium text-[#6b7280] hover:text-[#374151] hover:bg-[#f9fafb]"
-                            >
-                              Reset
-                            </Button>
-                          )}
-                          <Button
-                            size="sm"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              setIsDropdownOpen(false);
-                            }}
-                            className="h-7 sm:h-8 px-3 sm:px-4 bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] text-white text-[11px] sm:text-[12px] font-medium rounded-[6px] border-0"
-                          >
-                            Confirm
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Filter controls row */}
-        <div 
-          ref={filterRowRef}
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-[8px] lg:gap-[8px] xl:gap-[10px] w-full"
-        >
-          <div className="flex items-center gap-[4px] sm:gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-1 w-full min-w-0 overflow-hidden">
-            {filterOptions.map((filter, index) => (
-              <div key={`filter-${index}`} className="relative flex-1 min-w-0">
-                <Button
-                  ref={(el) => (filterButtonRefs.current[filter.key] = el)}
-                  variant="outline"
-                  onClick={() => toggleFilterDropdown(filter.key)}
-                  className={`h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[3px] sm:px-[4px] lg:px-[6px] xl:px-[8px] rounded-[10px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] flex items-center justify-center gap-[2px] sm:gap-[3px] lg:gap-[4px] xl:gap-[6px] transition-colors w-full min-w-0 ${
-                    appliedFilters.has(filter.key)
-                      ? 'bg-blue-100 border-blue-300 text-blue-700 hover:bg-blue-200'
-                      : 'bg-basewhite border-[#dbe2eb] text-neutral-new900 hover:bg-gray-50'
-                  }`}
-                >
-                  <Icon
-                    name={filter.icon}
-                    className="w-[10px] h-[10px] sm:w-[12px] sm:h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px] flex-shrink-0"
-                    alt={`${filter.name} icon`}
-                  />
-                  <span className="hidden sm:block lg:hidden truncate min-w-0 text-[10px] sm:text-[11px]">
-                    {filter.name === "Buzz Score" ? "Buzz" : 
-                     filter.name === "Engagement" ? "Engage" :
-                     filter.name === "Followers" ? "Follow" :
-                     filter.name === "Avg. Views" ? "Views" :
-                     filter.name === "Platform" ? "Platform" :
-                     filter.name === "Location" ? "Location" : filter.name}
-                  </span>
-                  <span className="hidden lg:block truncate min-w-0">{filter.name}</span>
-                  <Icon
-                    name="DropdownIcon.svg"
-                    className={`w-[5px] h-[3px] sm:w-[6px] sm:h-[4px] lg:w-[8px] lg:h-[5px] xl:w-[10px] xl:h-[6px] flex-shrink-0 transition-transform ${
-                      openFilter === filter.key ? 'rotate-180' : ''
-                    }`}
-                    alt="Dropdown icon"
-                  />
-                </Button>
-
-                {/* Location filter dropdown */}
-                {filter.key === 'location' && (
-                  <LocationFilterDropdown
-                    isOpen={openFilter === 'location'}
-                    onClose={() => setOpenFilter(null)}
-                    selectedLocations={selectedLocations}
-                    onLocationToggle={handleLocationToggle}
-                    onReset={handleLocationReset}
-                    onConfirm={handleLocationConfirm}
-                    triggerRef={{ current: filterButtonRefs.current.location }}
-                  />
-                )}
-
-                {/* Match Score filter dropdown */}
-                {filter.key === 'buzzScore' && (
-                  <BuzzScoreFilterDropdown
-                    isOpen={openFilter === 'buzzScore'}
-                    onClose={() => setOpenFilter(null)}
-                    selectedScores={selectedBuzzScores}
-                    onScoreToggle={handleBuzzScoreToggle}
-                    onReset={handleBuzzScoreReset}
-                    onConfirm={handleBuzzScoreConfirm}
-                    triggerRef={{ current: filterButtonRefs.current.buzzScore }}
-                  />
-                )}
-
-                {/* Platform filter dropdown */}
-                {filter.key === 'platform' && (
-                  <PlatformFilterDropdown
-                    isOpen={openFilter === 'platform'}
-                    onClose={() => setOpenFilter(null)}
-                    selectedPlatforms={selectedPlatforms}
-                    onPlatformToggle={handlePlatformToggle}
-                    onReset={handlePlatformReset}
-                    onConfirm={handlePlatformConfirm}
-                    triggerRef={{ current: filterButtonRefs.current.platform }}
-                  />
-                )}
-
-                {/* Range filter dropdowns */}
-                {['engagement', 'followers', 'avgViews'].includes(filter.key) && (
-                  <FilterDropdown
-                    isOpen={openFilter === filter.key}
-                    onClose={() => setOpenFilter(null)}
-                    config={filterConfigs[filter.key as keyof typeof filterConfigs]}
-                    value={filterValues[filter.key as keyof typeof filterValues]}
-                    onValueChange={(value) => handleFilterValueChange(filter.key, value)}
-                    onApply={() => handleFilterApply(filter.key)}
-                    onReset={() => handleFilterReset(filter.key)}
-                    triggerRef={{ current: filterButtonRefs.current[filter.key] }}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-[6px] lg:gap-[8px] xl:gap-[10px] flex-shrink-0">
-            <Separator 
-              orientation="vertical" 
-              className="hidden sm:block h-[28px] lg:h-[32px] xl:h-[36px]" 
-            />
-
-            <Button
-              onClick={handleApplyFilters}
-              disabled={loading}
-              className="h-[28px] lg:h-[32px] xl:h-[36px] py-[4px] lg:py-[6px] xl:py-[8px] px-[10px] sm:px-[12px] lg:px-[18px] xl:px-[24px] bg-[linear-gradient(90deg,#557EDD_0%,#6C40E4_100%)] hover:bg-[linear-gradient(90deg,#4A6BC8_0%,#5A36C7_100%)] border-transparent rounded-[10px] font-medium text-[11px] lg:text-[12px] xl:text-[13px] text-white flex items-center gap-[3px] lg:gap-[4px] xl:gap-[6px] hover:text-gray-100 transition-all justify-center whitespace-nowrap flex-shrink-0 min-w-[80px] sm:min-w-[100px] lg:min-w-[120px] xl:min-w-[140px] disabled:opacity-50 disabled:cursor-not-allowed"
-              variant="outline"
-            >
-              <Icon
-                name="FilterIcon.svg"
-                className="w-[10px] h-[10px] sm:w-[12px] sm:h-[12px] lg:w-[14px] lg:h-[14px] xl:w-[16px] xl:h-[16px] text-white flex-shrink-0"
-                alt="Filter icon"
-              />
-              <span className="hidden lg:inline">{loading ? 'Applying...' : 'Apply Filters'}</span>
-              <span className="hidden sm:inline lg:hidden">{loading ? 'Applying...' : 'Apply'}</span>
-              <span className="sm:hidden">{loading ? '...' : 'Apply'}</span>
-            </Button>
-          </div>
-        </div>
-      </div>
-    </Card>
-  );
-};
+                        
+                        <div className="border-t border-gray-100 mt-3 lg:mt-4 xl:mt-5 pt-3 lg:pt-4 xl:pt-5 flex justify-between items-center">
+                          <span className="text-[11px] lg:text-[12px] xl:text-[13px] text-gray-500">
+                            {selectedCategories.size} selected
+                          </span>
+                          <div className="flex items-center gap-2 lg:gap-3 xl:gap-4">
+                            {selectedCategories.size > 0 && (
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  handleClearAll();
+                                }}
+                                className="text-[11px] lg:text-[12px] xl:text-[13px] text-blue-600 hover:text-blue-700 font-medium"
+                              >
+                                Clear All
+                              </button>
+                            )}
+                            <button
                               type="button"
                               onClick={(e) => {
                                 e.preventDefault();
